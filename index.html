@@ -1279,7 +1279,7 @@
             <p class="section-subtitle">Our day-to-day updates, posted as they happen</p>
 
             <div class="fb-wrap">
-                <div class="fb-embed">
+                <div class="fb-embed" id="fbEmbed">
                     <div class="fb-page"
                          data-href="https://www.facebook.com/greatbay.sno.rollers"
                          data-tabs="timeline"
@@ -1288,17 +1288,18 @@
                          data-small-header="false"
                          data-adapt-container-width="true"
                          data-hide-cover="false"
-                         data-show-facepile="true">
-                        <blockquote cite="https://www.facebook.com/greatbay.sno.rollers" class="fb-xfbml-parse-ignore">
-                            <div class="fb-fallback">
-                                <p style="margin-bottom:14px;"><strong>Our Facebook feed loads here.</strong></p>
-                                <p style="margin-bottom:18px;">If you're seeing this, a browser privacy setting or ad blocker is blocking it.</p>
-                                <a href="https://www.facebook.com/greatbay.sno.rollers" target="_blank" rel="noopener"
-                                   style="display:inline-block;padding:12px 26px;background:linear-gradient(135deg,var(--logo-gradient-start),var(--logo-gradient-end));color:#fff;text-decoration:none;border-radius:8px;font-weight:600;">
-                                    Open our Facebook page →
-                                </a>
-                            </div>
-                        </blockquote>
+                         data-show-facepile="true"></div>
+
+                    <!-- Shown only if the embed fails to render. Facebook's plugin
+                         collapses to zero height when a browser blocks third-party
+                         storage, which would otherwise leave a blank white box. -->
+                    <div class="fb-fallback" id="fbFallback" hidden>
+                        <p style="margin-bottom:14px;"><strong>Our Facebook feed can't load in this browser.</strong></p>
+                        <p style="margin-bottom:18px;">An ad blocker or privacy setting is blocking it &mdash; the feed itself is fine.</p>
+                        <a href="https://www.facebook.com/greatbay.sno.rollers" target="_blank" rel="noopener"
+                           style="display:inline-block;padding:12px 26px;background:linear-gradient(135deg,var(--logo-gradient-start),var(--logo-gradient-end));color:#fff;text-decoration:none;border-radius:8px;font-weight:600;">
+                            Open our Facebook page →
+                        </a>
                     </div>
                 </div>
 
@@ -1518,7 +1519,39 @@
     </footer>
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous"
+            onerror="window.__fbBlocked = true;"
             src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v21.0"
             nonce="gbsr"></script>
+
+    <script>
+        // Facebook's plugin reports itself "rendered" even when it collapses to
+        // zero height (blocked third-party storage, ad blockers, some privacy
+        // modes). Without this the section would just be a blank white box, so
+        // check the real rendered height and swap in the fallback card instead.
+        (function () {
+            var embed = document.getElementById('fbEmbed');
+            var fallback = document.getElementById('fbFallback');
+            if (!embed || !fallback) return;
+
+            var tries = 0;
+            function check() {
+                tries++;
+                var frame = embed.querySelector('iframe');
+                var h = frame ? frame.getBoundingClientRect().height : 0;
+
+                if (h > 100) return;                       // rendered fine, leave it alone
+                if (tries < 8 && !window.__fbBlocked) {
+                    setTimeout(check, 1000);               // still loading, look again
+                    return;
+                }
+
+                var page = embed.querySelector('.fb-page');
+                if (page) page.style.display = 'none';
+                fallback.hidden = false;
+                embed.style.minHeight = '0';
+            }
+            setTimeout(check, 2500);
+        })();
+    </script>
 </body>
 </html>
