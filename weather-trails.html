@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather & Trail Maps - Great Bay Sno-Rollers | NH Trail Conditions</title>
+    <meta name="description" content="Check real-time weather radar, snow forecasts, and interactive trail maps for Rockingham County, NH. Plan your snowmobile ride with up-to-date trail conditions and weather info.">
+    <meta name="keywords" content="NH trail map, snowmobile weather, Rockingham County trails, snow forecast, SLEDNH map, NH snowmobile conditions">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Weather & Trail Maps - Great Bay Sno-Rollers">
+    <meta property="og:description" content="Real-time weather radar, snow forecasts, and interactive trail maps for NH snowmobiling.">
+    <meta property="og:image" content="https://greatbaysnorollers.com/3-MEDIA/1-Photos/Gallery/471227032_591632543414320_4580947917977553883_n.jpg">
+
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="3-MEDIA/1-Photos/Logos/favicon-512.png">
+    <link rel="apple-touch-icon" href="3-MEDIA/1-Photos/Logos/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ice-blue: #D4E7F5;
+            --deep-blue: #1A3A52;
+            --snow-white: #F8FBFD;
+            --accent-orange: #FF4500;
+            --logo-gradient-start: #FF4500;
+            --logo-gradient-mid: #FF6B35;
+            --logo-gradient-end: #FFA726;
+            --text-dark: #2C3E50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: linear-gradient(to bottom, #0F2027, #203A43, #2C5364);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 58, 82, 0.97);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 5px solid;
+            border-image: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-mid), var(--logo-gradient-end)) 1;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-image {
+            height: 84px;
+            width: auto;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+        }
+
+        .logo-text h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-mid), var(--logo-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            color: var(--snow-white);
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--snow-white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 11px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            transform: translateY(-2px);
+        }
+
+
+        /* "Join the Club" gets button treatment in the top nav */
+        .nav-links a.nav-join {
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .nav-links a.nav-join:hover { filter: brightness(1.08); }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 101;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background: var(--snow-white);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                        url('3-MEDIA/1-Photos/Gallery/471227032_591632543414320_4580947917977553883_n.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 20px;
+            text-align: center;
+            color: var(--snow-white);
+        }
+
+        .page-header h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--ice-blue);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Widget Cards */
+        .widget-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: var(--deep-blue);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 4px solid;
+            border-image: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-mid), var(--logo-gradient-end)) 1;
+            padding-bottom: 10px;
+        }
+
+        .widget-container {
+            width: 100%;
+            min-height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+        .widget-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Trail Map Section */
+        .trail-map-container {
+            min-height: 600px;
+        }
+
+        /* Weather Grid */
+        .weather-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-box h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--deep-blue);
+            color: var(--snow-white);
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--ice-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-orange);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                max-width: 300px;
+                background: var(--deep-blue);
+                flex-direction: column;
+                padding: 80px 30px 30px;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+                transition: right 0.3s ease;
+                z-index: 99;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding: 15px 20px;
+                text-align: left;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .page-header h2 {
+                font-size: 2rem;
+            }
+
+            .weather-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .widget-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="3-MEDIA/1-Photos/Logos/GreatBaySnoRoller-LOGO.png" alt="Great Bay Sno-Rollers Logo" class="logo-image">
+                <div class="logo-text">
+                    <h1>GREAT BAY SNO-ROLLERS</h1>
+                    <p>Rockingham County, NH</p>
+                </div>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" onclick="closeMenu()">Home</a></li>
+                <li><a href="trails.html" onclick="closeMenu()">Trails</a></li>
+                <li><a href="club-updates.html" onclick="closeMenu()">Updates</a></li>
+                <li><a href="weather-trails.html" class="active" onclick="closeMenu()">Weather</a></li>
+                <li><a href="events.html" onclick="closeMenu()">Events</a></li>
+                <li><a href="gallery.html" onclick="closeMenu()">Gallery</a></li>
+                <li><a href="get-involved.html" onclick="closeMenu()">Get Involved</a></li>
+                <li><a href="membership.html" class="nav-join" onclick="closeMenu()">Join the Club</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h2>WEATHER & TRAIL CONDITIONS</h2>
+        <p>Real-time weather, snow forecast, and interactive trail maps</p>
+    </section>
+
+    <main class="container">
+        <!-- Weather Radar -->
+        <div class="widget-section">
+            <h2 class="section-title">🌦️ Live Weather Radar</h2>
+            <div class="widget-container" style="min-height: 500px;">
+                <iframe src="https://embed.windy.com/embed2.html?lat=43.0&lon=-71.0&zoom=9&level=surface&overlay=rain&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=mph&metricTemp=default&radarRange=-1"
+                        style="width: 100%; height: 500px;"
+                        frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!-- Snow Forecast -->
+        <div class="widget-section">
+            <h2 class="section-title">❄️ Snow Forecast</h2>
+            <div class="info-box">
+                <h3>7-Day Snow Forecast for Rockingham County, NH</h3>
+                <p>Check the detailed forecast below for expected snowfall amounts, temperatures, and trail conditions. Updated hourly.</p>
+            </div>
+            <div class="widget-container" style="min-height: 600px;">
+                <iframe src="https://forecast.weather.gov/MapClick.php?lat=43.0&lon=-71.0"
+                        style="width: 100%; height: 600px;"
+                        frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!-- Trail Map with Weather Overlay -->
+        <div class="widget-section">
+            <h2 class="section-title">🗺️ Looking for the Trail Map?</h2>
+            <div class="info-box">
+                <h3>It's on the Trails page now</h3>
+                <p>We moved the maps together so you can see the statewide SLEDNH network and
+                   our own local trails side by side, along with a per-trail condition table
+                   showing mileage and when each trail was last groomed.</p>
+            </div>
+            <p style="text-align: center; margin-top: 25px;">
+                <a href="trails.html" style="display: inline-block; padding: 16px 38px; background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end)); color: white; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    Open Trail Map &amp; Conditions →
+                </a>
+            </p>
+        </div>
+
+        <!-- Additional Weather Resources -->
+        <div class="widget-section">
+            <h2 class="section-title">🌨️ Additional Weather Resources</h2>
+            <div class="weather-grid">
+                <div>
+                    <h3 style="color: var(--deep-blue); margin-bottom: 15px; font-size: 1.3rem;">National Weather Service</h3>
+                    <div class="widget-container" style="min-height: 400px;">
+                        <iframe src="https://forecast.weather.gov/MapClick.php?lat=43.0&lon=-71.0"
+                                style="width: 100%; height: 400px;"></iframe>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: var(--deep-blue); margin-bottom: 15px; font-size: 1.3rem;">Snow Depth Map</h3>
+                    <div class="widget-container" style="min-height: 400px; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 20px; text-align: center;">
+                        <p style="color: var(--text-dark); margin-bottom: 15px;">Interactive snow depth data for New Hampshire</p>
+                        <a href="https://www.nohrsc.noaa.gov/interactive/html/map.html?var=ssm_depth&min_x=-71.5&max_x=-70.5&min_y=42.5&max_y=43.5"
+                           target="_blank" rel="noopener"
+                           style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end)); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: transform 0.3s ease;">
+                            View Snow Depth Map →
+                        </a>
+                        <p style="color: #666; margin-top: 15px; font-size: 0.9rem;">Opens in new window with full interactive features</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weather Alert Box -->
+        <div class="info-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+            <h3>⚠️ Before You Ride</h3>
+            <p><strong>Always check current conditions before heading out!</strong></p>
+            <p>• Monitor trail status updates on our homepage and Facebook page<br>
+               • Check weather forecasts for sudden changes<br>
+               • Verify trail grooming schedules<br>
+               • Be aware of ice and low-snow warnings<br>
+               • Ride safely and respect trail closures</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="trails.html">Trail Map & Conditions</a>
+                <a href="club-updates.html">Club Updates</a>
+                <a href="weather-trails.html">Weather & Radar</a>
+                <a href="events.html">Events Calendar</a>
+                <a href="gallery.html">Photo Gallery</a>
+                <a href="get-involved.html">Get Involved</a>
+                <a href="membership.html">Join the Club</a>
+                <a href="equipment.html">Groomers & Equipment</a>
+                <a href="merch.html">Club Merch</a>
+                <a href="supporters.html">Our Supporters</a>
+                <a href="landing.html">Quick Links</a>
+                <a href="https://www.facebook.com/greatbay.sno.rollers" target="_blank" rel="noopener">Facebook</a>
+                <a href="https://venmo.com/u/greatbaysnorollers" target="_blank" rel="noopener">Donate via Venmo</a>
+                <a href="https://slednh.com/" target="_blank" rel="noopener">NH Snowmobile Association</a>
+                <a href="https://slednh.evtrails.com/" target="_blank" rel="noopener">Statewide Trail Map</a>
+            </div>
+            <p>&copy; 2026 Great Bay Sno-Rollers. Rockingham County, NH</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Functions
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.querySelector('.hamburger');
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.querySelector('.hamburger');
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.querySelector('.hamburger');
+            const nav = document.querySelector('nav');
+
+            if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    </script>
+</body>
+</html>

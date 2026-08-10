@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trail Map &amp; Conditions - Great Bay Sno-Rollers | Rockingham County NH</title>
+    <meta name="description" content="Interactive trail map and per-trail conditions for Great Bay Sno-Rollers, Newfields Sno-Raiders, and Lee Sno-Travelers in Rockingham County, NH.">
+    <meta name="keywords" content="NH snowmobile trail map, trail conditions, Great Bay Sno-Rollers trails, Newfields Sno-Raiders, Lee Sno-Travelers, Rockingham County trails">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Trail Map & Conditions - Great Bay Sno-Rollers">
+    <meta property="og:description" content="Interactive trail map and per-trail conditions for Great Bay Sno-Rollers, Newfields Sno-Raiders, and Lee Sno-Travelers in Rockingham County, NH.">
+    <meta property="og:image" content="https://greatbaysnorollers.com/3-MEDIA/1-Photos/Gallery/483100253_645066678070906_3838840164000899336_n.jpg">
+
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="3-MEDIA/1-Photos/Logos/favicon-512.png">
+    <link rel="apple-touch-icon" href="3-MEDIA/1-Photos/Logos/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ice-blue: #D4E7F5;
+            --deep-blue: #1A3A52;
+            --snow-white: #F8FBFD;
+            --accent-orange: #FF4500;
+            --text-dark: #2C3E50;
+            --logo-gradient-start: #FF4500;
+            --logo-gradient-mid: #FF6B35;
+            --logo-gradient-end: #FFA726;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: linear-gradient(to bottom, #0F2027, #203A43, #2C5364);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 58, 82, 0.97);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 5px solid;
+            border-image: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-mid), var(--logo-gradient-end)) 1;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-image {
+            height: 84px;
+            width: auto;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+        }
+
+        .logo-text h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-mid), var(--logo-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            color: var(--snow-white);
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--snow-white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 11px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            transform: translateY(-2px);
+        }
+
+
+        /* "Join the Club" gets button treatment in the top nav */
+        .nav-links a.nav-join {
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .nav-links a.nav-join:hover { filter: brightness(1.08); }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 101;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background: var(--snow-white);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        /* Mobile Menu Styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 80px;
+                flex-direction: column;
+                background: rgba(26, 58, 82, 0.98);
+                width: 250px;
+                padding: 30px 20px;
+                box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.5);
+                transition: right 0.3s ease;
+                border-radius: 10px 0 0 10px;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                padding: 12px 20px;
+                width: 100%;
+                text-align: left;
+            }
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                        url('3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/single-file-trail.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 20px;
+            text-align: center;
+            color: var(--snow-white);
+        }
+
+        .page-header h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--ice-blue);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Updates Grid */
+        .updates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        /* Update Card */
+        .update-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .update-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .update-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .update-title {
+            font-size: 1.5rem;
+            color: var(--deep-blue);
+            font-weight: 700;
+        }
+
+        .update-date {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .update-content {
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .update-content p {
+            margin-bottom: 15px;
+        }
+
+        .update-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .update-content ul {
+            padding-left: 25px;
+            line-height: 1.8;
+        }
+
+        .update-content ul li {
+            margin-bottom: 8px;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(26, 58, 82, 0.97);
+            color: var(--snow-white);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: var(--logo-gradient-mid);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--logo-gradient-end);
+        }
+
+        /* Expand/Collapse */
+        .expandable-content {
+            position: relative;
+        }
+
+        .expandable-content.collapsed {
+            max-height: 150px;
+            overflow: hidden;
+        }
+
+        .expandable-content.collapsed::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, white);
+        }
+
+        .expand-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .expand-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-header h2 {
+                font-size: 2rem;
+            }
+
+            .updates-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .update-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* ---- shared additions for Get Involved / Supporters ---- */
+        .panel {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .panel h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            color: var(--deep-blue);
+            margin-bottom: 8px;
+        }
+
+        .panel > p { margin-bottom: 15px; }
+
+        .panel ul { padding-left: 25px; line-height: 1.9; margin-bottom: 15px; }
+
+        .lede {
+            color: var(--ice-blue);
+            font-size: 1.15rem;
+            max-width: 780px;
+            margin: 0 auto 40px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        table.schedule { width: 100%; border-collapse: collapse; }
+
+        table.schedule th,
+        table.schedule td {
+            text-align: left;
+            padding: 12px 14px;
+            border-bottom: 1px solid #e3e8ee;
+        }
+
+        table.schedule th {
+            background: var(--deep-blue);
+            color: var(--snow-white);
+            font-weight: 600;
+        }
+
+        table.schedule tr:last-child td { border-bottom: none; }
+
+        .empty-state {
+            padding: 26px;
+            text-align: center;
+            color: #6b7580;
+            background: #f5f7fa;
+            border: 2px dashed #c9d3de;
+            border-radius: 12px;
+        }
+
+        .people {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .person {
+            background: #f5f7fa;
+            border-left: 5px solid var(--accent-orange);
+            border-radius: 10px;
+            padding: 18px 20px;
+        }
+
+        .person .role {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+            font-size: 1.15rem;
+            color: var(--accent-orange);
+        }
+
+        .person .name { font-weight: 700; color: var(--deep-blue); font-size: 1.1rem; }
+
+        .person .vacant { color: #8a94a0; font-style: italic; }
+
+        .signup {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .signup input[type="email"],
+        .signup input[type="text"] {
+            flex: 1 1 220px;
+            min-width: 0;
+            padding: 14px 16px;
+            border: 2px solid #d5dde6;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .signup input:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+        }
+
+        .signup button {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .signup button:hover { transform: translateY(-2px); }
+
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tier {
+            background: #f5f7fa;
+            border-radius: 12px;
+            padding: 22px;
+            border-top: 5px solid var(--accent-orange);
+        }
+
+        .tier h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            color: var(--deep-blue);
+        }
+
+        .supporter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .supporter {
+            background: #f5f7fa;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .supporter .biz { font-weight: 700; color: var(--deep-blue); font-size: 1.05rem; }
+        .supporter .town { color: #6b7580; font-size: 0.9rem; }
+
+        /* ---- trail map + status table ---- */
+        /* embedded statewide SLEDNH map */
+        .widget-container {
+            width: 100%;
+            height: 620px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #d5dde6;
+            background: #eef2f6;
+        }
+
+        .widget-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .widget-container { height: 420px; }
+        }
+
+        #map {
+            height: 560px;
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid #d5dde6;
+            background: #eef2f6;
+        }
+
+        .legend-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 22px;
+            margin: 18px 0 6px;
+            align-items: center;
+        }
+
+        .legend-row span.key {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: var(--deep-blue);
+        }
+
+        .legend-row i {
+            width: 26px;
+            height: 5px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+
+        .table-scroll { overflow-x: auto; }
+
+        table.trails {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 760px;
+        }
+
+        table.trails th,
+        table.trails td {
+            text-align: left;
+            padding: 11px 12px;
+            border-bottom: 1px solid #e3e8ee;
+            white-space: nowrap;
+        }
+
+        table.trails th {
+            background: var(--deep-blue);
+            color: var(--snow-white);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        table.trails td.comment { white-space: normal; min-width: 200px; color: #55606c; }
+
+        table.trails tbody tr { cursor: pointer; }
+        table.trails tbody tr:hover { background: #fff4ef; }
+        table.trails tbody tr.selected { background: #ffe8dd; }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 18px 0;
+        }
+
+        .filters button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            border: 2px solid #d5dde6;
+            background: #fff;
+            border-radius: 24px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--deep-blue);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filters button i {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .filters button:hover { border-color: var(--accent-orange); }
+
+        .filters button.on {
+            background: var(--deep-blue);
+            border-color: var(--deep-blue);
+            color: #fff;
+        }
+
+        td.club-cell {
+            font-weight: 600;
+            color: var(--deep-blue);
+        }
+
+        td.club-cell i {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 7px;
+        }
+
+        table.trails tr.club-head td {
+            background: #eef2f6;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+            font-size: 1.15rem;
+            color: var(--deep-blue);
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .pill.open    { background: #2E7D32; color: #fff; }
+        .pill.closed  { background: #C62828; color: #fff; }
+        .pill.caution { background: #F9A825; color: #2C3E50; }
+
+        .needs-name {
+            color: #8a94a0;
+            font-style: italic;
+        }
+
+        .trail-id {
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 0.85rem;
+            color: #6b7580;
+            margin-right: 8px;
+        }
+
+        .totals {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 22px 0 6px;
+        }
+
+        .totals div {
+            background: #f5f7fa;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .totals strong {
+            display: block;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-orange);
+            line-height: 1.1;
+        }
+
+        .totals span { color: #55606c; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            #map { height: 380px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="3-MEDIA/1-Photos/Logos/GreatBaySnoRoller-LOGO.png" alt="Great Bay Sno-Rollers Logo" class="logo-image">
+                <div class="logo-text">
+                    <h1>GREAT BAY SNO-ROLLERS</h1>
+                    <p>Rockingham County, NH</p>
+                </div>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" onclick="closeMenu()">Home</a></li>
+                <li><a href="trails.html" class="active" onclick="closeMenu()">Trails</a></li>
+                <li><a href="club-updates.html" onclick="closeMenu()">Updates</a></li>
+                <li><a href="weather-trails.html" onclick="closeMenu()">Weather</a></li>
+                <li><a href="events.html" onclick="closeMenu()">Events</a></li>
+                <li><a href="gallery.html" onclick="closeMenu()">Gallery</a></li>
+                <li><a href="get-involved.html" onclick="closeMenu()">Get Involved</a></li>
+                <li><a href="membership.html" class="nav-join" onclick="closeMenu()">Join the Club</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h2>TRAIL MAP &amp; CONDITIONS</h2>
+        <p>Our trails, our neighbours' trails, and what shape they're in</p>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <a href="index.html" class="back-button">&larr; Back to Home</a>
+
+        <p class="lede">Every trail we and our neighbouring clubs maintain, with current status.
+        Geometry and mileage come straight from the official
+        <a href="https://slednh.evtrails.com/" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;">SLEDNH trail map</a>.</p>
+
+        <div class="panel">
+            <h3>&#129517; Full SLEDNH Trail Map</h3>
+            <p>The complete statewide network &mdash; corridors, connectors, and every club's
+               trails. Pan and zoom to plan a longer trip, or click a trail for its details.</p>
+            <div class="widget-container">
+                <iframe src="https://slednh.evtrails.com/"
+                        title="SLEDNH statewide interactive trail map"
+                        loading="lazy"></iframe>
+            </div>
+            <p style="margin-top:14px;color:#6b7580;font-size:0.95rem;">
+                Map won't load or too cramped on your phone?
+                <a href="https://slednh.evtrails.com/" target="_blank" rel="noopener" style="color:var(--accent-orange);font-weight:600;">Open it full screen &rarr;</a>
+            </p>
+        </div>
+
+        <div class="panel">
+            <h3>&#128506;&#65039; Our Local Network</h3>
+            <div class="legend-row">
+                <span class="key"><i style="background:#FF4500"></i> Great Bay Sno-Rollers</span>
+                <span class="key"><i style="background:#1565C0"></i> Newfields Sno-Raiders</span>
+                <span class="key"><i style="background:#2E7D32"></i> Lee Sno-Travelers</span>
+                <span class="key"><i style="background:#6b7580"></i> Parking / services</span>
+            </div>
+            <div id="map"></div>
+            <div class="totals">
+                <div><strong id="tot-gb">&mdash;</strong><span>miles &mdash; Great Bay</span></div>
+                <div><strong id="tot-nsr">&mdash;</strong><span>miles &mdash; Newfields</span></div>
+                <div><strong id="tot-lst">&mdash;</strong><span>miles &mdash; Lee</span></div>
+                <div><strong id="tot-all">&mdash;</strong><span>miles connected</span></div>
+            </div>
+            <p style="margin-top:14px;color:#6b7580;font-size:0.95rem;">
+                Click any trail on the map or any row in the table below to highlight it.
+                For the full statewide network including corridors, use the
+                <a href="https://slednh.evtrails.com/" target="_blank" rel="noopener" style="color:var(--accent-orange);font-weight:600;">SLEDNH map</a>.
+            </p>
+        </div>
+
+        <div class="panel">
+            <h3>&#128203; Trail Status</h3>
+            <p id="status-stamp" style="color:#6b7580;"></p>
+            <p style="color:#55606c;">Our trails and our neighbours' trails connect into one
+               network, so they're all listed together. Filter by club if you only want ours.</p>
+
+            <div class="filters" id="club-filters">
+                <button type="button" data-club="all" class="on">All clubs</button>
+                <button type="button" data-club="gb"><i style="background:#FF4500"></i>Great Bay</button>
+                <button type="button" data-club="nsr"><i style="background:#1565C0"></i>Newfields</button>
+                <button type="button" data-club="lst"><i style="background:#2E7D32"></i>Lee</button>
+            </div>
+
+            <div class="table-scroll">
+                <table class="trails">
+                    <thead>
+                        <tr>
+                            <th>Trail</th><th>Managed By</th><th>Miles</th><th>km</th>
+                            <th>Status</th><th>Condition</th><th>Last Groomed</th><th>Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody id="trail-rows"></tbody>
+                </table>
+            </div>
+            <p style="margin-top:18px;color:#6b7580;font-size:0.95rem;">
+                Conditions use the NH Bureau of Trails grades: <strong>Great</strong> (solid base, well groomed),
+                <strong>Good</strong> (adequate base, some ice possible), <strong>Moderate</strong>
+                (rideable, bare or rough spots), <strong>Marginal</strong> (thin cover, obstacles).
+                Conditions change within hours &mdash; ride to what you actually see.
+            </p>
+        </div>
+
+        <div class="panel">
+            <h3>&#128663; Parking &amp; Access</h3>
+            <p id="parking-note"></p>
+            <ul id="parking-list"></ul>
+            <!-- ADD PARKING HERE: the list above is pulled from SLEDNH's map, which only
+                 has a couple of spots for our area. Add real trailhead parking by copying
+                 a line into EXTRA_PARKING in the script at the bottom of this page. -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links" style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;margin-bottom:16px;">
+                <a href="index.html">Home</a>
+                <a href="trails.html">Trail Map & Conditions</a>
+                <a href="club-updates.html">Club Updates</a>
+                <a href="weather-trails.html">Weather & Radar</a>
+                <a href="events.html">Events Calendar</a>
+                <a href="gallery.html">Photo Gallery</a>
+                <a href="get-involved.html">Get Involved</a>
+                <a href="membership.html">Join the Club</a>
+                <a href="equipment.html">Groomers & Equipment</a>
+                <a href="merch.html">Club Merch</a>
+                <a href="supporters.html">Our Supporters</a>
+                <a href="landing.html">Quick Links</a>
+                <a href="https://www.facebook.com/greatbay.sno.rollers" target="_blank" rel="noopener">Facebook</a>
+                <a href="https://venmo.com/u/greatbaysnorollers" target="_blank" rel="noopener">Donate via Venmo</a>
+                <a href="https://slednh.com/" target="_blank" rel="noopener">NH Snowmobile Association</a>
+                <a href="https://slednh.evtrails.com/" target="_blank" rel="noopener">Statewide Trail Map</a>
+            </div>
+        <p>&copy; 2026 Great Bay Sno-Rollers. All rights reserved.</p>
+        <p>
+            <a href="mailto:greatbaysnorollers@gmail.com">greatbaysnorollers@gmail.com</a> |
+            <a href="https://www.facebook.com/GreatBaySnoRollers" target="_blank" rel="noopener">Follow us on Facebook</a>
+        </p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.getElementById('hamburger');
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.getElementById('hamburger');
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+
+        // Expand/Collapse Content
+        function toggleExpand(contentId, button) {
+            const content = document.getElementById(contentId);
+            content.classList.toggle('collapsed');
+
+            if (content.classList.contains('collapsed')) {
+                button.textContent = 'Read More';
+            } else {
+                button.textContent = 'Read Less';
+            }
+        }
+    </script>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="trails-data.js"></script>
+    <script>
+    /* =====================================================================
+       TRAIL STATUS  --  this is the part you edit.
+
+       1. NETWORK_STATUS sets the default for every trail.
+       2. TRAIL_STATUS overrides individual trails that differ. Use the id
+          shown in grey next to each trail name (e.g. 'GB-01').
+
+       status:    'open' | 'closed' | 'caution'
+       condition: 'Great' | 'Good' | 'Moderate' | 'Marginal' | '--'
+       ===================================================================== */
+
+    var LAST_UPDATED = 'August 10, 2026';
+
+    var NETWORK_STATUS = {
+        status:    'closed',
+        condition: '--',
+        groomed:   '--',
+        comment:   'Closed for the season. See you in December.'
+    };
+
+    var TRAIL_STATUS = {
+        // 'GB-01': { status: 'open', condition: 'Good', groomed: 'Jan 26, 2026', comment: 'Groomed overnight' },
+        // 'gb-NEAL_MILL_EXTENSION': { status: 'caution', condition: 'Marginal', groomed: 'Jan 20, 2026', comment: 'Thin over the culvert' },
+    };
+
+    /* Extra parking the SLEDNH map doesn't have. Add as many as you like. */
+    var EXTRA_PARKING = [
+        // { name: 'Example Trailhead Lot', detail: 'Room for 6 trailers, off Neal Mill Rd', lat: 43.05, lon: -70.99 },
+    ];
+
+    /* ===================== nothing below here needs editing ============== */
+
+    var CLUBS = {
+        gb:  { label: 'Great Bay Sno-Rollers', color: '#FF4500' },
+        nsr: { label: 'Newfields Sno-Raiders', color: '#1565C0' },
+        lst: { label: 'Lee Sno-Travelers',     color: '#2E7D32' }
+    };
+
+    var map = L.map('map', { scrollWheelZoom: false });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 17,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors | Trails: SLEDNH'
+    }).addTo(map);
+    map.fitBounds(TRAIL_BOUNDS, { padding: [20, 20] });
+
+    function statusFor(id) {
+        var o = TRAIL_STATUS[id] || {};
+        return {
+            status:    o.status    || NETWORK_STATUS.status,
+            condition: o.condition || NETWORK_STATUS.condition,
+            groomed:   o.groomed   || NETWORK_STATUS.groomed,
+            comment:   (o.comment !== undefined) ? o.comment : NETWORK_STATUS.comment
+        };
+    }
+
+    var layers = {};
+    TRAIL_DATA.forEach(function (t) {
+        var color = CLUBS[t.club].color;
+        var group = L.layerGroup();
+        t.paths.forEach(function (path) {
+            L.polyline(path, { color: color, weight: 4, opacity: 0.85 })
+                .addTo(group)
+                .on('click', function () { select(t.id); });
+        });
+        group.addTo(map);
+        layers[t.id] = { group: group, color: color, trail: t };
+    });
+
+    // parking + services markers
+    var poiIcon = L.divIcon({
+        className: '',
+        html: '<div style="background:#6b7580;color:#fff;border-radius:50%;width:22px;height:22px;' +
+              'display:flex;align-items:center;justify-content:center;font-size:12px;' +
+              'box-shadow:0 1px 4px rgba(0,0,0,.4)">P</div>',
+        iconSize: [22, 22], iconAnchor: [11, 11]
+    });
+    TRAIL_POIS.concat(EXTRA_PARKING.map(function (p) {
+        return { name: p.name, cat: 'Parking', lat: p.lat, lon: p.lon, detail: p.detail };
+    })).forEach(function (p) {
+        L.marker([p.lat, p.lon], { icon: poiIcon })
+            .addTo(map)
+            .bindPopup('<strong>' + p.name + '</strong><br>' + p.cat + (p.detail ? '<br>' + p.detail : ''));
+    });
+
+    // totals
+    document.getElementById('tot-gb').textContent  = TRAIL_TOTALS.gb;
+    document.getElementById('tot-nsr').textContent = TRAIL_TOTALS.nsr;
+    document.getElementById('tot-lst').textContent = TRAIL_TOTALS.lst;
+    document.getElementById('tot-all').textContent =
+        (TRAIL_TOTALS.gb + TRAIL_TOTALS.nsr + TRAIL_TOTALS.lst).toFixed(1);
+
+    // table
+    var tbody = document.getElementById('trail-rows');
+    document.getElementById('status-stamp').textContent = 'Last updated ' + LAST_UPDATED;
+
+    ['gb', 'nsr', 'lst'].forEach(function (club) {
+        var head = document.createElement('tr');
+        head.className = 'club-head';
+        head.dataset.club = club;
+        var mi = TRAIL_TOTALS[club];
+        head.innerHTML = '<td colspan="8">' + CLUBS[club].label +
+            ' &mdash; ' + mi + ' mi / ' + (mi * 1.60934).toFixed(1) + ' km' +
+            (club === 'gb' ? '' : ' <span style="font-family:Barlow,sans-serif;letter-spacing:0;' +
+             'font-size:0.85rem;font-weight:400;color:#6b7580;">(neighbouring club &mdash; connects to ours)</span>') +
+            '</td>';
+        tbody.appendChild(head);
+
+        TRAIL_DATA.filter(function (t) { return t.club === club; }).forEach(function (t) {
+            var s = statusFor(t.id);
+            var tr = document.createElement('tr');
+            tr.dataset.id = t.id;
+            tr.dataset.club = club;
+            // Only unnamed trails show their id — that's the handle the club uses
+            // to refer to them until they get real names.
+            var nameCell = t.name
+                ? t.name
+                : '<span class="trail-id">' + t.id + '</span><span class="needs-name">unnamed &mdash; needs a name</span>';
+            tr.innerHTML =
+                '<td>' + nameCell + '</td>' +
+                '<td class="club-cell"><i style="background:' + CLUBS[club].color + '"></i>' +
+                    CLUBS[club].label.replace(/ (Sno-Rollers|Sno-Raiders|Sno-Travelers)$/, '') + '</td>' +
+                '<td>' + t.miles.toFixed(2) + '</td>' +
+                '<td>' + t.km.toFixed(2) + '</td>' +
+                '<td><span class="pill ' + s.status + '">' + s.status + '</span></td>' +
+                '<td>' + s.condition + '</td>' +
+                '<td>' + s.groomed + '</td>' +
+                '<td class="comment">' + s.comment + '</td>';
+            tr.addEventListener('click', function () { select(t.id, true); });
+            tbody.appendChild(tr);
+        });
+    });
+
+    function select(id, zoom) {
+        Object.keys(layers).forEach(function (k) {
+            layers[k].group.eachLayer(function (l) {
+                l.setStyle({ weight: k === id ? 7 : 4, opacity: k === id ? 1 : 0.4 });
+            });
+        });
+        [].forEach.call(tbody.querySelectorAll('tr'), function (tr) {
+            tr.classList.toggle('selected', tr.dataset.id === id);
+        });
+        var row = tbody.querySelector('tr[data-id="' + id + '"]');
+        if (row) row.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        if (zoom) {
+            var b = L.latLngBounds([]);
+            layers[id].group.eachLayer(function (l) { b.extend(l.getBounds()); });
+            map.fitBounds(b, { padding: [40, 40], maxZoom: 15 });
+        }
+    }
+
+    // club filter — hides table rows and pulls the matching layers off the map
+    document.getElementById('club-filters').addEventListener('click', function (e) {
+        var btn = e.target.closest('button');
+        if (!btn) return;
+        var want = btn.dataset.club;
+
+        [].forEach.call(this.querySelectorAll('button'), function (b) {
+            b.classList.toggle('on', b === btn);
+        });
+
+        [].forEach.call(tbody.querySelectorAll('tr'), function (tr) {
+            var show = (want === 'all') || (tr.dataset.club === want);
+            tr.style.display = show ? '' : 'none';
+        });
+
+        Object.keys(layers).forEach(function (k) {
+            var l = layers[k];
+            var show = (want === 'all') || (l.trail.club === want);
+            if (show) { l.group.addTo(map); } else { map.removeLayer(l.group); }
+        });
+
+        var b = L.latLngBounds([]);
+        Object.keys(layers).forEach(function (k) {
+            if (want === 'all' || layers[k].trail.club === want) {
+                layers[k].group.eachLayer(function (ln) { b.extend(ln.getBounds()); });
+            }
+        });
+        if (b.isValid()) map.fitBounds(b, { padding: [25, 25] });
+    });
+
+    // parking list
+    var pl = document.getElementById('parking-list');
+    var parking = TRAIL_POIS.filter(function (p) { return p.cat === 'Parking'; }).concat(EXTRA_PARKING);
+    document.getElementById('parking-note').textContent = parking.length
+        ? 'Marked with a P on the map above.'
+        : 'No parking is listed for our section of the network yet.';
+    parking.forEach(function (p) {
+        var li = document.createElement('li');
+        li.innerHTML = '<strong>' + p.name + '</strong>' + (p.detail ? ' &mdash; ' + p.detail : '') +
+            ' <a href="https://www.google.com/maps?q=' + p.lat + ',' + p.lon +
+            '" target="_blank" rel="noopener" style="color:var(--accent-orange)">directions</a>';
+        pl.appendChild(li);
+    });
+
+    var others = TRAIL_POIS.filter(function (p) { return p.cat !== 'Parking'; });
+    if (others.length) {
+        var li = document.createElement('li');
+        li.style.marginTop = '10px';
+        li.innerHTML = '<em>Also nearby on the SLEDNH map: ' +
+            others.length + ' gas and food stops &mdash; see the map markers.</em>';
+        pl.appendChild(li);
+    }
+    </script>
+</body>
+</html>

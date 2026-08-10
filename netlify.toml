@@ -1,0 +1,26 @@
+# Netlify configuration for greatbaysnorollers.com
+#
+# This is a plain static site — no build step, no dependencies. Netlify just
+# publishes the repository root as-is.
+
+[build]
+  publish = "."
+  command = ""
+
+# Long cache for photos (their filenames change when the photo changes),
+# but always revalidate HTML so updates appear immediately.
+[[headers]]
+  for = "/3-MEDIA/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

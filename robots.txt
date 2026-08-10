@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /0-ARCHIVE/
+
+Sitemap: https://greatbaysnorollers.com/sitemap.xml

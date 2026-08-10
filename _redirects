@@ -1,0 +1,7 @@
+# Netlify redirects.
+# Old URLs that people may have bookmarked or that Google still has indexed.
+# Format:  <old path>  <new path>  <status code>
+
+# Trail reports were merged into Club Updates; live status moved to the map page.
+/trail-conditions.html   /club-updates.html   301
+/trail-conditions        /club-updates.html   301

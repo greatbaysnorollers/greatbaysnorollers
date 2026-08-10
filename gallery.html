@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery - Great Bay Sno-Rollers | Snowmobile Action Photos</title>
+    <meta name="description" content="Browse our photo gallery featuring snowmobile action shots, trail rides, and club events in Rockingham County, NH. Capturing the thrill of snowmobiling with Great Bay Sno-Rollers.">
+    <meta name="keywords" content="snowmobile photos, Great Bay Sno-Rollers gallery, NH snowmobiling photos, trail riding pictures, snowmobile action shots">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Great Bay Sno-Rollers Photo Gallery">
+    <meta property="og:description" content="Browse snowmobile action photos and club events from Rockingham County, NH.">
+    <meta property="og:image" content="https://greatbaysnorollers.com/3-MEDIA/1-Photos/Gallery/483100253_645066678070906_3838840164000899336_n.jpg">
+
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="3-MEDIA/1-Photos/Logos/favicon-512.png">
+    <link rel="apple-touch-icon" href="3-MEDIA/1-Photos/Logos/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ice-blue: #D4E7F5;
+            --deep-blue: #1A3A52;
+            --snow-white: #F8FBFD;
+            --accent-orange: #FF4500;
+            --text-dark: #2C3E50;
+            --logo-gradient-start: #FF4500;
+            --logo-gradient-mid: #FF6B35;
+            --logo-gradient-end: #FFA726;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: linear-gradient(to bottom, #0F2027, #203A43, #2C5364);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 58, 82, 0.97);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 5px solid;
+            border-image: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-mid), var(--logo-gradient-end)) 1;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-image {
+            height: 84px;
+            width: auto;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+        }
+
+        .logo-text h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-mid), var(--logo-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            color: var(--snow-white);
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--snow-white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 11px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            transform: translateY(-2px);
+        }
+
+
+        /* "Join the Club" gets button treatment in the top nav */
+        .nav-links a.nav-join {
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .nav-links a.nav-join:hover { filter: brightness(1.08); }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 101;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background: var(--snow-white);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                        url('3-MEDIA/1-Photos/Gallery/483100253_645066678070906_3838840164000899336_n.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 20px;
+            text-align: center;
+            color: var(--snow-white);
+        }
+
+        .page-header h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--ice-blue);
+        }
+
+        /* Gallery Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            aspect-ratio: 4/3;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.4);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-item-overlay p {
+            color: white;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            background: var(--accent-orange);
+            transform: rotate(90deg);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--accent-orange);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--deep-blue);
+            color: var(--snow-white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--ice-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-orange);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                max-width: 300px;
+                background: var(--deep-blue);
+                flex-direction: column;
+                padding: 80px 30px 30px;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+                transition: right 0.3s ease;
+                z-index: 99;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding: 15px 20px;
+                text-align: left;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .page-header h2 {
+                font-size: 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+
+            .lightbox-nav {
+                font-size: 2rem;
+                width: 50px;
+                height: 50px;
+            }
+
+            .lightbox-close {
+                font-size: 2rem;
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="3-MEDIA/1-Photos/Logos/GreatBaySnoRoller-LOGO.png" alt="Great Bay Sno-Rollers Logo" class="logo-image">
+                <div class="logo-text">
+                    <h1>GREAT BAY SNO-ROLLERS</h1>
+                    <p>Rockingham County, NH</p>
+                </div>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" onclick="closeMenu()">Home</a></li>
+                <li><a href="trails.html" onclick="closeMenu()">Trails</a></li>
+                <li><a href="club-updates.html" onclick="closeMenu()">Updates</a></li>
+                <li><a href="weather-trails.html" onclick="closeMenu()">Weather</a></li>
+                <li><a href="events.html" onclick="closeMenu()">Events</a></li>
+                <li><a href="gallery.html" class="active" onclick="closeMenu()">Gallery</a></li>
+                <li><a href="get-involved.html" onclick="closeMenu()">Get Involved</a></li>
+                <li><a href="membership.html" class="nav-join" onclick="closeMenu()">Join the Club</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h2>PHOTO GALLERY</h2>
+        <p>Capturing the thrill of snowmobiling in Rockingham County</p>
+    </section>
+
+    <main class="container">
+        <div class="gallery-grid">
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/2026_Feb22-Group_Ride/sled-lineup-bluebird.jpg">
+                <img src="3-MEDIA/1-Photos/2026_Feb22-Group_Ride/thumbs/sled-lineup-bluebird.jpg" alt="Bluebird group ride, February 2026" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Bluebird group ride, February 2026</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/2026_Feb22-Group_Ride/group-on-the-corridor.jpg">
+                <img src="3-MEDIA/1-Photos/2026_Feb22-Group_Ride/thumbs/group-on-the-corridor.jpg" alt="Group ride on the corridor, February 2026" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Group ride on the corridor, February 2026</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/sleds-buried.jpg">
+                <img src="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/thumbs/sleds-buried.jpg" alt="Buried after the January storm" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Buried after the January storm</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/group-stop-pond.jpg">
+                <img src="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/thumbs/group-stop-pond.jpg" alt="Regrouping on the ice, January 2026" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Regrouping on the ice, January 2026</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/single-file-trail.jpg">
+                <img src="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/thumbs/single-file-trail.jpg" alt="Single file through fresh snow" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Single file through fresh snow</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/night-ride.jpg">
+                <img src="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/thumbs/night-ride.jpg" alt="Night ride, January 2026" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Night ride, January 2026</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/riders-on-the-river.jpg">
+                <img src="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/thumbs/riders-on-the-river.jpg" alt="Vintage Phazers on the river, MLK Day 2026" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Vintage Phazers on the river, MLK Day 2026</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/riders-on-the-river-2.jpg">
+                <img src="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/thumbs/riders-on-the-river-2.jpg" alt="MLK Day ride, January 2026" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>MLK Day ride, January 2026</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/phazers-fresh-snow.jpg">
+                <img src="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/thumbs/phazers-fresh-snow.jpg" alt="Phazers in fresh snow" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Phazers in fresh snow</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/open-field-crossing.jpg">
+                <img src="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/thumbs/open-field-crossing.jpg" alt="Crossing the open fields" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Crossing the open fields</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/club-lineup-marsh.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/club-lineup-marsh.jpg" alt="Club lineup out on the marsh" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Club lineup out on the marsh</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/vintage-sled-googly-eyes.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/vintage-sled-googly-eyes.jpg" alt="Vintage sled with a sense of humor" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Vintage sled with a sense of humor</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/605193876_866215545956017_1420054460100092599_n.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/605193876_866215545956017_1420054460100092599_n.jpg" alt="Snowmobile action" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/605127379_867337009177204_1290253696290446714_n.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/605127379_867337009177204_1290253696290446714_n.jpg" alt="Trail work" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/597939064_856836420227263_4688380764244533264_n.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/597939064_856836420227263_4688380764244533264_n.jpg" alt="Grooming trails" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/597397887_856836603560578_7626117195584514107_n.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/597397887_856836603560578_7626117195584514107_n.jpg" alt="Winter trails" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/597392139_856836536893918_6105219647123673434_n.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/597392139_856836536893918_6105219647123673434_n.jpg" alt="Trail grooming" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/597385752_856836466893925_2064940089688574359_n.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/597385752_856836466893925_2064940089688574359_n.jpg" alt="Snowmobile club" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/597341304_856836413560597_8060508882785267367_n.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/597341304_856836413560597_8060508882785267367_n.jpg" alt="Trail riding" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/488927175_665550786022495_6389899726708991196_n.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/488927175_665550786022495_6389899726708991196_n.jpg" alt="Snowmobile adventures" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/483544285_646017431309164_8125565713010565912_n.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/483544285_646017431309164_8125565713010565912_n.jpg" alt="Club ride" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/483100253_645066678070906_3838840164000899336_n.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/483100253_645066678070906_3838840164000899336_n.jpg" alt="Snowmobile action shot" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/482072230_642479721662935_2808091848758304531_n.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/482072230_642479721662935_2808091848758304531_n.jpg" alt="Winter adventures" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/472829530_601082042469370_8217287547257351680_n.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/472829530_601082042469370_8217287547257351680_n.jpg" alt="Snowmobile club ride" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/471227032_591632543414320_4580947917977553883_n.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/471227032_591632543414320_4580947917977553883_n.jpg" alt="Group riding" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/471195526_591610653416509_6813867149596581138_n.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/471195526_591610653416509_6813867149596581138_n.jpg" alt="Scenic trail" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/271272635_100437129200533_8738425904938062672_n.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/271272635_100437129200533_8738425904938062672_n.jpg" alt="Club jacket with the original Great Bay Sno-Rollers patch" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/Dec7_Pic3.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/Dec7_Pic3.jpg" alt="Trail maintenance" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/Dec7_Pic2.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/Dec7_Pic2.jpg" alt="Trail cleanup" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/Dec7_Pic1.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/Dec7_Pic1.jpg" alt="Trail work" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/Dec6_Pic2.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/Dec6_Pic2.jpg" alt="Groomer test" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/Dec6_Pic1.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/Dec6_Pic1.jpg" alt="Equipment testing" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Click to view full size</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Gallery/Billy_Vandervalk_Headshot.jpg">
+                <img src="3-MEDIA/1-Photos/Gallery/thumbs/Billy_Vandervalk_Headshot.jpg" alt="Billy Vandervalk - Club President" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Billy Vandervalk - Club President</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-src="3-MEDIA/1-Photos/Logos/GreatBaySnoRoller-LOGO.png">
+                <img src="3-MEDIA/1-Photos/Logos/GreatBaySnoRoller-LOGO.png" alt="Great Bay Sno-Rollers Logo" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <p>Club Logo</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-close" onclick="closeLightbox()">&times;</div>
+        <div class="lightbox-prev" onclick="changeImage(-1)">&#10094;</div>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Gallery image">
+        </div>
+        <div class="lightbox-next" onclick="changeImage(1)">&#10095;</div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="trails.html">Trail Map & Conditions</a>
+                <a href="club-updates.html">Club Updates</a>
+                <a href="weather-trails.html">Weather & Radar</a>
+                <a href="events.html">Events Calendar</a>
+                <a href="gallery.html">Photo Gallery</a>
+                <a href="get-involved.html">Get Involved</a>
+                <a href="membership.html">Join the Club</a>
+                <a href="equipment.html">Groomers & Equipment</a>
+                <a href="merch.html">Club Merch</a>
+                <a href="supporters.html">Our Supporters</a>
+                <a href="landing.html">Quick Links</a>
+                <a href="https://www.facebook.com/greatbay.sno.rollers" target="_blank" rel="noopener">Facebook</a>
+                <a href="https://venmo.com/u/greatbaysnorollers" target="_blank" rel="noopener">Donate via Venmo</a>
+                <a href="https://slednh.com/" target="_blank" rel="noopener">NH Snowmobile Association</a>
+                <a href="https://slednh.evtrails.com/" target="_blank" rel="noopener">Statewide Trail Map</a>
+            </div>
+            <p>&copy; 2026 Great Bay Sno-Rollers. Rockingham County, NH</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Functions
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.querySelector('.hamburger');
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.querySelector('.hamburger');
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.querySelector('.hamburger');
+            const nav = document.querySelector('nav');
+
+            if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+
+        // Gallery Functions
+        let currentImageIndex = 0;
+        const images = [];
+
+        // Collect all gallery images
+        document.querySelectorAll('.gallery-item').forEach((item, index) => {
+            images.push(item.dataset.src);
+            item.addEventListener('click', () => openLightbox(index));
+        });
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = images[index];
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            } else if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
+            }
+            document.getElementById('lightbox-img').src = images[currentImageIndex];
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') changeImage(-1);
+                if (e.key === 'ArrowRight') changeImage(1);
+            }
+        });
+
+        // Close on background click
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>

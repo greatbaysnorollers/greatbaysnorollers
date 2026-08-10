@@ -1,0 +1,26 @@
+# Great Bay Sno-Rollers website
+#
+# The repo holds the DEPLOYABLE SITE ONLY. Everything Netlify needs is tracked;
+# archives and full-resolution originals stay on local disk (they are far too
+# large for GitHub and nothing on the site links to them).
+
+# Full-res originals and video — 239 MB, includes a 162 MB file that exceeds
+# GitHub's 100 MB per-file limit. Keep your own backup of this folder.
+3-MEDIA/9-Originals-FullRes/
+
+# Dated backups of previous site versions. Git history replaces these.
+0-ARCHIVE/
+
+# Local tooling / editor noise
+.claude/settings.local.json
+.vscode/
+.idea/
+__pycache__/
+*.pyc
+
+# OS junk
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+desktop.ini
+.DS_Store

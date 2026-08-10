@@ -1,0 +1,10 @@
+# Keep line endings consistent so edits from different machines/editors
+# don't show up as whole-file changes.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.mp4 binary
+*.mov binary

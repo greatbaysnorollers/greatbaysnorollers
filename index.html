@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Great Bay Sno-Rollers - Rockingham County, NH Snowmobile Club</title>
+    <meta name="description" content="Great Bay Sno-Rollers is a premier snowmobile club in Rockingham County, NH. Join us for trail rides, events, and community. Get trail updates, weather forecasts, and connect with fellow snowmobile enthusiasts.">
+    <meta name="keywords" content="snowmobile, Rockingham County NH, Great Bay Sno-Rollers, snowmobile club, trail updates, NH snowmobiling, winter sports">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://greatbaysnorollers.com/">
+    <meta property="og:title" content="Great Bay Sno-Rollers - NH Snowmobile Club">
+    <meta property="og:description" content="Rockingham County's premier snowmobile club. Trail updates, events, and community for snowmobile enthusiasts.">
+    <meta property="og:image" content="https://greatbaysnorollers.com/3-MEDIA/1-Photos/Gallery/483100253_645066678070906_3838840164000899336_n.jpg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Great Bay Sno-Rollers - NH Snowmobile Club">
+    <meta name="twitter:description" content="Rockingham County's premier snowmobile club. Trail updates, events, and community.">
+    <meta name="twitter:image" content="https://greatbaysnorollers.com/3-MEDIA/1-Photos/Gallery/483100253_645066678070906_3838840164000899336_n.jpg">
+
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="3-MEDIA/1-Photos/Logos/favicon-512.png">
+    <link rel="apple-touch-icon" href="3-MEDIA/1-Photos/Logos/apple-touch-icon.png">
+    <link rel="canonical" href="https://greatbaysnorollers.com/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ice-blue: #D4E7F5;
+            --deep-blue: #1A3A52;
+            --snow-white: #F8FBFD;
+            --accent-orange: #FF4500;
+            --accent-red: #D32F2F;
+            --accent-yellow: #FFA726;
+            --text-dark: #2C3E50;
+            --success-green: #4CAF50;
+            --warning-yellow: #FFC107;
+            --danger-red: #F44336;
+            --logo-gradient-start: #FF4500;
+            --logo-gradient-mid: #FF6B35;
+            --logo-gradient-end: #FFA726;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: linear-gradient(to bottom, #0F2027, #203A43, #2C5364);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            /* NOTE: no backdrop-filter here. It makes the header a containing block
+               for the position:fixed mobile menu, which then overflows the page
+               and causes sideways scrolling on phones. */
+            background: rgba(26, 58, 82, 0.97);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 4px solid var(--accent-orange);
+        }
+
+        /* The racing stripe animates its BACKGROUND, not its box. Animating the box
+           (translateX) made the page up to twice as wide for half of every cycle,
+           which flickered the horizontal scrollbar and reflowed the whole layout. */
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                var(--logo-gradient-start) 15%,
+                var(--logo-gradient-mid) 35%,
+                var(--logo-gradient-end) 50%,
+                var(--logo-gradient-mid) 65%,
+                var(--logo-gradient-start) 85%,
+                transparent 100%);
+            background-size: 200% 100%;
+            animation: racing-stripe 4s linear infinite;
+        }
+
+        @keyframes racing-stripe {
+            0% { background-position: 100% 0; }
+            100% { background-position: -100% 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            header::after { animation: none; }
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-image {
+            height: 84px;
+            width: auto;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+        }
+
+        .logo-text h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-mid), var(--logo-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            color: var(--snow-white);
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--snow-white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 11px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            transform: translateY(-2px);
+        }
+
+
+        /* "Join the Club" gets button treatment in the top nav */
+        .nav-links a.nav-join {
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .nav-links a.nav-join:hover { filter: brightness(1.08); }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 101;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--snow-white);
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Hero Section — rotating background photos */
+        .hero {
+            position: relative;
+            padding: 110px 20px;
+            text-align: center;
+            color: var(--snow-white);
+            background: var(--deep-blue);
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.6s ease-in-out;
+            z-index: -2;
+        }
+
+        .hero-slide.is-active { opacity: 1; }
+
+        /* readability scrim over whatever photo is showing */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(10, 22, 32, 0.55), rgba(10, 22, 32, 0.65));
+            z-index: -1;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-slide { transition: none; }
+        }
+
+        .hero h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: var(--ice-blue);
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-mid), var(--logo-gradient-end));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 69, 0, 0.4);
+            animation: fadeInUp 1s ease 0.4s backwards;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 69, 0, 0.6);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==========================================================
+           TRAIL STATUS BAR  --  edit this ONE spot to set trail status
+           See the markup below <body> for the four ready-made options.
+           ========================================================== */
+        .trail-status-bar {
+            padding: 14px 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #fff;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 8px 18px;
+            border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .trail-status-bar .status-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: currentColor;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .trail-status-bar .status-stamp {
+            font-weight: 500;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .trail-status-bar.is-open     { background: #2E7D32; }
+        .trail-status-bar.is-closed   { background: #C62828; }
+        .trail-status-bar.is-caution  { background: #F9A825; color: #2C3E50; }
+        .trail-status-bar.is-offseason{ background: #37474F; }
+
+
+        /* Facebook feed */
+        .fb-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 60px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .fb-wrap {
+            display: grid;
+            grid-template-columns: minmax(280px, 500px) 1fr;
+            gap: 35px;
+            align-items: start;
+        }
+
+        .fb-embed {
+            min-height: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .fb-embed .fb-page,
+        .fb-embed .fb-page span,
+        .fb-embed iframe { max-width: 100% !important; }
+
+        .fb-fallback {
+            padding: 30px;
+            text-align: center;
+            background: #f5f7fa;
+            border: 2px dashed #c9d3de;
+            border-radius: 12px;
+            color: #55606c;
+        }
+
+        .fb-why h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+            color: var(--deep-blue);
+            margin-bottom: 10px;
+        }
+
+        .fb-why p { color: #55606c; margin-bottom: 14px; }
+
+        @media (max-width: 900px) {
+            .fb-wrap { grid-template-columns: 1fr; }
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Trail Updates Section */
+        .updates-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+            color: var(--deep-blue);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--logo-gradient-start) 0px,
+                var(--logo-gradient-start) 20px,
+                var(--logo-gradient-mid) 20px,
+                var(--logo-gradient-mid) 40px,
+                var(--logo-gradient-end) 40px,
+                var(--logo-gradient-end) 60px
+            );
+        }
+
+        .section-subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        /* Update Cards */
+        .updates-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .update-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 8px solid var(--accent-orange);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .update-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .update-card.status-open {
+            border-left-color: var(--success-green);
+            border-left-width: 6px;
+        }
+
+        .update-card.status-closed {
+            border-left-color: var(--danger-red);
+            border-left-width: 6px;
+        }
+
+        .update-card.status-caution {
+            border-left-color: var(--warning-yellow);
+            border-left-width: 6px;
+        }
+
+        .update-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+            gap: 15px;
+        }
+
+        .update-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--deep-blue);
+            flex: 1;
+        }
+
+        .status-badge {
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .status-badge.open {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .status-badge.closed {
+            background: var(--danger-red);
+            color: white;
+        }
+
+        .status-badge.caution {
+            background: var(--warning-yellow);
+            color: var(--text-dark);
+        }
+
+        .update-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .update-content {
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .update-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .update-images img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .update-images img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Expandable Content */
+        .expandable-content {
+            position: relative;
+        }
+
+        .expandable-content.collapsed {
+            max-height: 150px;
+            overflow: hidden;
+        }
+
+        .expandable-content.collapsed::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, white);
+        }
+
+        .expand-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .expand-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            /* transparent border reserved up front so the hover border
+               doesn't resize the card and jog the text */
+            border: 2px solid transparent;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.3);
+            border-color: var(--accent-orange);
+        }
+
+        .info-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .info-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: var(--deep-blue);
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .info-card a {
+            background: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .info-card a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            transition: width 0.3s ease;
+        }
+
+        .info-card a:hover::after {
+            width: 100%;
+        }
+
+        /* Join Section */
+        .join-section {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, #2c5f7a 100%);
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .join-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-mid), var(--logo-gradient-end));
+        }
+
+        .join-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 3px;
+            color: var(--accent-yellow);
+            margin-bottom: 15px;
+        }
+
+        .join-section p {
+            color: var(--ice-blue);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .join-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .benefit-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--logo-gradient-start);
+            backdrop-filter: blur(10px);
+        }
+
+        .benefit-item h4 {
+            color: var(--snow-white);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .benefit-item p {
+            color: var(--ice-blue);
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        .join-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            color: white;
+            padding: 18px 45px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 25px rgba(255, 69, 0, 0.4);
+        }
+
+        .join-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 69, 0, 0.6);
+        }
+
+        /* Membership: the money argument */
+        .join-headline {
+            font-size: 1.35rem !important;
+            color: var(--snow-white) !important;
+            max-width: 720px;
+            margin: 0 auto 10px !important;
+        }
+
+        .join-headline strong {
+            color: var(--accent-yellow);
+        }
+
+        .join-math {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            padding: 25px 30px;
+            margin: 30px auto;
+            max-width: 560px;
+            text-align: left;
+        }
+
+        .join-math dl {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px 20px;
+            margin: 0;
+        }
+
+        .join-math dt {
+            color: var(--ice-blue);
+        }
+
+        .join-math dd {
+            margin: 0;
+            text-align: right;
+            font-weight: 700;
+            color: var(--snow-white);
+            white-space: nowrap;
+        }
+
+        .join-math .total {
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            padding-top: 12px;
+            margin-top: 4px;
+        }
+
+        .join-math .total dd,
+        .join-math .total dt {
+            color: var(--accent-yellow);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .join-steps {
+            list-style: none;
+            counter-reset: step;
+            max-width: 620px;
+            margin: 30px auto;
+            text-align: left;
+        }
+
+        .join-steps li {
+            counter-increment: step;
+            position: relative;
+            padding: 8px 0 8px 46px;
+            color: var(--ice-blue);
+            line-height: 1.6;
+        }
+
+        .join-steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            color: #fff;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .join-note {
+            font-size: 0.95rem !important;
+            color: var(--ice-blue) !important;
+            opacity: 0.85;
+            max-width: 620px;
+            margin: 18px auto 0 !important;
+        }
+
+
+        /* Compact membership banner — full detail lives on membership.html */
+        .join-banner {
+            background: linear-gradient(135deg, var(--deep-blue) 0%, #2c5f7a 100%);
+            border-radius: 20px;
+            padding: 32px 38px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border-top: 5px solid var(--accent-orange);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 26px;
+        }
+
+        .join-banner-text { flex: 1 1 420px; }
+
+        .join-banner h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            letter-spacing: 2px;
+            color: var(--accent-yellow);
+            margin-bottom: 8px;
+        }
+
+        .join-banner p {
+            color: var(--ice-blue);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .join-banner p strong { color: var(--snow-white); }
+
+        .join-banner-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            flex: 0 0 auto;
+        }
+
+        .join-banner-more {
+            color: var(--ice-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-bottom: 1px solid transparent;
+        }
+
+        .join-banner-more:hover { border-bottom-color: var(--accent-orange); }
+
+        @media (max-width: 700px) {
+            .join-banner { padding: 26px 22px; }
+            .join-banner-actions { width: 100%; }
+            .join-banner-actions .join-button { width: 100%; text-align: center; }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--deep-blue);
+            color: var(--snow-white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--ice-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-orange);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                max-width: 300px;
+                background: var(--deep-blue);
+                flex-direction: column;
+                padding: 80px 30px 30px;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+                z-index: 100;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding: 15px;
+                text-align: left;
+                border-left: 3px solid transparent;
+            }
+
+            .nav-links a:hover {
+                border-left-color: var(--accent-orange);
+                transform: translateX(5px);
+            }
+
+            .update-header {
+                flex-direction: column;
+                align-items: start;
+            }
+
+            .logo-text h1 {
+                font-size: 1.4rem;
+            }
+
+            .logo-image {
+                height: 64px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="3-MEDIA/1-Photos/Logos/GreatBaySnoRoller-LOGO.png" alt="Great Bay Sno-Rollers Logo" class="logo-image" width="946" height="587">
+                <div class="logo-text">
+                    <h1>GREAT BAY SNO-ROLLERS</h1>
+                    <p>Rockingham County, NH</p>
+                </div>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active" onclick="closeMenu()">Home</a></li>
+                <li><a href="trails.html" onclick="closeMenu()">Trails</a></li>
+                <li><a href="club-updates.html" onclick="closeMenu()">Updates</a></li>
+                <li><a href="weather-trails.html" onclick="closeMenu()">Weather</a></li>
+                <li><a href="events.html" onclick="closeMenu()">Events</a></li>
+                <li><a href="gallery.html" onclick="closeMenu()">Gallery</a></li>
+                <li><a href="get-involved.html" onclick="closeMenu()">Get Involved</a></li>
+                <li><a href="membership.html" class="nav-join" onclick="closeMenu()">Join the Club</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.querySelector('.hamburger');
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.querySelector('.hamburger');
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+
+        // Toggle expand/collapse for long posts
+        function toggleExpand(contentId, button) {
+            const content = document.getElementById(contentId);
+            content.classList.toggle('collapsed');
+
+            if (content.classList.contains('collapsed')) {
+                button.textContent = 'Read More';
+            } else {
+                button.textContent = 'Read Less';
+            }
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.querySelector('.hamburger');
+
+            if (!nav.contains(event.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+    </script>
+
+    <!-- ============================================================
+         TRAIL STATUS BAR
+         Update this whenever trail status changes. Change TWO things:
+           1. the class on the <div>   2. the text inside it
+         Ready-made options (copy the whole line you want):
+
+         <div class="trail-status-bar is-open">
+         <div class="trail-status-bar is-caution">
+         <div class="trail-status-bar is-closed">
+         <div class="trail-status-bar is-offseason">
+         ============================================================ -->
+    <div class="trail-status-bar is-offseason">
+        <span><span class="status-dot"></span>Trails are closed for the season</span>
+        <span class="status-stamp">Updated August 10, 2026 &middot; See you in December</span>
+    </div>
+
+    <section class="hero">
+        <!-- ============================================================
+             HERO PHOTOS. They cross-fade every 7 seconds.
+             To change them: edit the background-image paths below.
+             To add one: copy a whole <div class="hero-slide" ...></div> line.
+             To stop the rotation: delete all but the first line.
+             Use LANDSCAPE photos — portrait ones get badly cropped.
+             ============================================================ -->
+        <div class="hero-slide is-active" style="background-image: url('3-MEDIA/1-Photos/Hero/club-lineup-marsh.jpg')"></div>
+        <div class="hero-slide" style="background-image: url('3-MEDIA/1-Photos/Hero/sled-lineup-bluebird.jpg')"></div>
+        <div class="hero-slide" style="background-image: url('3-MEDIA/1-Photos/Hero/riders-on-the-river.jpg')"></div>
+        <div class="hero-slide" style="background-image: url('3-MEDIA/1-Photos/Hero/single-file-trail.jpg')"></div>
+
+        <h2>RIDE WITH US</h2>
+        <p>Your Local Snowmobile Club in Rockingham County</p>
+        <a href="#join" class="cta-button">Join the Club</a>
+    </section>
+
+    <script>
+        // Cross-fade the hero photos. Respects "reduce motion" system settings.
+        (function () {
+            var slides = document.querySelectorAll('.hero-slide');
+            if (slides.length < 2) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            var i = 0;
+            setInterval(function () {
+                slides[i].classList.remove('is-active');
+                i = (i + 1) % slides.length;
+                slides[i].classList.add('is-active');
+            }, 7000);
+        })();
+    </script>
+
+    <main class="container">
+        <!-- Join the Club Section -->
+        <section class="join-banner" id="join">
+            <div class="join-banner-text">
+                <h2>MEMBERSHIP PAYS FOR ITSELF</h2>
+                <p>$20 a year. New Hampshire gives club members <strong>$30 off the registration
+                   of every sled they own</strong> &mdash; so one sled already puts you ahead, and
+                   your dues buy groomer fuel.</p>
+            </div>
+            <div class="join-banner-actions">
+                <a href="https://tinyurl.com/GreatBaySnoRollers" target="_blank" rel="noopener" class="join-button">Join Online</a>
+                <a href="membership.html" class="join-banner-more">How it works &rarr;</a>
+            </div>
+        </section>
+
+        <!-- Trail Conditions Section -->
+        <section id="updates" class="updates-section">
+            <h2 class="section-title">
+                📢 Club Updates
+            </h2>
+            <p class="section-subtitle">Rides, trail work, grooming, and meetings &mdash; newest first</p>
+
+            <div class="updates-grid">
+                <!-- ADD NEW UPDATES AT THE TOP OF THIS LIST -->
+
+                <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
+                    <div class="update-header">
+                        <h3 class="update-title">Bluebird Group Ride - February 22</h3>
+                    </div>
+                    <p class="update-date">📅 February 22, 2026</p>
+                    <div class="update-content">
+                        <p>About the best February Sunday you could ask for &mdash; blue sky, hard base, and a big turnout. Everything from vintage iron to new sleds lined up on the ice.</p>
+                        <div class="update-images">
+                            <img src="3-MEDIA/1-Photos/Hero/sled-lineup-bluebird.jpg" data-full="3-MEDIA/1-Photos/Hero/sled-lineup-bluebird.jpg" alt="Sleds lined up on a frozen pond under blue sky" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                            <img src="3-MEDIA/1-Photos/2026_Feb22-Group_Ride/thumbs/group-on-the-corridor.jpg" data-full="3-MEDIA/1-Photos/2026_Feb22-Group_Ride/group-on-the-corridor.jpg" alt="Group of riders stopped along the trail corridor" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
+                    <div class="update-header">
+                        <h3 class="update-title">Storm Day - January 26</h3>
+                    </div>
+                    <p class="update-date">📅 January 26, 2026</p>
+                    <div class="update-content">
+                        <p>Woke up to the sleds buried. Dug them out, made a day of it, and kept going after dark.</p>
+                        <div class="update-images">
+                            <img src="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/thumbs/sleds-buried.jpg" data-full="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/sleds-buried.jpg" alt="Snowmobiles buried under fresh snow after an overnight storm" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                            <img src="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/thumbs/group-stop-pond.jpg" data-full="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/group-stop-pond.jpg" alt="Riders regrouping on a frozen pond" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                            <img src="3-MEDIA/1-Photos/Hero/single-file-trail.jpg" data-full="3-MEDIA/1-Photos/Hero/single-file-trail.jpg" alt="Riding single file down a freshly covered trail" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                            <img src="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/thumbs/night-ride.jpg" data-full="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/night-ride.jpg" alt="Headlight on the trail during a night ride in falling snow" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
+                    <div class="update-header">
+                        <h3 class="update-title">MLK Day Ride - January 19</h3>
+                    </div>
+                    <p class="update-date">📅 January 19, 2026</p>
+                    <div class="update-content">
+                        <p>Holiday Monday, fresh snow in the trees, and the old Phazers out where they belong. Ran the river and crossed the open fields &mdash; hard to beat a day like this.</p>
+                        <div class="update-images">
+                            <img src="3-MEDIA/1-Photos/Hero/riders-on-the-river.jpg" data-full="3-MEDIA/1-Photos/Hero/riders-on-the-river.jpg" alt="Two riders on vintage Yamaha Phazers on a snow-covered river" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                            <img src="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/thumbs/phazers-fresh-snow.jpg" data-full="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/phazers-fresh-snow.jpg" alt="Vintage Yamaha Phazers loaded up in fresh snow" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                            <img src="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/thumbs/open-field-crossing.jpg" data-full="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/open-field-crossing.jpg" alt="Riders crossing an open snow-covered field" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
+                    <div class="update-header">
+                        <h3 class="update-title">January Meeting - January 6th</h3>
+                    </div>
+                    <p class="update-date">📅 January 6, 2026</p>
+                    <div class="update-content expandable-content collapsed" id="clubUpdate0">
+                        <p><strong>Great Bay Sno-Rollers January Meeting</strong></p>
+                        <p style="margin-top: 10px;">I hope this message finds you well and you had a great New Year! Our monthly January meeting is coming up, and I'd like to invite you all to join us.</p>
+                        <p style="margin-top: 10px;"><strong>This will be a combined meeting with the members of the Lee Sno-Travelers.</strong></p>
+
+                        <p style="margin-top: 15px;"><strong>Meeting Details:</strong></p>
+                        <ul style="padding-left: 25px; line-height: 1.8;">
+                            <li><strong>Date:</strong> Tuesday, January 6th</li>
+                            <li><strong>Time:</strong> 6:00 PM</li>
+                            <li><strong>Location:</strong> My shop - 31 Tuckers Way, Newmarket, NH 03857</li>
+                            <li><strong>⚠️ The parking area is VERY ICY, please use caution</strong></li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>Agenda Items:</strong> We have several important topics to discuss as we prepare for the season ahead:</p>
+                        <ul style="padding-left: 25px; line-height: 1.8;">
+                            <li>Trail work updates and upcoming projects</li>
+                            <li>Signage installation and maintenance</li>
+                            <li>Club clothing orders and availability</li>
+                            <li>Grooming schedule and coordination</li>
+                            <li>Groomer maintenance and equipment status</li>
+                            <li>Potential expansion: Taking over management of other southern NH clubs</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;">Feel free to bring any questions or concerns you'd like to discuss. Looking forward to seeing everyone there!</p>
+                        <p style="margin-top: 10px; font-style: italic; color: #666;"><strong>PS -</strong> Bring a camp chair and the shop/meeting is beer friendly.</p>
+                    </div>
+                    <button class="expand-button" onclick="toggleExpand('clubUpdate0', this)">Read More</button>
+                </div>
+
+                <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
+                    <div class="update-header">
+                        <h3 class="update-title">Trail Work & Ice Check - December 29</h3>
+                    </div>
+                    <p class="update-date">📅 December 29, 2025</p>
+                    <div class="update-content">
+                        <p>Was out doing trail work yesterday cleared a bunch of trails between Lee Hook Road and the upper Lamprey River. Cut a hole in the ice on the Lamprey in a few spots, 7-9" everywhere we looked.</p>
+                        <div class="update-images">
+                            <img src="3-MEDIA/1-Photos/2025_Dec29-Trail_Update/thumbs/605127379_867337009177204_1290253696290446714_n.jpg" data-full="3-MEDIA/1-Photos/2025_Dec29-Trail_Update/605127379_867337009177204_1290253696290446714_n.jpg" alt="Ice check photo" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
+                    <div class="update-header">
+                        <h3 class="update-title">Trail Smoothing - December 27</h3>
+                    </div>
+                    <p class="update-date">📅 December 27, 2025</p>
+                    <div class="update-content">
+                        <p>Out smoothing that snow!</p>
+                        <div class="update-images">
+                            <img src="3-MEDIA/1-Photos/2025_Dec27-Trail_Update/thumbs/605193876_866215545956017_1420054460100092599_n.jpg" data-full="3-MEDIA/1-Photos/2025_Dec27-Trail_Update/605193876_866215545956017_1420054460100092599_n.jpg" alt="Trail smoothing photo" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="club-updates.html" class="cta-button" style="display: inline-block; padding: 15px 40px; background: linear-gradient(135deg, var(--logo-gradient-start) 0%, var(--logo-gradient-mid) 50%, var(--logo-gradient-end) 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    View All Updates →
+                </a>
+                <p style="margin-top: 18px; color: #666;">
+                    Looking for current trail status? That's on the
+                    <a href="trails.html" style="color: var(--accent-orange); font-weight: 600;">Trail Map &amp; Conditions</a> page.
+                </p>
+            </div>
+        </section>
+
+        <!-- Facebook feed: pulls our latest posts automatically, so the site stays
+             current between manual updates. Nothing to maintain here. -->
+        <section class="fb-section">
+            <h2 class="section-title">
+                📘 Latest From Facebook
+            </h2>
+            <p class="section-subtitle">Our day-to-day updates, posted as they happen</p>
+
+            <div class="fb-wrap">
+                <div class="fb-embed">
+                    <div class="fb-page"
+                         data-href="https://www.facebook.com/greatbay.sno.rollers"
+                         data-tabs="timeline"
+                         data-width="500"
+                         data-height="640"
+                         data-small-header="false"
+                         data-adapt-container-width="true"
+                         data-hide-cover="false"
+                         data-show-facepile="true">
+                        <blockquote cite="https://www.facebook.com/greatbay.sno.rollers" class="fb-xfbml-parse-ignore">
+                            <div class="fb-fallback">
+                                <p style="margin-bottom:14px;"><strong>Our Facebook feed loads here.</strong></p>
+                                <p style="margin-bottom:18px;">If you're seeing this, a browser privacy setting or ad blocker is blocking it.</p>
+                                <a href="https://www.facebook.com/greatbay.sno.rollers" target="_blank" rel="noopener"
+                                   style="display:inline-block;padding:12px 26px;background:linear-gradient(135deg,var(--logo-gradient-start),var(--logo-gradient-end));color:#fff;text-decoration:none;border-radius:8px;font-weight:600;">
+                                    Open our Facebook page →
+                                </a>
+                            </div>
+                        </blockquote>
+                    </div>
+                </div>
+
+                <div class="fb-why">
+                    <h3>Ride Announcements Happen Here First</h3>
+                    <p>Group rides, last-minute grooming runs, storm updates, and trail work
+                       calls all get posted to Facebook as they happen. This feed mirrors it, so
+                       you don't need an account to keep up.</p>
+                    <p>Following the page is still the best way to get notified before a ride
+                       instead of after it.</p>
+                    <p style="margin-bottom:22px;">Got photos from a ride? Post them to the page
+                       and we'll pull the good ones into the gallery.</p>
+                    <a href="https://www.facebook.com/greatbay.sno.rollers" target="_blank" rel="noopener"
+                       style="display:inline-block;padding:14px 30px;background:linear-gradient(135deg,var(--logo-gradient-start),var(--logo-gradient-end));color:#fff;text-decoration:none;border-radius:8px;font-weight:700;">
+                        Follow us on Facebook
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="updates-section" id="grooming" style="margin-top: 60px;">
+            <h2 class="section-title">
+                🛠️ Trail Grooming & Maintenance
+            </h2>
+            <p class="section-subtitle">Keeping our trails in top condition</p>
+
+            <div class="updates-grid">
+                <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
+                    <div class="update-header">
+                        <h3 class="update-title">Trail Grooming Schedule</h3>
+                    </div>
+                    <div class="update-content">
+                        <p style="margin-bottom: 15px;">Our grooming crews work throughout the season to maintain trail quality. Grooming typically occurs:</p>
+                        <ul style="padding-left: 25px; line-height: 2;">
+                            <li><strong>Main trails:</strong> 2-3 times per week during peak season</li>
+                            <li><strong>Secondary trails:</strong> Weekly or as needed</li>
+                            <li><strong>Best riding:</strong> 24-48 hours after grooming</li>
+                        </ul>
+                        <p style="margin-top: 15px; font-style: italic; color: #666;">Check our Facebook page for real-time grooming updates and schedules.</p>
+                    </div>
+                </div>
+
+                <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-mid);">
+                    <div class="update-header">
+                        <h3 class="update-title">Volunteer Trail Work</h3>
+                    </div>
+                    <div class="update-content">
+                        <p style="margin-bottom: 15px;">Help us maintain our trail system! Volunteer opportunities include:</p>
+                        <ul style="padding-left: 25px; line-height: 2;">
+                            <li>Spring/Fall trail clearing and brush cutting</li>
+                            <li>Bridge and signage maintenance</li>
+                            <li>Trail marking and mapping</li>
+                            <li>Equipment maintenance and support</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Want to help?</strong> Contact us at <a href="mailto:greatbaysnorollers@gmail.com" style="color: var(--logo-gradient-start);">greatbaysnorollers@gmail.com</a> or check our Events Calendar for upcoming trail work days.</p>
+                    </div>
+                </div>
+
+                <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-end);">
+                    <div class="update-header">
+                        <h3 class="update-title">Support Our Grooming</h3>
+                    </div>
+                    <div class="update-content">
+                        <p style="margin-bottom: 15px;">Trail grooming equipment and fuel are expensive. Your support helps keep trails in excellent condition:</p>
+                        <ul style="padding-left: 25px; line-height: 2;">
+                            <li><strong>Become a member</strong> - Dues support grooming operations</li>
+                            <li><strong>Make a donation</strong> - Every dollar helps maintain equipment</li>
+                            <li><strong>Volunteer time</strong> - Reduce costs by helping with maintenance</li>
+                            <li><strong>Spread the word</strong> - More members = better trails</li>
+                        </ul>
+                        <p style="margin-top: 15px;">
+                            <a href="https://venmo.com/u/greatbaysnorollers" target="_blank" rel="noopener" style="display: inline-block; background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end)); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600;">Donate via Venmo</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="info-grid" id="about">
+            <div class="info-card">
+                <div class="info-icon">🗺️</div>
+                <h3>Trail Map & Conditions</h3>
+                <p>Interactive map, mileage, and current trail status</p>
+                <a href="trails.html">Open →</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">📢</div>
+                <h3>Club Updates</h3>
+                <p>Rides, trail work, grooming, and meetings</p>
+                <a href="club-updates.html">Open →</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">🌦️</div>
+                <h3>Weather & Radar</h3>
+                <p>Live radar, forecast, and the statewide map</p>
+                <a href="weather-trails.html">Open →</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">📅</div>
+                <h3>Events Calendar</h3>
+                <p>Club rides, meetings, and work days</p>
+                <a href="events.html">Open →</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">📸</div>
+                <h3>Photo Gallery</h3>
+                <p>Action shots from rides and trail work</p>
+                <a href="gallery.html">Open →</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">🛠️</div>
+                <h3>Get Involved</h3>
+                <p>Volunteer, trail work days, and club officers</p>
+                <a href="get-involved.html">Open →</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">🎫</div>
+                <h3>Join the Club</h3>
+                <p>$20 a year, $30 back per sled you register</p>
+                <a href="membership.html">Open →</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">🚜</div>
+                <h3>Groomers & Equipment</h3>
+                <p>The machines that keep the trails rideable</p>
+                <a href="equipment.html">Open →</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">👕</div>
+                <h3>Club Merch</h3>
+                <p>Club hoodies and gear</p>
+                <a href="merch.html">Open →</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">🏢</div>
+                <h3>Our Supporters</h3>
+                <p>Businesses and landowners who make it possible</p>
+                <a href="supporters.html">Open →</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">🔗</div>
+                <h3>Quick Links</h3>
+                <p>Everything in one place, made for QR codes</p>
+                <a href="landing.html">Open →</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">📘</div>
+                <h3>Facebook</h3>
+                <p>Day-to-day updates and ride announcements</p>
+                <a href="https://www.facebook.com/greatbay.sno.rollers" target="_blank" rel="noopener">Open →</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">💳</div>
+                <h3>Donate via Venmo</h3>
+                <p>Help pay for grooming fuel and repairs</p>
+                <a href="https://venmo.com/u/greatbaysnorollers" target="_blank" rel="noopener">Open →</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">❄️</div>
+                <h3>NH Snowmobile Association</h3>
+                <p>Statewide advocacy, registration, and news</p>
+                <a href="https://slednh.com/" target="_blank" rel="noopener">Open →</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">🧭</div>
+                <h3>Statewide Trail Map</h3>
+                <p>The full SLEDNH network beyond our area</p>
+                <a href="https://slednh.evtrails.com/" target="_blank" rel="noopener">Open →</a>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">📞</div>
+                <h3>Contact Us</h3>
+                <p>President: Billy Vandervalk</p>
+                <a href="mailto:greatbaysnorollers@gmail.com">Email the club →</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="trails.html">Trail Map & Conditions</a>
+                <a href="club-updates.html">Club Updates</a>
+                <a href="weather-trails.html">Weather & Radar</a>
+                <a href="events.html">Events Calendar</a>
+                <a href="gallery.html">Photo Gallery</a>
+                <a href="get-involved.html">Get Involved</a>
+                <a href="membership.html">Join the Club</a>
+                <a href="equipment.html">Groomers & Equipment</a>
+                <a href="merch.html">Club Merch</a>
+                <a href="supporters.html">Our Supporters</a>
+                <a href="landing.html">Quick Links</a>
+                <a href="https://www.facebook.com/greatbay.sno.rollers" target="_blank" rel="noopener">Facebook</a>
+                <a href="https://venmo.com/u/greatbaysnorollers" target="_blank" rel="noopener">Donate via Venmo</a>
+                <a href="https://slednh.com/" target="_blank" rel="noopener">NH Snowmobile Association</a>
+                <a href="https://slednh.evtrails.com/" target="_blank" rel="noopener">Statewide Trail Map</a>
+            </div>
+            <p>&copy; 2026 Great Bay Sno-Rollers. Rockingham County, NH</p>
+        </div>
+    </footer>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+            src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v21.0"
+            nonce="gbsr"></script>
+</body>
+</html>

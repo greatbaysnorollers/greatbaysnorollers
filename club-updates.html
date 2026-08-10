@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Updates - Great Bay Sno-Rollers | Rides, Trail Work &amp; Meetings</title>
+    <meta name="description" content="Rides, trail work, grooming reports, and meeting announcements from Great Bay Sno-Rollers in Rockingham County, NH.">
+    <meta name="keywords" content="snowmobile club updates NH, group rides, trail work, club meetings, Great Bay Sno-Rollers">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Great Bay Sno-Rollers Club Updates">
+    <meta property="og:description" content="Rides, trail work, grooming reports, and meeting announcements from Great Bay Sno-Rollers in Rockingham County, NH.">
+    <meta property="og:image" content="https://greatbaysnorollers.com/3-MEDIA/1-Photos/Gallery/483100253_645066678070906_3838840164000899336_n.jpg">
+
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" href="3-MEDIA/1-Photos/Logos/favicon-512.png">
+    <link rel="apple-touch-icon" href="3-MEDIA/1-Photos/Logos/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ice-blue: #D4E7F5;
+            --deep-blue: #1A3A52;
+            --snow-white: #F8FBFD;
+            --accent-orange: #FF4500;
+            --text-dark: #2C3E50;
+            --logo-gradient-start: #FF4500;
+            --logo-gradient-mid: #FF6B35;
+            --logo-gradient-end: #FFA726;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: linear-gradient(to bottom, #0F2027, #203A43, #2C5364);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 58, 82, 0.97);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 5px solid;
+            border-image: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-mid), var(--logo-gradient-end)) 1;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-image {
+            height: 84px;
+            width: auto;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+        }
+
+        .logo-text h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-mid), var(--logo-gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            color: var(--snow-white);
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--snow-white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 11px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            transform: translateY(-2px);
+        }
+
+
+        /* "Join the Club" gets button treatment in the top nav */
+        .nav-links a.nav-join {
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .nav-links a.nav-join:hover { filter: brightness(1.08); }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 101;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background: var(--snow-white);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        /* Mobile Menu Styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 80px;
+                flex-direction: column;
+                background: rgba(26, 58, 82, 0.98);
+                width: 250px;
+                padding: 30px 20px;
+                box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.5);
+                transition: right 0.3s ease;
+                border-radius: 10px 0 0 10px;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                padding: 12px 20px;
+                width: 100%;
+                text-align: left;
+            }
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                        url('3-MEDIA/1-Photos/Gallery/271272635_100437129200533_8738425904938062672_n.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 20px;
+            text-align: center;
+            color: var(--snow-white);
+        }
+
+        .page-header h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--ice-blue);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Updates Grid */
+        .updates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        /* Update Card */
+        .update-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .update-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .update-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .update-title {
+            font-size: 1.5rem;
+            color: var(--deep-blue);
+            font-weight: 700;
+        }
+
+        .update-date {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .update-content {
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        .update-content p {
+            margin-bottom: 15px;
+        }
+
+        .update-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .update-content ul {
+            padding-left: 25px;
+            line-height: 1.8;
+        }
+
+        .update-content ul li {
+            margin-bottom: 8px;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(26, 58, 82, 0.97);
+            color: var(--snow-white);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: var(--logo-gradient-mid);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--logo-gradient-end);
+        }
+
+        /* Expand/Collapse */
+        .expandable-content {
+            position: relative;
+        }
+
+        .expandable-content.collapsed {
+            max-height: 150px;
+            overflow: hidden;
+        }
+
+        .expandable-content.collapsed::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, white);
+        }
+
+        .expand-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .expand-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-header h2 {
+                font-size: 2rem;
+            }
+
+            .updates-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .update-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="3-MEDIA/1-Photos/Logos/GreatBaySnoRoller-LOGO.png" alt="Great Bay Sno-Rollers Logo" class="logo-image">
+                <div class="logo-text">
+                    <h1>GREAT BAY SNO-ROLLERS</h1>
+                    <p>Rockingham County, NH</p>
+                </div>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" onclick="closeMenu()">Home</a></li>
+                <li><a href="trails.html" onclick="closeMenu()">Trails</a></li>
+                <li><a href="club-updates.html" class="active" onclick="closeMenu()">Updates</a></li>
+                <li><a href="weather-trails.html" onclick="closeMenu()">Weather</a></li>
+                <li><a href="events.html" onclick="closeMenu()">Events</a></li>
+                <li><a href="gallery.html" onclick="closeMenu()">Gallery</a></li>
+                <li><a href="get-involved.html" onclick="closeMenu()">Get Involved</a></li>
+                <li><a href="membership.html" class="nav-join" onclick="closeMenu()">Join the Club</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h2>📢 Club Updates</h2>
+        <p>Rides, trail work, grooming, and meetings &mdash; newest first</p>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <a href="index.html" class="back-button">← Back to Home</a>
+
+        <!-- Club Updates Grid -->
+        <div class="updates-grid">
+
+            <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
+                    <div class="update-header">
+                        <h3 class="update-title">Bluebird Group Ride - February 22</h3>
+                    </div>
+                    <p class="update-date">📅 February 22, 2026</p>
+                    <div class="update-content">
+                        <p>About the best February Sunday you could ask for &mdash; blue sky, hard base, and a big turnout. Everything from vintage iron to new sleds lined up on the ice.</p>
+                        <div class="update-images">
+                            <img src="3-MEDIA/1-Photos/2026_Feb22-Group_Ride/thumbs/sled-lineup-bluebird.jpg" data-full="3-MEDIA/1-Photos/2026_Feb22-Group_Ride/sled-lineup-bluebird.jpg" alt="Sleds lined up on a frozen pond under blue sky" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                            <img src="3-MEDIA/1-Photos/2026_Feb22-Group_Ride/thumbs/group-on-the-corridor.jpg" data-full="3-MEDIA/1-Photos/2026_Feb22-Group_Ride/group-on-the-corridor.jpg" alt="Group of riders stopped along the trail corridor" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                        </div>
+                    </div>
+                </div>
+
+            <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
+                    <div class="update-header">
+                        <h3 class="update-title">Storm Day - January 26</h3>
+                    </div>
+                    <p class="update-date">📅 January 26, 2026</p>
+                    <div class="update-content">
+                        <p>Woke up to the sleds buried. Dug them out, made a day of it, and kept going after dark.</p>
+                        <div class="update-images">
+                            <img src="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/thumbs/sleds-buried.jpg" data-full="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/sleds-buried.jpg" alt="Snowmobiles buried under fresh snow after an overnight storm" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                            <img src="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/thumbs/group-stop-pond.jpg" data-full="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/group-stop-pond.jpg" alt="Riders regrouping on a frozen pond" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                            <img src="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/thumbs/single-file-trail.jpg" data-full="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/single-file-trail.jpg" alt="Riding single file down a freshly covered trail" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                            <img src="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/thumbs/night-ride.jpg" data-full="3-MEDIA/1-Photos/2026_Jan26-Storm_Ride/night-ride.jpg" alt="Headlight on the trail during a night ride in falling snow" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                        </div>
+                    </div>
+                </div>
+
+            <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
+                    <div class="update-header">
+                        <h3 class="update-title">MLK Day Ride - January 19</h3>
+                    </div>
+                    <p class="update-date">📅 January 19, 2026</p>
+                    <div class="update-content">
+                        <p>Holiday Monday, fresh snow in the trees, and the old Phazers out where they belong. Ran the river and crossed the open fields &mdash; hard to beat a day like this.</p>
+                        <div class="update-images">
+                            <img src="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/thumbs/riders-on-the-river.jpg" data-full="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/riders-on-the-river.jpg" alt="Two riders on vintage Yamaha Phazers on a snow-covered river" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                            <img src="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/thumbs/phazers-fresh-snow.jpg" data-full="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/phazers-fresh-snow.jpg" alt="Vintage Yamaha Phazers loaded up in fresh snow" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                            <img src="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/thumbs/open-field-crossing.jpg" data-full="3-MEDIA/1-Photos/2026_Jan19-MLK_Ride/open-field-crossing.jpg" alt="Riders crossing an open snow-covered field" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                        </div>
+                    </div>
+                </div>
+
+            <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
+                    <div class="update-header">
+                        <h3 class="update-title">January Meeting - January 6th</h3>
+                    </div>
+                    <p class="update-date">📅 January 6, 2026</p>
+                    <div class="update-content expandable-content collapsed" id="clubUpdate0">
+                        <p><strong>Great Bay Sno-Rollers January Meeting</strong></p>
+                        <p style="margin-top: 10px;">I hope this message finds you well and you had a great New Year! Our monthly January meeting is coming up, and I'd like to invite you all to join us.</p>
+                        <p style="margin-top: 10px;"><strong>This will be a combined meeting with the members of the Lee Sno-Travelers.</strong></p>
+
+                        <p style="margin-top: 15px;"><strong>Meeting Details:</strong></p>
+                        <ul style="padding-left: 25px; line-height: 1.8;">
+                            <li><strong>Date:</strong> Tuesday, January 6th</li>
+                            <li><strong>Time:</strong> 6:00 PM</li>
+                            <li><strong>Location:</strong> My shop - 31 Tuckers Way, Newmarket, NH 03857</li>
+                            <li><strong>⚠️ The parking area is VERY ICY, please use caution</strong></li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>Agenda Items:</strong> We have several important topics to discuss as we prepare for the season ahead:</p>
+                        <ul style="padding-left: 25px; line-height: 1.8;">
+                            <li>Trail work updates and upcoming projects</li>
+                            <li>Signage installation and maintenance</li>
+                            <li>Club clothing orders and availability</li>
+                            <li>Grooming schedule and coordination</li>
+                            <li>Groomer maintenance and equipment status</li>
+                            <li>Potential expansion: Taking over management of other southern NH clubs</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;">Feel free to bring any questions or concerns you'd like to discuss. Looking forward to seeing everyone there!</p>
+                        <p style="margin-top: 10px; font-style: italic; color: #666;"><strong>PS -</strong> Bring a camp chair and the shop/meeting is beer friendly.</p>
+                    </div>
+                    <button class="expand-button" onclick="toggleExpand('clubUpdate0', this)">Read More</button>
+                </div>
+
+            <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
+                    <div class="update-header">
+                        <h3 class="update-title">Trail Work & Ice Check - December 29</h3>
+                    </div>
+                    <p class="update-date">📅 December 29, 2025</p>
+                    <div class="update-content">
+                        <p>Was out doing trail work yesterday cleared a bunch of trails between Lee Hook Road and the upper Lamprey River. Cut a hole in the ice on the Lamprey in a few spots, 7-9" everywhere we looked.</p>
+                        <div class="update-images">
+                            <img src="3-MEDIA/1-Photos/2025_Dec29-Trail_Update/thumbs/605127379_867337009177204_1290253696290446714_n.jpg" data-full="3-MEDIA/1-Photos/2025_Dec29-Trail_Update/605127379_867337009177204_1290253696290446714_n.jpg" alt="Ice check photo" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                        </div>
+                    </div>
+                </div>
+
+            <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
+                    <div class="update-header">
+                        <h3 class="update-title">Trail Smoothing - December 27</h3>
+                    </div>
+                    <p class="update-date">📅 December 27, 2025</p>
+                    <div class="update-content">
+                        <p>Out smoothing that snow!</p>
+                        <div class="update-images">
+                            <img src="3-MEDIA/1-Photos/2025_Dec27-Trail_Update/thumbs/605193876_866215545956017_1420054460100092599_n.jpg" data-full="3-MEDIA/1-Photos/2025_Dec27-Trail_Update/605193876_866215545956017_1420054460100092599_n.jpg" alt="Trail smoothing photo" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                        </div>
+                    </div>
+                </div>
+
+            <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
+                    <div class="update-header">
+                        <h3 class="update-title">Full Loop Trail Grooming - December 14</h3>
+                    </div>
+                    <p class="update-date">📅 December 14, 2025</p>
+                    <div class="update-content">
+                        <p>Your local snowmobile club was out clearing the trails this am.</p>
+                        <div class="update-images">
+                            <img src="3-MEDIA/1-Photos/2025_Dec14_Update/thumbs/597341304_856836413560597_8060508882785267367_n.jpg" data-full="3-MEDIA/1-Photos/2025_Dec14_Update/597341304_856836413560597_8060508882785267367_n.jpg" alt="Trail grooming photo 1" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                            <img src="3-MEDIA/1-Photos/2025_Dec14_Update/thumbs/597385752_856836466893925_2064940089688574359_n.jpg" data-full="3-MEDIA/1-Photos/2025_Dec14_Update/597385752_856836466893925_2064940089688574359_n.jpg" alt="Trail grooming photo 2" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                            <img src="3-MEDIA/1-Photos/2025_Dec14_Update/thumbs/597392139_856836536893918_6105219647123673434_n.jpg" data-full="3-MEDIA/1-Photos/2025_Dec14_Update/597392139_856836536893918_6105219647123673434_n.jpg" alt="Trail grooming photo 3" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                            <img src="3-MEDIA/1-Photos/2025_Dec14_Update/thumbs/597397887_856836603560578_7626117195584514107_n.jpg" data-full="3-MEDIA/1-Photos/2025_Dec14_Update/597397887_856836603560578_7626117195584514107_n.jpg" alt="Trail grooming photo 4" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                            <img src="3-MEDIA/1-Photos/2025_Dec14_Update/thumbs/597939064_856836420227263_4688380764244533264_n.jpg" data-full="3-MEDIA/1-Photos/2025_Dec14_Update/597939064_856836420227263_4688380764244533264_n.jpg" alt="Trail grooming photo 5" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
+                        </div>
+                    </div>
+                </div>
+
+            <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
+                    <div class="update-header">
+                        <h3 class="update-title">December Meeting - December 3rd</h3>
+                    </div>
+                    <p class="update-date">📅 December 2, 2025</p>
+                    <div class="update-content expandable-content collapsed" id="clubUpdate1">
+                        <p><strong>Great Bay Sno-Rollers December Meeting</strong></p>
+                        <p style="margin-top: 10px;">I hope this message finds you well and ready for another great snowmobiling season! Our monthly December meeting is coming up, and I'd like to invite you all to join us.</p>
+
+                        <p style="margin-top: 15px;"><strong>Meeting Details:</strong></p>
+                        <ul style="padding-left: 25px; line-height: 1.8;">
+                            <li><strong>Date:</strong> Wednesday, December 3rd</li>
+                            <li><strong>Time:</strong> 6:30 PM</li>
+                            <li><strong>Location:</strong> My shop - 31 Tuckers Way, Newmarket, NH 03857</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>Agenda Items:</strong></p>
+                        <ul style="padding-left: 25px; line-height: 1.8;">
+                            <li>Trail work updates and upcoming projects</li>
+                            <li>Signage installation and maintenance</li>
+                            <li>Club clothing orders and availability</li>
+                            <li>Grooming schedule and coordination</li>
+                            <li>Groomer maintenance and equipment status</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;">This promises to be an important meeting as we finalize our preparations for the season and discuss some exciting opportunities for our club's growth. Your input and participation are valuable, so please try to attend if you can.</p>
+                        <p style="margin-top: 10px;">Feel free to bring any questions or concerns you'd like to discuss. Looking forward to seeing everyone there!</p>
+                        <p style="margin-top: 10px;"><strong>Ride safe,</strong><br>Billy Vandervalk<br>President, Great Bay Sno-Rollers</p>
+                        <p style="margin-top: 10px; font-style: italic; color: #666;"><strong>PS -</strong> Bring a camp chair and the shop/meeting is beer friendly.</p>
+                    </div>
+                    <button class="expand-button" onclick="toggleExpand('clubUpdate1', this)">Read More</button>
+                </div>
+
+            <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
+                    <div class="update-header">
+                        <h3 class="update-title">November Meeting - November 8th</h3>
+                    </div>
+                    <p class="update-date">📅 October 29, 2025</p>
+                    <div class="update-content expandable-content collapsed" id="clubUpdate2">
+                        <p><strong>UPCOMING MEETING</strong></p>
+                        <p style="margin-top: 10px;">I hope this message finds you well and ready for another great snowmobiling season! Our monthly November meeting is coming up, and I'd like to invite you all to join us.</p>
+
+                        <p style="margin-top: 15px;"><strong>Meeting Details:</strong></p>
+                        <ul style="padding-left: 25px; line-height: 1.8;">
+                            <li><strong>Date:</strong> Wednesday, November 8th</li>
+                            <li><strong>Time:</strong> 6:30 PM</li>
+                            <li><strong>Location:</strong> My shop - 31 Tuckers Way, Newmarket, NH 03857</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>Agenda Items:</strong> We have several important topics to discuss as we prepare for the season ahead:</p>
+                        <ul style="padding-left: 25px; line-height: 1.8;">
+                            <li>Trail work updates and upcoming projects</li>
+                            <li>Signage installation and maintenance</li>
+                            <li>Club clothing orders and availability</li>
+                            <li>Grant and Aid opportunities and applications</li>
+                            <li>Grooming schedule and coordination</li>
+                            <li>Groomer maintenance and equipment status</li>
+                            <li>Potential expansion: Taking over the management of other southern NH clubs</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;">This promises to be an important meeting as we finalize our preparations for the season and discuss some exciting opportunities for our club's growth. Your input and participation are valuable, so please try to attend if you can.</p>
+                        <p style="margin-top: 10px;">Feel free to bring any questions or concerns you'd like to discuss. Looking forward to seeing everyone there!</p>
+                    </div>
+                    <button class="expand-button" onclick="toggleExpand('clubUpdate2', this)">Read More</button>
+                </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links" style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;margin-bottom:16px;">
+                <a href="index.html">Home</a>
+                <a href="trails.html">Trail Map & Conditions</a>
+                <a href="club-updates.html">Club Updates</a>
+                <a href="weather-trails.html">Weather & Radar</a>
+                <a href="events.html">Events Calendar</a>
+                <a href="gallery.html">Photo Gallery</a>
+                <a href="get-involved.html">Get Involved</a>
+                <a href="membership.html">Join the Club</a>
+                <a href="equipment.html">Groomers & Equipment</a>
+                <a href="merch.html">Club Merch</a>
+                <a href="supporters.html">Our Supporters</a>
+                <a href="landing.html">Quick Links</a>
+                <a href="https://www.facebook.com/greatbay.sno.rollers" target="_blank" rel="noopener">Facebook</a>
+                <a href="https://venmo.com/u/greatbaysnorollers" target="_blank" rel="noopener">Donate via Venmo</a>
+                <a href="https://slednh.com/" target="_blank" rel="noopener">NH Snowmobile Association</a>
+                <a href="https://slednh.evtrails.com/" target="_blank" rel="noopener">Statewide Trail Map</a>
+            </div>
+        <p>&copy; 2026 Great Bay Sno-Rollers. All rights reserved.</p>
+        <p>
+            <a href="mailto:greatbaysnorollers@gmail.com">greatbaysnorollers@gmail.com</a> |
+            <a href="https://www.facebook.com/GreatBaySnoRollers" target="_blank" rel="noopener">Follow us on Facebook</a>
+        </p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.getElementById('hamburger');
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const hamburger = document.getElementById('hamburger');
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+
+        // Expand/Collapse Content
+        function toggleExpand(contentId, button) {
+            const content = document.getElementById(contentId);
+            content.classList.toggle('collapsed');
+
+            if (content.classList.contains('collapsed')) {
+                button.textContent = 'Read More';
+            } else {
+                button.textContent = 'Read Less';
+            }
+        }
+    </script>
+</body>
+</html>
