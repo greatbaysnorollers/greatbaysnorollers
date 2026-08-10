@@ -54,7 +54,8 @@
             padding: 1rem 0;
             position: sticky;
             top: 0;
-            z-index: 100;
+            /* above Leaflet's panes and controls (they go up to 1000) */
+            z-index: 1200;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
             border-bottom: 5px solid;
             border-image: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-mid), var(--logo-gradient-end)) 1;
@@ -535,6 +536,8 @@
         /* ---- trail map + status table ---- */
         /* embedded statewide SLEDNH map */
         .widget-container {
+            position: relative;
+            z-index: 0;
             width: 100%;
             height: 620px;
             border-radius: 12px;
@@ -554,7 +557,13 @@
             .widget-container { height: 420px; }
         }
 
+        /* Leaflet's own panes/controls sit at z-index 400-1000, which was
+           painting the map over the sticky header on scroll. Giving #map its
+           own stacking context at 0 keeps all of it below the header. */
         #map {
+            position: relative;
+            z-index: 0;
+            isolation: isolate;
             height: 560px;
             width: 100%;
             border-radius: 12px;
