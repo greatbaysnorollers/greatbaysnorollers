@@ -98,35 +98,101 @@
             font-weight: 600;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 12px;
-            list-style: none;
+
+        /* ---------- grouped navigation ---------- */
+        .nav-links { display: flex; align-items: center; gap: 6px; list-style: none; }
+
+        .nav-item { position: relative; }
+
+        .nav-links a,
+        .nav-trigger {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: var(--snow-white); text-decoration: none;
+            font-family: inherit; font-size: 1rem; font-weight: 500;
+            padding: 10px 14px; border: none; background: none;
+            border-radius: 6px; cursor: pointer; transition: background .2s ease;
         }
 
-        .nav-links a {
-            color: var(--snow-white);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 11px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
+        .nav-trigger::after {
+            content: ''; width: 0; height: 0;
+            border-left: 4px solid transparent; border-right: 4px solid transparent;
+            border-top: 5px solid currentColor; opacity: .75; transition: transform .2s ease;
         }
 
-        .nav-links a:hover {
-            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
-            transform: translateY(-2px);
+        .nav-links a:hover,
+        .nav-trigger:hover,
+        .nav-item:focus-within .nav-trigger { background: rgba(255,255,255,.14); }
+
+        .nav-links a.active { background: rgba(255,255,255,.2); }
+
+        .dropdown {
+            position: absolute; top: calc(100% + 8px); left: 0; min-width: 236px;
+            background: #14293a; border: 1px solid rgba(255,255,255,.14);
+            border-radius: 10px; box-shadow: 0 12px 34px rgba(0,0,0,.45);
+            padding: 8px; list-style: none;
+            opacity: 0; visibility: hidden; transform: translateY(-6px);
+            transition: opacity .18s ease, transform .18s ease, visibility .18s;
+            z-index: 20;
         }
 
+        /* invisible bridge so the menu survives the gap on the way down */
+        .nav-item::after { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 10px; }
 
-        /* "Join the Club" gets button treatment in the top nav */
+        .nav-item:hover .dropdown,
+        .nav-item:focus-within .dropdown,
+        .nav-item.open .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .nav-item:hover .nav-trigger::after,
+        .nav-item.open .nav-trigger::after { transform: rotate(180deg); }
+
+        .dropdown a { display: block; width: 100%; padding: 10px 14px; border-radius: 6px; white-space: nowrap; }
+        .dropdown a:hover { background: rgba(255,255,255,.12); }
+
+        .dropdown a.donate {
+            margin-top: 6px; padding-top: 12px;
+            border-top: 1px solid rgba(255,255,255,.14);
+            color: #FFA726; font-weight: 700;
+        }
+
         .nav-links a.nav-join {
             background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
-            color: #fff;
-            font-weight: 700;
+            color: #fff; font-weight: 700; margin-left: 6px;
         }
 
         .nav-links a.nav-join:hover { filter: brightness(1.08); }
+
+        /* ---------- mobile: tap-to-expand accordion, no hover ---------- */
+        @media (max-width: 900px) {
+            .hamburger { display: flex; }
+
+            .nav-links {
+                position: fixed; top: 0; right: -100%;
+                width: 86%; max-width: 340px; height: 100vh; overflow-y: auto;
+                flex-direction: column; align-items: stretch; gap: 2px;
+                background: #14293a; padding: 96px 18px 40px;
+                box-shadow: -6px 0 24px rgba(0,0,0,.5);
+                transition: right .3s ease; z-index: 100;
+            }
+
+            .nav-links.active { right: 0; }
+
+            .nav-item { width: 100%; }
+            .nav-item::after { display: none; }
+
+            .nav-links a,
+            .nav-trigger { width: 100%; justify-content: space-between; padding: 14px 16px; font-size: 1.05rem; }
+
+            .dropdown {
+                position: static; opacity: 1; visibility: visible; transform: none;
+                display: none; min-width: 0; background: rgba(0,0,0,.22);
+                border: none; box-shadow: none; padding: 4px 0 8px 12px; margin: 2px 0 6px;
+            }
+
+            .nav-item.open .dropdown { display: block; }
+            .dropdown a { white-space: normal; padding: 12px 16px; }
+
+            .nav-links a.nav-join { margin: 14px 0 0; justify-content: center; padding: 16px; }
+        }
 
         /* Hamburger Menu */
         .hamburger {
@@ -161,29 +227,6 @@
         @media (max-width: 768px) {
             .hamburger {
                 display: flex;
-            }
-
-            .nav-links {
-                position: fixed;
-                right: -100%;
-                top: 80px;
-                flex-direction: column;
-                background: rgba(26, 58, 82, 0.98);
-                width: 250px;
-                padding: 30px 20px;
-                box-shadow: -5px 5px 20px rgba(0, 0, 0, 0.5);
-                transition: right 0.3s ease;
-                border-radius: 10px 0 0 10px;
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .nav-links a {
-                padding: 12px 20px;
-                width: 100%;
-                text-align: left;
             }
         }
 
@@ -529,7 +572,26 @@
 
         .supporter .biz { font-weight: 700; color: var(--deep-blue); font-size: 1.05rem; }
         .supporter .town { color: #6b7580; font-size: 0.9rem; }
-    </style>
+    
+        /* ---------- footer has one job: ask for donations ---------- */
+        .footer-donate { max-width: 620px; margin: 0 auto 22px; text-align: center; }
+
+        .footer-donate-lead { color: var(--ice-blue); font-size: 1.05rem; margin-bottom: 18px; }
+
+        .footer-donate-btn {
+            display: inline-block; padding: 16px 44px;
+            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
+            color: #fff !important; text-decoration: none; border-radius: 50px;
+            font-weight: 700; font-size: 1.15rem; letter-spacing: .5px;
+            box-shadow: 0 8px 24px rgba(255,69,0,.35);
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+
+        .footer-donate-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 32px rgba(255,69,0,.5); }
+
+        .footer-fine { text-align: center; font-size: .9rem; color: var(--ice-blue); opacity: .75; }
+        .footer-fine a { color: inherit; }
+</style>
 </head>
 <body>
     <!-- Header Navigation -->
@@ -543,13 +605,31 @@
                 </div>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.html" onclick="closeMenu()">Home</a></li>
-                <li><a href="trails.html" onclick="closeMenu()">Trails</a></li>
-                <li><a href="club-updates.html" onclick="closeMenu()">Updates</a></li>
-                <li><a href="weather-trails.html" onclick="closeMenu()">Weather</a></li>
-                <li><a href="events.html" onclick="closeMenu()">Events</a></li>
-                <li><a href="gallery.html" onclick="closeMenu()">Gallery</a></li>
-                <li><a href="get-involved.html" class="active" onclick="closeMenu()">Get Involved</a></li>
+                <li class="nav-item">
+                    <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">Trails</button>
+                    <ul class="dropdown">
+                        <li><a href="trails.html" onclick="closeMenu()">Trail Map &amp; Conditions</a></li>
+                        <li><a href="weather-trails.html" onclick="closeMenu()">Weather &amp; Radar</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">News</button>
+                    <ul class="dropdown">
+                        <li><a href="club-updates.html" onclick="closeMenu()">Club Updates</a></li>
+                        <li><a href="gallery.html" onclick="closeMenu()">Photo Gallery</a></li>
+                        <li><a href="events.html" onclick="closeMenu()">Events Calendar</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="nav-trigger" aria-expanded="false" aria-haspopup="true">The Club</button>
+                    <ul class="dropdown">
+                        <li><a href="get-involved.html" class="active" onclick="closeMenu()">Get Involved</a></li>
+                        <li><a href="equipment.html" onclick="closeMenu()">Groomers &amp; Equipment</a></li>
+                        <li><a href="supporters.html" onclick="closeMenu()">Our Supporters</a></li>
+                        <li><a href="merch.html" onclick="closeMenu()">Club Merch</a></li>
+                        <li><a class="donate" href="https://venmo.com/u/greatbaysnorollers" target="_blank" rel="noopener" onclick="closeMenu()">&#128179; Donate to the Club</a></li>
+                    </ul>
+                </li>
                 <li><a href="membership.html" class="nav-join" onclick="closeMenu()">Join the Club</a></li>
             </ul>
             <div class="hamburger" id="hamburger" onclick="toggleMenu()">
@@ -682,28 +762,14 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-links" style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;margin-bottom:16px;">
-                <a href="index.html">Home</a>
-                <a href="trails.html">Trail Map & Conditions</a>
-                <a href="club-updates.html">Club Updates</a>
-                <a href="weather-trails.html">Weather & Radar</a>
-                <a href="events.html">Events Calendar</a>
-                <a href="gallery.html">Photo Gallery</a>
-                <a href="get-involved.html">Get Involved</a>
-                <a href="membership.html">Join the Club</a>
-                <a href="equipment.html">Groomers & Equipment</a>
-                <a href="merch.html">Club Merch</a>
-                <a href="supporters.html">Our Supporters</a>
-                <a href="landing.html">Quick Links</a>
-                <a href="https://www.facebook.com/greatbay.sno.rollers" target="_blank" rel="noopener">Facebook</a>
-                <a href="https://venmo.com/u/greatbaysnorollers" target="_blank" rel="noopener">Donate via Venmo</a>
-                <a href="https://slednh.com/" target="_blank" rel="noopener">NH Snowmobile Association</a>
-                <a href="https://slednh.evtrails.com/" target="_blank" rel="noopener">Statewide Trail Map</a>
-            </div>
-        <p>&copy; 2026 Great Bay Sno-Rollers. All rights reserved.</p>
-        <p>
-            <a href="mailto:greatbaysnorollers@gmail.com">greatbaysnorollers@gmail.com</a> |
-            <a href="https://www.facebook.com/GreatBaySnoRollers" target="_blank" rel="noopener">Follow us on Facebook</a>
+
+        <div class="footer-donate">
+            <p class="footer-donate-lead">Every dollar goes to grooming fuel, equipment, and trail maintenance.</p>
+            <a href="https://venmo.com/u/greatbaysnorollers" target="_blank" rel="noopener" class="footer-donate-btn">&#128179; Donate to the Club</a>
+        </div>
+        <p class="footer-fine">
+            &copy; 2026 Great Bay Sno-Rollers &middot; Newmarket, NH &middot;
+            <a href="mailto:greatbaysnorollers@gmail.com">greatbaysnorollers@gmail.com</a>
         </p>
     </footer>
 
@@ -735,6 +801,38 @@
                 button.textContent = 'Read Less';
             }
         }
+    </script>
+
+    <script>
+        // Desktop opens menus on hover (CSS). Touch screens have no hover, so
+        // below 900px the trigger toggles its own submenu instead.
+        (function () {
+            var nav = document.getElementById('navLinks');
+            if (!nav) return;
+            function touchLayout() { return window.matchMedia('(max-width: 900px)').matches; }
+            function closeAll() {
+                nav.querySelectorAll('.nav-item.open').forEach(function (o) {
+                    o.classList.remove('open');
+                    o.querySelector('.nav-trigger').setAttribute('aria-expanded', 'false');
+                });
+            }
+            nav.querySelectorAll('.nav-trigger').forEach(function (btn) {
+                btn.addEventListener('click', function (e) {
+                    if (!touchLayout()) return;
+                    e.preventDefault();
+                    var item = btn.closest('.nav-item');
+                    var wasOpen = item.classList.contains('open');
+                    closeAll();
+                    if (!wasOpen) {
+                        item.classList.add('open');
+                        btn.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') { closeAll(); closeMenu(); }
+            });
+        })();
     </script>
 </body>
 </html>
