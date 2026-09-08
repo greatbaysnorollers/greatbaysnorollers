@@ -1,0 +1,113 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Great Bay Sno-Rollers//Club Meetings//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Great Bay Sno-Rollers Meetings
+X-WR-TIMEZONE:America/New_York
+BEGIN:VEVENT
+UID:gbsr-meeting-20260914@greatbaysnorollers.com
+DTSTAMP:20260908T141215Z
+DTSTART:20260914T220000Z
+DTEND:20260915T000000Z
+SUMMARY:Great Bay Sno-Rollers Club Meeting
+LOCATION:Billy's shop, 31 Tuckers Way, Newmarket, NH 03857
+DESCRIPTION:Great Bay Sno-Rollers monthly club meeting.
+
+Bring any questions or concerns you'd like to discuss.
+
+PS - Bring a camp chair. The shop/meeting is beer-friendly.
+
+greatbaysnorollers.com
+END:VEVENT
+BEGIN:VEVENT
+UID:gbsr-meeting-20261005@greatbaysnorollers.com
+DTSTAMP:20260908T141215Z
+DTSTART:20261005T220000Z
+DTEND:20261006T000000Z
+SUMMARY:Great Bay Sno-Rollers Club Meeting
+LOCATION:Billy's shop, 31 Tuckers Way, Newmarket, NH 03857
+DESCRIPTION:Great Bay Sno-Rollers monthly club meeting.
+
+Bring any questions or concerns you'd like to discuss.
+
+PS - Bring a camp chair. The shop/meeting is beer-friendly.
+
+greatbaysnorollers.com
+END:VEVENT
+BEGIN:VEVENT
+UID:gbsr-meeting-20261102@greatbaysnorollers.com
+DTSTAMP:20260908T141215Z
+DTSTART:20261102T230000Z
+DTEND:20261103T010000Z
+SUMMARY:Great Bay Sno-Rollers Club Meeting
+LOCATION:Billy's shop, 31 Tuckers Way, Newmarket, NH 03857
+DESCRIPTION:Great Bay Sno-Rollers monthly club meeting.
+
+Bring any questions or concerns you'd like to discuss.
+
+PS - Bring a camp chair. The shop/meeting is beer-friendly.
+
+greatbaysnorollers.com
+END:VEVENT
+BEGIN:VEVENT
+UID:gbsr-meeting-20261207@greatbaysnorollers.com
+DTSTAMP:20260908T141215Z
+DTSTART:20261207T230000Z
+DTEND:20261208T010000Z
+SUMMARY:Great Bay Sno-Rollers Club Meeting
+LOCATION:Billy's shop, 31 Tuckers Way, Newmarket, NH 03857
+DESCRIPTION:Great Bay Sno-Rollers monthly club meeting.
+
+Bring any questions or concerns you'd like to discuss.
+
+PS - Bring a camp chair. The shop/meeting is beer-friendly.
+
+greatbaysnorollers.com
+END:VEVENT
+BEGIN:VEVENT
+UID:gbsr-meeting-20270104@greatbaysnorollers.com
+DTSTAMP:20260908T141215Z
+DTSTART:20270104T230000Z
+DTEND:20270105T010000Z
+SUMMARY:Great Bay Sno-Rollers Club Meeting
+LOCATION:Billy's shop, 31 Tuckers Way, Newmarket, NH 03857
+DESCRIPTION:Great Bay Sno-Rollers monthly club meeting.
+
+Bring any questions or concerns you'd like to discuss.
+
+PS - Bring a camp chair. The shop/meeting is beer-friendly.
+
+greatbaysnorollers.com
+END:VEVENT
+BEGIN:VEVENT
+UID:gbsr-meeting-20270201@greatbaysnorollers.com
+DTSTAMP:20260908T141215Z
+DTSTART:20270201T230000Z
+DTEND:20270202T010000Z
+SUMMARY:Great Bay Sno-Rollers Club Meeting
+LOCATION:Billy's shop, 31 Tuckers Way, Newmarket, NH 03857
+DESCRIPTION:Great Bay Sno-Rollers monthly club meeting.
+
+Bring any questions or concerns you'd like to discuss.
+
+PS - Bring a camp chair. The shop/meeting is beer-friendly.
+
+greatbaysnorollers.com
+END:VEVENT
+BEGIN:VEVENT
+UID:gbsr-meeting-20270301@greatbaysnorollers.com
+DTSTAMP:20260908T141215Z
+DTSTART:20270301T230000Z
+DTEND:20270302T010000Z
+SUMMARY:Great Bay Sno-Rollers Club Meeting
+LOCATION:Billy's shop, 31 Tuckers Way, Newmarket, NH 03857
+DESCRIPTION:Great Bay Sno-Rollers monthly club meeting.
+
+Bring any questions or concerns you'd like to discuss.
+
+PS - Bring a camp chair. The shop/meeting is beer-friendly.
+
+greatbaysnorollers.com
+END:VEVENT
+END:VCALENDAR

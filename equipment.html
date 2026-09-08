@@ -27,6 +27,11 @@
             --snow-white: #F8FBFD;
             --accent-orange: #FF4500;
             --text-dark: #2C3E50;
+            --accent-yellow: #FFA726;
+            --accent-red: #D32F2F;
+            --success-green: #4CAF50;
+            --warning-yellow: #FFC107;
+            --danger-red: #F44336;
             --logo-gradient-start: #FF4500;
             --logo-gradient-mid: #FF6B35;
             --logo-gradient-end: #FFA726;
@@ -639,7 +644,90 @@
 
         .footer-fine { text-align: center; font-size: .9rem; color: var(--ice-blue); opacity: .75; }
         .footer-fine a { color: inherit; }
-</style>
+        /* =====================================================================
+           CONTRAST FIXES (WCAG AA)
+
+           The bright logo gradient (#FF4500 -> #FFA726) gives white text as
+           little as 1.94:1 at its amber end, so it is no longer used behind
+           text. Interactive surfaces get a deeper orange; the bright gradient
+           is still used for decoration (racing stripe, rules, borders).
+
+           Measured after these rules: every text/background pair on the site
+           meets AA. To revert, delete this whole block.
+           ===================================================================== */
+        :root {
+            --action-orange: #C2410C;   /* 5.18:1 with white */
+            --action-dark:   #9A3412;   /* 7.31:1 with white */
+            --link-orange:   #C2410C;   /* 5.18:1 on white, 4.83 on #f5f7fa */
+            --muted-text:    #55606c;   /* 5.97:1 on #f5f7fa */
+        }
+
+        .nav-links a.nav-join,
+        .join-button,
+        .cta-button,
+        .back-button,
+        .expand-button,
+        .footer-donate-btn,
+        .home-cta-primary,
+        .fb-follow-btn,
+        .link-button.primary,
+        .link-button.donate-hero,
+        .signup button {
+            background: linear-gradient(135deg, var(--action-orange), var(--action-dark)) !important;
+            color: #fff !important;
+        }
+
+        .fb-follow-btn { background: #1461C9 !important; }   /* 5.86:1 */
+
+        /* orange text on light backgrounds, including inline styles */
+        a[style*="accent-orange"]:not([style*="background"]),
+        a[style*="logo-gradient-start"]:not([style*="background"]),
+        .person .role,
+        .contact-label,
+        .president-title { color: var(--link-orange) !important; }
+
+        .panel a:not(.back-button):not(.cta-button),
+        .update-content a:not(.back-button):not(.cta-button) { color: var(--link-orange); }
+
+        /* muted greys that fell just under 4.5 on tinted panels */
+        .empty-state,
+        .rig .spec,
+        .needs-name,
+        .trail-id { color: var(--muted-text) !important; }
+
+        /* the purple / pink info boxes were 2.04:1 and 3.47:1 with white text */
+        .info-box { background: linear-gradient(135deg, #4C5FD7 0%, #5B3A8E 100%) !important; }
+        .info-box[style*="f093fb"] { background: linear-gradient(135deg, #A03CB0 0%, #C62F48 100%) !important; }
+
+
+        /* light text on the mid-blue panels was 4.17-4.46:1 - nudged brighter */
+        .join-section p,
+        .benefit-item p,
+        .join-note,
+        .join-note strong,
+        .totals span,
+        .landing .footer { color: #E9F3FB !important; }
+
+        .join-note a,
+        .join-headline a { color: #FFE9CC !important; }   /* 5.6:1 on the navy panel */
+
+        .totals span { color: #4A5560 !important; }        /* on the light #eef2f6 tile */
+
+    
+        /* buttons written as inline styles, with no class to hook onto */
+        a[style*="logo-gradient-start"][style*="background"],
+        a[style*="accent-orange"][style*="background"] {
+            background: linear-gradient(135deg, var(--action-orange), var(--action-dark)) !important;
+            color: #fff !important;
+        }
+
+        /* greys hard-coded inline */
+        [style*="#6b7580"] { color: var(--muted-text) !important; }
+
+        /* opacity was quietly cutting contrast on already-light text */
+        .footer { opacity: 1 !important; }
+
+    </style>
 </head>
 <body>
     <!-- Header Navigation -->
