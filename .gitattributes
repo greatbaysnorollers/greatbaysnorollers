@@ -8,3 +8,6 @@
 *.ico binary
 *.mp4 binary
 *.mov binary
+
+# Calendar files are spec-bound to CRLF line endings; leave them byte-exact.
+*.ics -text
