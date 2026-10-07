@@ -1393,23 +1393,23 @@
         <!-- ============================================================
              FACEBOOK / SOCIAL
 
-             The live feed below is switched ON and points at the club Page
-             (id 61594959698186). Two things to know if it ever breaks:
+             The live feed below is switched ON and points at the club Page,
+             now using the claimed username URL. If it ever breaks:
 
-               1. The plugin only accepts the profile.php?id=... form of the
-                  URL. The canonical /people/Great-Bay-.../ URL renders a 0x0
-                  empty box. Tested both.
-               2. If the club claims a Page username, swap the URL here and in
-                  the .connect block above, and in get-involved / merch /
-                  landing.
-             ============================================================ -->        <section class="connect">
+               Both the username URL and the older profile.php?id=61594959698186
+               form render correctly in the page plugin - both were tested. The
+               canonical /people/Great-Bay-.../ URL does NOT: it renders a 0x0
+               empty box. Do not "fix" the href by pasting that one in.
+             ============================================================ -->
+
+        <section class="connect">
             <div class="connect-head">
                 <h2>Stay in the Loop</h2>
                 <p>Group rides, last-minute grooming runs, storm updates and trail work calls go out
                    here first &mdash; often the night before. Pick whichever one you actually check.</p>
             </div>
             <div class="connect-links">
-                <a href="https://www.facebook.com/profile.php?id=61594959698186" target="_blank" rel="noopener" class="connect-btn cb-fb">
+                <a href="https://www.facebook.com/GreatBaySnoRollersLeeSnoTravelers" target="_blank" rel="noopener" class="connect-btn cb-fb">
                     <span class="cb-icon">&#128216;</span>
                     <span class="cb-text"><strong>Facebook</strong><em>Posts, photos and ride calls</em></span>
                 </a>
@@ -1438,14 +1438,14 @@
             <p class="section-subtitle">Our day-to-day updates, posted as they happen</p>
             <div class="fb-embed" id="fbEmbed">
                 <div class="fb-page"
-                     data-href="https://www.facebook.com/profile.php?id=61594959698186"
+                     data-href="https://www.facebook.com/GreatBaySnoRollersLeeSnoTravelers"
                      data-tabs="timeline" data-width="500" data-height="640"
                      data-small-header="false" data-adapt-container-width="true"
                      data-hide-cover="false" data-show-facepile="true"></div>
                 <div class="fb-fallback" id="fbFallback" hidden>
                     <p><strong>Facebook isn&rsquo;t loading here.</strong> Some browsers and ad blockers
                        stop it. Our posts are all still on the page itself.</p>
-                    <a href="https://www.facebook.com/profile.php?id=61594959698186" target="_blank" rel="noopener">Open our Facebook page &rarr;</a>
+                    <a href="https://www.facebook.com/GreatBaySnoRollersLeeSnoTravelers" target="_blank" rel="noopener">Open our Facebook page &rarr;</a>
                 </div>
             </div>
         </section>

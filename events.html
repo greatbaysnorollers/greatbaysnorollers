@@ -410,6 +410,28 @@
 
         .footer-fine { text-align: center; font-size: .9rem; color: var(--ice-blue); opacity: .75; }
         .footer-fine a { color: inherit; }
+        .upcoming { display: flex; flex-direction: column; gap: 14px; }
+        .upcoming-card {
+            display: flex; gap: 18px; align-items: flex-start; min-width: 0;
+            background: #fff; border: 1px solid #d7dee5; border-left: 5px solid var(--action-orange, #C2410C);
+            border-radius: 10px; padding: 18px 20px;
+        }
+        .up-date {
+            flex: none; width: 66px; text-align: center; line-height: 1;
+            border-radius: 8px; padding: 10px 0; background: var(--deep-blue, #1A3A52); color: #fff;
+        }
+        .up-mon { display: block; font-size: .8rem; text-transform: uppercase; letter-spacing: .09em; }
+        .up-day { display: block; font-family: 'Bebas Neue', sans-serif; font-size: 2rem; }
+        .up-body { min-width: 0; }
+        .up-body h3 { margin: 0 0 4px; font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem;
+                      letter-spacing: .02em; color: var(--deep-blue, #1A3A52); }
+        .up-when { margin: 0 0 8px; font-weight: 600; color: var(--action-orange, #C2410C); }
+        .up-body p { margin: 0; color: #55606c; line-height: 1.65; }
+        @media (max-width: 520px) {
+            .upcoming-card { flex-direction: column; gap: 12px; }
+            .up-date { width: 100%; display: flex; justify-content: center; gap: 8px; align-items: baseline; }
+        }
+
         /* =====================================================================
            CONTRAST FIXES (WCAG AA)
 
@@ -584,6 +606,23 @@
             <h3>📅 Stay Connected with Club Events</h3>
             <p>Check out our calendar below for upcoming club rides, monthly meetings, fundraisers, and community events. All members and snowmobile enthusiasts are welcome!</p>
             <p><strong>How to add to your calendar:</strong> Click on any event below to view details, and use the "+ Google Calendar" button to add it to your personal calendar for reminders.</p>
+        </div>
+
+        <!-- Upcoming work days and one-off events. Add new ones at the top. -->
+        <div class="calendar-section">
+            <h2 class="section-title">&#128296; Coming Up</h2>
+            <div class="upcoming">
+                <div class="upcoming-card">
+                    <div class="up-date"><span class="up-mon">Oct</span><span class="up-day">17</span></div>
+                    <div class="up-body">
+                        <h3>Bridge Demolition &mdash; Summer Grant-in-Aid Project</h3>
+                        <p class="up-when">Saturday, October 17 &middot; 8:00 AM</p>
+                        <p>We&rsquo;re tearing out the existing bridge to make way for the new one. Plenty of
+                           hands needed. Glenn is running the project &mdash; reach out to him or Billy if you
+                           can make it, and bring work gloves and any demo tools you have.</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Google Calendar -->
