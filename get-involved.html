@@ -597,6 +597,66 @@
 
         .footer-fine { text-align: center; font-size: .9rem; color: var(--ice-blue); opacity: .75; }
         .footer-fine a { color: inherit; }
+
+        /* MailerLite signup form, restyled to match the site.
+           Their rules are #mlb2-xxxxx.ml-form-embedContainer ... !important, so
+           these are scoped under #gbsr-signup to outrank them. */
+        #gbsr-signup { max-width: 100%; }
+        #gbsr-signup .ml-form-embedContainer.ml-subscribe-form .ml-form-embedWrapper {
+            background-color: transparent !important;
+            box-shadow: none !important;
+            width: 100% !important;
+            max-width: 560px !important;
+        }
+        #gbsr-signup .ml-form-embedContainer.ml-subscribe-form .ml-form-embedWrapper .ml-form-embedBody {
+            padding: 0 !important;
+        }
+        /* The panel already carries a heading; hide MailerLite's duplicate. */
+        #gbsr-signup .ml-form-embedContainer.ml-subscribe-form .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent {
+            display: none !important;
+        }
+        #gbsr-signup .ml-form-embedContainer.ml-subscribe-form .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input,
+        #gbsr-signup .ml-form-embedContainer.ml-subscribe-form .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow textarea,
+        #gbsr-signup .ml-form-embedContainer.ml-subscribe-form .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow .custom-select {
+            font-family: 'Barlow', sans-serif !important;
+            font-size: 1rem !important;
+            border-color: #cbd5dd !important;
+            border-radius: 8px !important;
+            padding: 13px 14px !important;
+            color: #2C3E50 !important;
+        }
+        #gbsr-signup .ml-form-embedContainer.ml-subscribe-form .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input:focus,
+        #gbsr-signup .ml-form-embedContainer.ml-subscribe-form .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow textarea:focus {
+            border-color: #C2410C !important;
+            outline: 2px solid rgba(194,65,12,.25) !important;
+        }
+        #gbsr-signup .ml-form-embedContainer.ml-subscribe-form .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button {
+            background: linear-gradient(135deg, #C2410C, #9A3412) !important;
+            font-family: 'Barlow', sans-serif !important;
+            font-size: 1.02rem !important;
+            font-weight: 700 !important;
+            letter-spacing: .3px !important;
+            border-radius: 8px !important;
+            padding: 15px !important;
+        }
+        #gbsr-signup .ml-form-embedContainer.ml-subscribe-form .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button:hover {
+            filter: brightness(1.08);
+            background: linear-gradient(135deg, #C2410C, #9A3412) !important;
+        }
+        #gbsr-signup .ml-form-embedContainer.ml-subscribe-form .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description p,
+        #gbsr-signup .ml-form-embedContainer.ml-subscribe-form .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedPermissions .ml-form-embedPermissionsContent p {
+            font-family: 'Barlow', sans-serif !important;
+            font-size: .9rem !important;
+            line-height: 1.5 !important;
+            color: #55606c !important;
+        }
+        #gbsr-signup .ml-form-embedContainer.ml-subscribe-form .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked ~ .label-description::before {
+            border-color: #C2410C !important;
+            background-color: #C2410C !important;
+        }
+        /* reCAPTCHA is a fixed-width widget; keep it inside the column on phones. */
+        #gbsr-signup .ml-form-recaptcha { max-width: 100% !important; overflow: hidden !important; }
+
         /* =====================================================================
            CONTRAST FIXES (WCAG AA)
 
@@ -823,20 +883,8 @@
             <p>Meeting reminders, trail work calls, and grooming updates &mdash; a few emails a month
                during the season, nothing in the summer. We don't share your address with anyone.</p>
 
-            <!-- This form works automatically on Netlify (no setup needed).
-                 After the first submission, addresses appear under
-                 Netlify dashboard > your site > Forms > club-newsletter. -->
-            <form name="club-newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                <input type="hidden" name="form-name" value="club-newsletter">
-                <p style="display:none;"><label>Leave this empty: <input name="bot-field"></label></p>
-                <div class="signup">
-                    <label for="nl-name" class="sr-only" style="position:absolute;left:-9999px;">Your name</label>
-                    <input id="nl-name" type="text" name="name" placeholder="Your name" autocomplete="name">
-                    <label for="nl-email" class="sr-only" style="position:absolute;left:-9999px;">Email address</label>
-                    <input id="nl-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
-                    <button type="submit">Sign Me Up</button>
-                </div>
-            </form>
+            <p class="signup-note">One or two emails a month in season. Unsubscribe any time.</p>
+            <div id="gbsr-signup"><div class="ml-embedded" data-form="vkZGlt"></div></div>
         </div>
 
         <div class="panel">
@@ -922,6 +970,16 @@
                 if (e.key === 'Escape') { closeAll(); closeMenu(); }
             });
         })();
+    </script>
+    <!-- MailerLite Universal: renders the signup form marked #gbsr-signup.
+         Account 2692960, form vkZGlt. Edit the form's fields in MailerLite;
+         the look is overridden by the #gbsr-signup rules in this page's CSS. -->
+    <script>
+        (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+        .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+        n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+        (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+        ml('account', '2692960');
     </script>
 </body>
 </html>
