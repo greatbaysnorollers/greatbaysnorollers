@@ -507,6 +507,13 @@
         table.meetings tr:last-child td { border-bottom: none; }
 
         table.meetings tr.next-meeting td { background: #FFF6EE; }
+        table.meetings tr.past-meeting td { background: #F1F4F7; color: #55606c; }
+        table.meetings tr.past-meeting td strong { font-weight: 600; }
+        .held-badge {
+            display: inline-block; margin-left: 8px; padding: 2px 10px;
+            border-radius: 20px; background: #6B7682; color: #fff;
+            font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+        }
 
         table.meetings td.muted, .muted { color: #55606c; }
 
@@ -593,20 +600,20 @@
                         <tr><th>Date</th><th>Time</th><th></th><th></th></tr>
                     </thead>
                     <tbody>
-                    <tr class="next-meeting">
-                        <td><strong>Monday, September 14, 2026</strong> <span class="next-badge">Next</span></td>
+                    <tr class="past-meeting">
+                        <td><strong>Monday, September 14, 2026</strong> <span class="held-badge">Held</span></td>
                         <td>6:00 PM</td>
                         <td class="muted">2nd Monday</td>
-                        <td><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Great+Bay+Sno-Rollers+Club+Meeting&dates=20260914T220000Z%2F20260915T000000Z&details=Great+Bay+Sno-Rollers+monthly+club+meeting.%0A%0ABring+any+questions+or+concerns+you%27d+like+to+discuss.%0A%0APS+-+Bring+a+camp+chair.+The+shop%2Fmeeting+is+beer-friendly.&location=Billy%27s+shop%2C+31+Tuckers+Way%2C+Newmarket%2C+NH+03857" target="_blank" rel="noopener">Add to Google Calendar</a></td>
+                        <td class="muted">&mdash;</td>
                     </tr>
-                    <tr>
-                        <td><strong>Monday, October 5, 2026</strong></td>
+                    <tr class="past-meeting">
+                        <td><strong>Monday, October 5, 2026</strong> <span class="held-badge">Held</span></td>
                         <td>6:00 PM</td>
                         <td class="muted">1st Monday</td>
-                        <td><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Great+Bay+Sno-Rollers+Club+Meeting&dates=20261005T220000Z%2F20261006T000000Z&details=Great+Bay+Sno-Rollers+monthly+club+meeting.%0A%0ABring+any+questions+or+concerns+you%27d+like+to+discuss.%0A%0APS+-+Bring+a+camp+chair.+The+shop%2Fmeeting+is+beer-friendly.&location=Billy%27s+shop%2C+31+Tuckers+Way%2C+Newmarket%2C+NH+03857" target="_blank" rel="noopener">Add to Google Calendar</a></td>
+                        <td class="muted">&mdash;</td>
                     </tr>
-                    <tr>
-                        <td><strong>Monday, November 2, 2026</strong></td>
+                    <tr class="next-meeting">
+                        <td><strong>Monday, November 2, 2026</strong> <span class="next-badge">Next</span></td>
                         <td>6:00 PM</td>
                         <td class="muted">1st Monday</td>
                         <td><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Great+Bay+Sno-Rollers+Club+Meeting&dates=20261102T230000Z%2F20261103T010000Z&details=Great+Bay+Sno-Rollers+monthly+club+meeting.%0A%0ABring+any+questions+or+concerns+you%27d+like+to+discuss.%0A%0APS+-+Bring+a+camp+chair.+The+shop%2Fmeeting+is+beer-friendly.&location=Billy%27s+shop%2C+31+Tuckers+Way%2C+Newmarket%2C+NH+03857" target="_blank" rel="noopener">Add to Google Calendar</a></td>
