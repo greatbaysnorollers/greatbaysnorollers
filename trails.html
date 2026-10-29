@@ -1100,6 +1100,11 @@
         // 'gb-NEAL_MILL_EXTENSION': { status: 'caution', condition: 'Marginal', groomed: 'Jan 20, 2026', comment: 'Thin over the culvert' },
     };
 
+    /* Live status from the club's trail Google Sheet: its "Website Status" tab, published to the
+       web as CSV (File > Share > Publish to web). When this is set, the sheet's values replace the
+       ones above as soon as it loads; if Google can't be reached, the values above stay. */
+    var STATUS_SHEET_CSV = '';
+
     /* Extra parking the SLEDNH map doesn't have. Add as many as you like. */
     var EXTRA_PARKING = [
         // { name: 'Example Trailhead Lot', detail: 'Room for 6 trailers, off Neal Mill Rd', lat: 43.05, lon: -70.99 },
@@ -1206,6 +1211,78 @@
             tbody.appendChild(tr);
         });
     });
+
+    // ---- live status from the Google Sheet --------------------------------------------
+    function parseCSV(text) {
+        var rows = [], row = [], cell = '', q = false;
+        for (var i = 0; i < text.length; i++) {
+            var ch = text[i];
+            if (q) {
+                if (ch === '"' && text[i + 1] === '"') { cell += '"'; i++; }
+                else if (ch === '"') { q = false; }
+                else { cell += ch; }
+            } else if (ch === '"') { q = true; }
+            else if (ch === ',') { row.push(cell); cell = ''; }
+            else if (ch === '\n' || ch === '\r') {
+                if (ch === '\r' && text[i + 1] === '\n') i++;
+                row.push(cell); rows.push(row); row = []; cell = '';
+            } else { cell += ch; }
+        }
+        if (cell !== '' || row.length) { row.push(cell); rows.push(row); }
+        return rows;
+    }
+
+    function applySheet(rows) {
+        var head = rows[0].map(function (h) { return h.trim().toLowerCase(); });
+        var col = function (name) { return head.indexOf(name); };
+        var cId = col('trail id'), cSt = col('status'), cCo = col('condition'),
+            cGr = col('last groomed'), cCm = col('comments'), cUp = col('updated');
+        if (cId < 0 || cSt < 0) return false;
+        var valid = { open: 1, caution: 1, closed: 1 };
+        var fresh = {};
+        rows.slice(1).forEach(function (r) {
+            var id = (r[cId] || '').trim();
+            if (!id) return;
+            var st = (r[cSt] || '').trim().toLowerCase();
+            var entry = {
+                status:    valid[st] ? st : undefined,
+                condition: cCo >= 0 ? (r[cCo] || '').trim() : undefined,
+                groomed:   cGr >= 0 ? (r[cGr] || '').trim() : undefined,
+                comment:   cCm >= 0 && (r[cCm] || '').trim() ? r[cCm].trim() : undefined
+            };
+            if (id.toUpperCase() === 'NETWORK') {
+                Object.keys(entry).forEach(function (k) { if (entry[k]) NETWORK_STATUS[k] = entry[k]; });
+                if (cUp >= 0 && (r[cUp] || '').trim()) LAST_UPDATED = r[cUp].trim();
+            } else {
+                fresh[id] = entry;
+            }
+        });
+        TRAIL_STATUS = fresh;
+        return true;
+    }
+
+    function repaintStatus() {
+        document.getElementById('status-stamp').textContent = 'Last updated ' + LAST_UPDATED;
+        [].forEach.call(tbody.querySelectorAll('tr[data-id]'), function (tr) {
+            var s = statusFor(tr.dataset.id);
+            var c = tr.cells;
+            c[4].innerHTML = '';
+            var pill = document.createElement('span');
+            pill.className = 'pill ' + s.status;
+            pill.textContent = s.status;
+            c[4].appendChild(pill);
+            c[5].textContent = s.condition || '--';
+            c[6].textContent = s.groomed || '--';
+            c[7].textContent = s.comment || '';
+        });
+    }
+
+    if (STATUS_SHEET_CSV) {
+        fetch(STATUS_SHEET_CSV, { cache: 'no-store' })
+            .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+            .then(function (text) { if (applySheet(parseCSV(text))) repaintStatus(); })
+            .catch(function () { /* keep the built-in status */ });
+    }
 
     function select(id, zoom) {
         Object.keys(layers).forEach(function (k) {
