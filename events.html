@@ -538,6 +538,16 @@
         }
 
         table.meetings td.muted, .muted { color: #55606c; }
+        .subscribe-box {
+            margin-top: 26px; padding: 20px 22px; background: #F4F7FA;
+            border-left: 5px solid var(--link-orange, #C2410C); border-radius: 8px;
+        }
+        .subscribe-box h3 { margin: 0 0 8px; color: var(--deep-blue); }
+        .subscribe-box p { margin: 0 0 12px; }
+        .subscribe-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+        .subscribe-buttons .back-button { margin: 0; }
+        .calendar-section a.back-button { display: inline-block; padding: 10px 18px; border-radius: 8px; font-weight: 600; text-decoration: none; }
+        .cal-url { word-break: break-all; font-family: monospace; font-size: .85rem; }
 
         table.meetings a { color: var(--link-orange, #C2410C); font-weight: 600; white-space: nowrap; }
 
@@ -608,11 +618,12 @@
             <p><strong>How to add to your calendar:</strong> Click on any event below to view details, and use the "+ Google Calendar" button to add it to your personal calendar for reminders.</p>
         </div>
 
-        <!-- Upcoming work days and one-off events. Add new ones at the top. -->
-        <div class="calendar-section">
+        <!-- Upcoming work days and one-off events. Add new ones at the top.
+             data-until (YYYY-MM-DD) hides a card after that day; the section hides when empty. -->
+        <div class="calendar-section" id="comingUp">
             <h2 class="section-title">&#128296; Coming Up</h2>
             <div class="upcoming">
-                <div class="upcoming-card">
+                <div class="upcoming-card" data-until="2026-11-02">
                     <div class="up-date"><span class="up-mon">Nov</span><span class="up-day">2</span></div>
                     <div class="up-body">
                         <h3>Joint Meeting &mdash; GBSR &amp; LST</h3>
@@ -641,43 +652,43 @@
                         <tr><th>Date</th><th>Time</th><th></th><th></th></tr>
                     </thead>
                     <tbody>
-                    <tr class="past-meeting">
+                    <tr data-date="2026-09-14" class="past-meeting">
                         <td><strong>Monday, September 14, 2026</strong> <span class="held-badge">Held</span></td>
                         <td>6:00 PM</td>
                         <td class="muted">2nd Monday</td>
                         <td class="muted">&mdash;</td>
                     </tr>
-                    <tr class="past-meeting">
+                    <tr data-date="2026-10-05" class="past-meeting">
                         <td><strong>Monday, October 5, 2026</strong> <span class="held-badge">Held</span></td>
                         <td>6:00 PM</td>
                         <td class="muted">1st Monday</td>
                         <td class="muted">&mdash;</td>
                     </tr>
-                    <tr class="next-meeting">
+                    <tr data-date="2026-11-02" data-fb="https://www.facebook.com/events/1827269128302349/" class="next-meeting">
                         <td><strong>Monday, November 2, 2026</strong> <span class="next-badge">Next</span></td>
                         <td>6:00 PM</td>
                         <td class="muted">1st Monday</td>
                         <td><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Great+Bay+Sno-Rollers+Club+Meeting&dates=20261102T230000Z%2F20261103T010000Z&details=Great+Bay+Sno-Rollers+monthly+club+meeting.%0A%0ABring+any+questions+or+concerns+you%27d+like+to+discuss.%0A%0APS+-+Bring+a+camp+chair.+The+shop%2Fmeeting+is+beer-friendly.&location=Billy%27s+shop%2C+31+Tuckers+Way%2C+Newmarket%2C+NH+03857" target="_blank" rel="noopener">Add to Google Calendar</a></td>
                     </tr>
-                    <tr>
+                    <tr data-date="2026-12-07">
                         <td><strong>Monday, December 7, 2026</strong></td>
                         <td>6:00 PM</td>
                         <td class="muted">1st Monday</td>
                         <td><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Great+Bay+Sno-Rollers+Club+Meeting&dates=20261207T230000Z%2F20261208T010000Z&details=Great+Bay+Sno-Rollers+monthly+club+meeting.%0A%0ABring+any+questions+or+concerns+you%27d+like+to+discuss.%0A%0APS+-+Bring+a+camp+chair.+The+shop%2Fmeeting+is+beer-friendly.&location=Billy%27s+shop%2C+31+Tuckers+Way%2C+Newmarket%2C+NH+03857" target="_blank" rel="noopener">Add to Google Calendar</a></td>
                     </tr>
-                    <tr>
+                    <tr data-date="2027-01-04">
                         <td><strong>Monday, January 4, 2027</strong></td>
                         <td>6:00 PM</td>
                         <td class="muted">1st Monday</td>
                         <td><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Great+Bay+Sno-Rollers+Club+Meeting&dates=20270104T230000Z%2F20270105T010000Z&details=Great+Bay+Sno-Rollers+monthly+club+meeting.%0A%0ABring+any+questions+or+concerns+you%27d+like+to+discuss.%0A%0APS+-+Bring+a+camp+chair.+The+shop%2Fmeeting+is+beer-friendly.&location=Billy%27s+shop%2C+31+Tuckers+Way%2C+Newmarket%2C+NH+03857" target="_blank" rel="noopener">Add to Google Calendar</a></td>
                     </tr>
-                    <tr>
+                    <tr data-date="2027-02-01">
                         <td><strong>Monday, February 1, 2027</strong></td>
                         <td>6:00 PM</td>
                         <td class="muted">1st Monday</td>
                         <td><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Great+Bay+Sno-Rollers+Club+Meeting&dates=20270201T230000Z%2F20270202T010000Z&details=Great+Bay+Sno-Rollers+monthly+club+meeting.%0A%0ABring+any+questions+or+concerns+you%27d+like+to+discuss.%0A%0APS+-+Bring+a+camp+chair.+The+shop%2Fmeeting+is+beer-friendly.&location=Billy%27s+shop%2C+31+Tuckers+Way%2C+Newmarket%2C+NH+03857" target="_blank" rel="noopener">Add to Google Calendar</a></td>
                     </tr>
-                    <tr>
+                    <tr data-date="2027-03-01">
                         <td><strong>Monday, March 1, 2027</strong></td>
                         <td>6:00 PM</td>
                         <td class="muted">1st Monday</td>
@@ -687,12 +698,19 @@
                 </table>
             </div>
 
-            <p style="margin-top:22px;">
-                <a href="gbsr-meetings.ics" class="back-button" style="margin-bottom:0;" download>&#11015;&#65039; Add All Meetings to Your Calendar</a>
-            </p>
-            <p class="muted" style="margin-top:12px;font-size:.92rem;">
-                Downloads a calendar file that works with Google Calendar, Apple Calendar, and Outlook.
-            </p>
+            <!-- Subscribing adds the club's public Google Calendar to the visitor's own calendar,
+                 so anything added or changed in that calendar shows up for them automatically. -->
+            <div class="subscribe-box" id="subscribe">
+                <h3>&#128276; Subscribe to the club calendar</h3>
+                <p>Meetings, work days and events show up in your own calendar, and stay up to date
+                   whenever we add or change something.</p>
+                <p class="subscribe-buttons">
+                    <a href="https://calendar.google.com/calendar/u/0?cid=Z3JlYXRiYXlzbm9yb2xsZXJzQGdtYWlsLmNvbQ" class="back-button" target="_blank" rel="noopener">Google Calendar</a>
+                    <a href="webcal://calendar.google.com/calendar/ical/greatbaysnorollers%40gmail.com/public/basic.ics" class="back-button">Apple / Outlook</a>
+                </p>
+                <p class="muted" style="font-size:.92rem;">Other calendar apps: subscribe &ldquo;from URL&rdquo; with
+                   <span class="cal-url">https://calendar.google.com/calendar/ical/greatbaysnorollers%40gmail.com/public/basic.ics</span></p>
+            </div>
         </div>
 
         <div class="calendar-section">
@@ -704,6 +722,15 @@
                         frameborder="0"
                         scrolling="no"></iframe>
             </div>
+            <p style="margin-top:14px;"><a href="#subscribe">Subscribe to this calendar</a> to get it in your own calendar app.</p>
+        </div>
+
+        <!-- Facebook's Page plugin "events" tab no longer renders an event list (tested 2026-10-28),
+             so this is a plain link. Individual events are linked from the meeting table (data-fb). -->
+        <div class="calendar-section">
+            <h2 class="section-title">&#128227; Events on Facebook</h2>
+            <p>RSVP to our events on Facebook and Facebook will remind you before each one.</p>
+            <p style="margin-top:14px;"><a href="https://www.facebook.com/GreatBaySnoRollersLeeSnoTravelers/events" class="back-button" target="_blank" rel="noopener">See our events on Facebook &rarr;</a></p>
         </div>
 
         <!-- Event Types -->
@@ -824,6 +851,50 @@
             document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape') { closeAll(); closeMenu(); }
             });
+        })();
+    </script>
+
+    <script>
+        // Meeting table keeps itself current: rows marked data-date="YYYY-MM-DD" get "Held" once
+        // the meeting is over and the first upcoming one gets "Next". To link a Facebook event,
+        // add data-fb="https://www.facebook.com/events/..." to that meeting's row.
+        (function () {
+            var MEETING_ENDS = 'T20:00:00';   // meetings run 6-8 PM local time
+            var now = new Date(), nextFound = false;
+            document.querySelectorAll('table.meetings tbody tr[data-date]').forEach(function (tr) {
+                var first = tr.cells[0], links = tr.cells[3];
+                first.querySelectorAll('.held-badge, .next-badge').forEach(function (b) { b.remove(); });
+                tr.classList.remove('past-meeting', 'next-meeting');
+                if (new Date(tr.dataset.date + MEETING_ENDS) < now) {
+                    tr.classList.add('past-meeting');
+                    first.insertAdjacentHTML('beforeend', '<span class="held-badge">Held</span>');
+                    links.className = 'muted';
+                    links.innerHTML = '&mdash;';
+                    return;
+                }
+                if (!nextFound) {
+                    nextFound = true;
+                    tr.classList.add('next-meeting');
+                    first.insertAdjacentHTML('beforeend', '<span class="next-badge">Next</span>');
+                }
+                if (tr.dataset.fb) {
+                    var a = document.createElement('a');
+                    a.href = tr.dataset.fb; a.target = '_blank'; a.rel = 'noopener';
+                    a.textContent = 'RSVP on Facebook';
+                    links.insertBefore(document.createElement('br'), links.firstChild);
+                    links.insertBefore(a, links.firstChild);
+                }
+            });
+
+            // Coming Up cards hide themselves after their data-until day; hide the section when empty.
+            var section = document.getElementById('comingUp');
+            if (section) {
+                var left = 0;
+                section.querySelectorAll('.upcoming-card[data-until]').forEach(function (card) {
+                    if (new Date(card.dataset.until + 'T23:59:59') < now) card.hidden = true; else left++;
+                });
+                if (!section.querySelector('.upcoming-card:not([data-until])') && left === 0) section.hidden = true;
+            }
         })();
     </script>
 </body>
