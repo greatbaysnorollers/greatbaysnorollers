@@ -618,35 +618,11 @@
             <p><strong>How to add to your calendar:</strong> Click on any event below to view details, and use the "+ Google Calendar" button to add it to your personal calendar for reminders.</p>
         </div>
 
-        <!-- Upcoming work days and one-off events. Add new ones at the top.
-             data-until (YYYY-MM-DD) hides a card after that day; the section hides when empty. -->
+        <!-- Coming Up cards come from updates-data.js (CLUB_EVENTS). Each hides after its day;
+             the section hides when none are left. -->
         <div class="calendar-section" id="comingUp">
             <h2 class="section-title">&#128296; Coming Up</h2>
-            <div class="upcoming">
-                <div class="upcoming-card" data-until="2026-11-21">
-                    <div class="up-date"><span class="up-mon">Nov</span><span class="up-day">21</span></div>
-                    <div class="up-body">
-                        <h3>Lee Bridge Decking Work Day &mdash; GBSR &amp; LST</h3>
-                        <p class="up-when">Saturday, November 21 &middot; 8:00 AM &middot; 51 Tuttle Road, Lee</p>
-                        <p>The new bridge over the Lamprey River near Tuttle Road is ready for its wood decking.
-                           Park at 51 Tuttle Road, just north of the bridge, and bring an impact driver or skill saw if you have one.
-                           <a href="club-updates.html#workdayNov21">Read more</a>.</p>
-                        <p><a href="https://www.facebook.com/events/1889427749135666/" target="_blank" rel="noopener"><strong>RSVP on Facebook &rarr;</strong></a></p>
-                    </div>
-                </div>
-                <div class="upcoming-card" id="meetingDec7" data-until="2026-12-07">
-                    <div class="up-date"><span class="up-mon">Dec</span><span class="up-day">7</span></div>
-                    <div class="up-body">
-                        <h3>December Club Meeting &mdash; GBSR &amp; LST</h3>
-                        <p class="up-when">Monday, December 7 &middot; 6:00 PM &middot; Billy&rsquo;s shop, 31 Tuckers Way, Newmarket</p>
-                        <p>Trail-naming night: we&rsquo;ll go through everyone&rsquo;s suggestions on a big screen with the
-                           interactive map and settle on names. Also on the list: the Lee bridge, getting trails and groomers
-                           ready for the season, and ideas for the Newmarket 300 parade float. Everyone is welcome; bring a
-                           camp chair. The full agenda will be posted here closer to the date.</p>
-                        <p><a href="https://docs.google.com/spreadsheets/d/1SGmMfgPYqCgOK_gtZ_HX9HYHLcbq4DgdCuo7uyFnkHg/edit?usp=sharing" target="_blank" rel="noopener"><strong>Add your trail name ideas &rarr;</strong></a></p>
-                    </div>
-                </div>
-            </div>
+            <div class="upcoming" data-upcoming></div>
         </div>
 
         <!-- Google Calendar -->
@@ -681,7 +657,7 @@
                         <td class="muted">1st Monday</td>
                         <td><a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Great+Bay+Sno-Rollers+Club+Meeting&dates=20261102T230000Z%2F20261103T010000Z&details=Great+Bay+Sno-Rollers+monthly+club+meeting.%0A%0ABring+any+questions+or+concerns+you%27d+like+to+discuss.%0A%0APS+-+Bring+a+camp+chair.+The+shop%2Fmeeting+is+beer-friendly.&location=Billy%27s+shop%2C+31+Tuckers+Way%2C+Newmarket%2C+NH+03857" target="_blank" rel="noopener">Add to Google Calendar</a></td>
                     </tr>
-                    <tr data-date="2026-12-07">
+                    <tr data-date="2026-12-07" data-fb="https://www.facebook.com/events/957589860556155/">
                         <td><strong>Monday, December 7, 2026</strong></td>
                         <td>6:00 PM</td>
                         <td class="muted">1st Monday</td>
@@ -896,17 +872,11 @@
                     links.insertBefore(a, links.firstChild);
                 }
             });
-
-            // Coming Up cards hide themselves after their data-until day; hide the section when empty.
-            var section = document.getElementById('comingUp');
-            if (section) {
-                var left = 0;
-                section.querySelectorAll('.upcoming-card[data-until]').forEach(function (card) {
-                    if (new Date(card.dataset.until + 'T23:59:59') < now) card.hidden = true; else left++;
-                });
-                if (!section.querySelector('.upcoming-card:not([data-until])') && left === 0) section.hidden = true;
-            }
         })();
     </script>
+
+    <!-- Coming Up cards come from updates-data.js -->
+    <script src="updates-data.js"></script>
+    <script src="updates.js"></script>
 </body>
 </html>

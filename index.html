@@ -553,6 +553,17 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
+        /* Cards drawn by updates.js (was an inline style on every card) */
+        .updates-grid .update-card {
+            background: white;
+            border-left: 5px solid var(--logo-gradient-start);
+            scroll-margin-top: 140px;   /* clears the fixed header when a link jumps here */
+        }
+        @media (max-width: 900px) { .updates-grid .update-card { scroll-margin-top: 205px; } }
+        .update-content p + p, .update-content p + ul, .update-content ul + p { margin-top: 10px; }
+        .update-content ul { padding-left: 25px; line-height: 1.8; }
+        .update-ps { font-style: italic; color: #55606c; }
+
         .update-card.status-open {
             border-left-color: var(--success-green);
             border-left-width: 6px;
@@ -1231,18 +1242,6 @@
             hamburger.classList.remove('active');
         }
 
-        // Toggle expand/collapse for long posts
-        function toggleExpand(contentId, button) {
-            const content = document.getElementById(contentId);
-            content.classList.toggle('collapsed');
-
-            if (content.classList.contains('collapsed')) {
-                button.textContent = 'Read More';
-            } else {
-                button.textContent = 'Read Less';
-            }
-        }
-
         // Close menu when clicking outside
         document.addEventListener('click', function(event) {
             const nav = document.querySelector('nav');
@@ -1384,74 +1383,11 @@
             </h2>
             <p class="section-subtitle">Rides, trail work, grooming, and meetings &mdash; our three most recent</p>
 
-            <div class="updates-grid">
-                <!-- ADD NEW UPDATES AT THE TOP OF THIS LIST -->
-
-                <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
-                    <div class="update-header">
-                        <h3 class="update-title">Lee Bridge Decking Work Day &mdash; Saturday, November 21</h3>
-                    </div>
-                    <p class="update-date">&#128197; November 21, 2026</p>
-                    <div class="update-content">
-                        <p>The new bridge over the Lamprey River near Tuttle Road is ready for decking. Glenn got the
-                           steel beams set, and on <strong>Saturday, November 21</strong> we&rsquo;re putting the wood
-                           decking on. Members of both clubs and anyone who wants to help are welcome; more hands make it go faster.</p>
-                        <p style="margin-top: 10px;"><strong>We meet at 8:00 AM.</strong> Park at 51 Tuttle Road, Lee, just north of the bridge.</p>
-                        <p style="margin-top: 10px;"><strong>Bring</strong> a battery-powered impact driver or skill saw if you have one,
-                           and any PPE you need (gloves, safety glasses and so on).</p>
-                        <p style="margin-top: 10px;"><a href="https://www.facebook.com/events/1889427749135666/" target="_blank" rel="noopener"><strong>RSVP on Facebook &rarr;</strong></a>
-                           Facebook will send you a reminder. Or <a href="https://www.google.com/calendar/event?eid=dHUycG5qbmptdWM2djk3YWthcXVtN2xxbWMgZ3JlYXRiYXlzbm9yb2xsZXJzQG0" target="_blank" rel="noopener">add it to your calendar</a>.</p>
-                        <p style="margin-top: 10px;">The project is funded by the NH Summer Grant-in-Aid program.
-                           <a href="club-updates.html#bridgeOct17">See how it started</a>.</p>
-                        <p style="margin-top: 10px;"><strong>Ride safe,</strong><br>Great Bay Sno-Rollers &amp; Lee Sno-Travelers</p>
-                    </div>
-                </div>
-
-                <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
-                    <div class="update-header">
-                        <h3 class="update-title">November Meeting &mdash; Monday, November 2</h3>
-                    </div>
-                    <p class="update-date">&#128197; November 2, 2026</p>
-                    <div class="update-content expandable-content collapsed" id="meetNov2">
-                        <p><strong>Meeting recap</strong></p>
-                        <p style="margin-top: 10px;">Thanks to everyone who came out, including a few new faces. The new Lee bridge is
-                           ready for decking, and the work day is Saturday, November 21.</p>
-
-                        <p style="margin-top: 15px;"><strong>Meeting Details:</strong></p>
-                        <ul style="padding-left: 25px; line-height: 1.8;">
-                            <li><strong>Date:</strong> Monday, November 2, 2026</li>
-                            <li><strong>Time:</strong> 6:00 PM</li>
-                            <li><strong>Location:</strong> Billy's shop &mdash; 31 Tuckers Way, Newmarket, NH 03857</li>
-                        </ul>
-
-                        <p style="margin-top: 15px;"><strong>Want the full recap?</strong> Agendas and meeting recaps go
-                           out by email. <a href="get-involved.html">Sign up for club emails</a> to get them.</p>
-
-                        <p style="margin-top: 15px;">Next meeting: <a href="events.html">Monday, December 7</a>.</p>
-                        <p style="margin-top: 10px;"><strong>Ride safe,</strong><br>Great Bay Sno-Rollers &amp; Lee Sno-Travelers</p>
-                    </div>
-                    <button class="expand-button" onclick="toggleExpand('meetNov2', this)">Read More</button>
-                </div>
-
-                <div class="update-card" style="background: white; border-left: 5px solid var(--logo-gradient-start);">
-                    <div class="update-header">
-                        <h3 class="update-title">Bridge Project &mdash; The Old Bridge Is Out</h3>
-                    </div>
-                    <p class="update-date">&#128197; October 17, 2026</p>
-                    <div class="update-content">
-                        <p>Our bridge over the Lamprey River near Tuttle Road, funded by the state's Summer
-                           Grant-in-Aid program, took a big step forward: members of both clubs tore out the old
-                           bridge, and the steel beams for the new one have been purchased.
-                           <a href="club-updates.html#bridgeOct17">Full update and photos &rarr;</a></p>
-                        <div class="update-images">
-                            <img src="3-MEDIA/1-Photos/2026_Oct17-Bridge_Demo/thumbs/old-bridge-before.jpg" data-full="3-MEDIA/1-Photos/2026_Oct17-Bridge_Demo/old-bridge-before.jpg" alt="The old wooden bridge over the Lamprey River before demolition" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
-                            <img src="3-MEDIA/1-Photos/2026_Oct17-Bridge_Demo/thumbs/crew-pulling-decking.jpg" data-full="3-MEDIA/1-Photos/2026_Oct17-Bridge_Demo/crew-pulling-decking.jpg" alt="Club members pulling up the old decking" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
-                            <img src="3-MEDIA/1-Photos/2026_Oct17-Bridge_Demo/thumbs/cutting-old-steel.jpg" data-full="3-MEDIA/1-Photos/2026_Oct17-Bridge_Demo/cutting-old-steel.jpg" alt="Three members cutting up the old steel with grinders" loading="lazy" onclick="window.open(this.dataset.full, '_blank')">
-                        </div>
-                    </div>
-                </div>
-
-</div>
+            <!-- Posts come from updates-data.js: the newest 3 show here. -->
+            <div class="updates-grid" data-updates="3">
+                <noscript><p>Club updates need JavaScript turned on. They are also posted on our
+                   <a href="https://www.facebook.com/GreatBaySnoRollersLeeSnoTravelers">Facebook Page</a>.</p></noscript>
+            </div>
 
             <div style="text-align: center; margin-top: 30px;">
                 <a href="club-updates.html" class="cta-button" style="display: inline-block; padding: 15px 40px; background: linear-gradient(135deg, var(--logo-gradient-start) 0%, var(--logo-gradient-mid) 50%, var(--logo-gradient-end) 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
@@ -1603,5 +1539,8 @@
         (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
         ml('account', '2692960');
     </script>
+    <!-- Club updates: edit updates-data.js to add a post -->
+    <script src="updates-data.js"></script>
+    <script src="updates.js"></script>
 </body>
 </html>

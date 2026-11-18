@@ -161,6 +161,21 @@ def main():
         if fix and s != orig:
             open(page, "w", encoding="utf-8", newline="").write(s)
 
+    # Club update photos live in updates-data.js as a folder plus file names,
+    # so they are checked here (report only: fix those by hand in that file).
+    data = "updates-data.js"
+    if os.path.exists(data):
+        s = open(data, encoding="utf-8").read()
+        for chunk in s.split("photoFolder:")[1:]:
+            folder = re.match(r"\s*'([^']+)'", chunk).group(1)
+            for f in re.findall(r"\[\s*'([^']+\.(?:jpe?g|png|webp|gif))'", chunk, re.I):
+                for ref in (f"{PHOTOS}/{folder}/{f}", f"{PHOTOS}/{folder}/thumbs/{f}"):
+                    ref = ref.replace(os.sep, "/")
+                    if not os.path.exists(ref.replace("/", os.sep)):
+                        broken += 1
+                        unresolved += 1
+                        print(f"  {data}: {ref}\n      -> MISSING, fix the folder or file name by hand")
+
     if not broken:
         print("  none - every image link resolves")
     print()
