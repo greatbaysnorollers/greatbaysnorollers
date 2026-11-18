@@ -22,215 +22,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="site.css">
     <style>
-        :root {
-            --ice-blue: #D4E7F5;
-            --deep-blue: #1A3A52;
-            --snow-white: #F8FBFD;
-            --accent-orange: #FF4500;
-            --text-dark: #2C3E50;
-            --accent-yellow: #FFA726;
-            --accent-red: #D32F2F;
-            --success-green: #4CAF50;
-            --warning-yellow: #FFC107;
-            --danger-red: #F44336;
-            --logo-gradient-start: #FF4500;
-            --logo-gradient-mid: #FF6B35;
-            --logo-gradient-end: #FFA726;
-        }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Barlow', sans-serif;
-            background: linear-gradient(to bottom, #0F2027, #203A43, #2C5364);
-            color: var(--text-dark);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
-
-        /* Header */
-        header {
-            background: rgba(26, 58, 82, 0.97);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            /* above Leaflet's panes and controls (they go up to 1000) */
-            z-index: 1200;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-            border-bottom: 5px solid;
-            border-image: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-mid), var(--logo-gradient-end)) 1;
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .logo {
-            display: flex;
-            text-decoration: none;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo-image {
-            height: 84px;
-            width: auto;
-            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
-        }
-
-        .logo-text h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.8rem;
-            letter-spacing: 3px;
-            background: linear-gradient(90deg, var(--logo-gradient-start), var(--logo-gradient-mid), var(--logo-gradient-end));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .logo-text p {
-            font-size: 0.85rem;
-            color: var(--snow-white);
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-
-        /* ---------- grouped navigation ---------- */
-        .nav-links { display: flex; align-items: center; gap: 6px; list-style: none; }
-
-        .nav-item { position: relative; }
-
-        .nav-links a,
-        .nav-trigger {
-            display: inline-flex; align-items: center; gap: 6px;
-            color: var(--snow-white); text-decoration: none;
-            font-family: inherit; font-size: 1rem; font-weight: 500;
-            padding: 10px 14px; border: none; background: none;
-            border-radius: 6px; cursor: pointer; transition: background .2s ease;
-        }
-
-        .nav-trigger::after {
-            content: ''; width: 0; height: 0;
-            border-left: 4px solid transparent; border-right: 4px solid transparent;
-            border-top: 5px solid currentColor; opacity: .75; transition: transform .2s ease;
-        }
-
-        .nav-links a:hover,
-        .nav-trigger:hover,
-        .nav-item:focus-within .nav-trigger { background: rgba(255,255,255,.14); }
-
-        .nav-links a.active { background: rgba(255,255,255,.2); }
-
-        .dropdown {
-            position: absolute; top: calc(100% + 8px); left: 0; min-width: 236px;
-            background: #14293a; border: 1px solid rgba(255,255,255,.14);
-            border-radius: 10px; box-shadow: 0 12px 34px rgba(0,0,0,.45);
-            padding: 8px; list-style: none;
-            opacity: 0; visibility: hidden; transform: translateY(-6px);
-            transition: opacity .18s ease, transform .18s ease, visibility .18s;
-            z-index: 20;
-        }
-
-        /* invisible bridge so the menu survives the gap on the way down */
-        .nav-item::after { content: ''; position: absolute; top: 100%; left: 0; right: 0; height: 10px; }
-
-        .nav-item:hover .dropdown,
-        .nav-item:focus-within .dropdown,
-        .nav-item.open .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
-
-        .nav-item:hover .nav-trigger::after,
-        .nav-item.open .nav-trigger::after { transform: rotate(180deg); }
-
-        .dropdown a { display: block; width: 100%; padding: 10px 14px; border-radius: 6px; white-space: nowrap; }
-        .dropdown a:hover { background: rgba(255,255,255,.12); }
-
-        .dropdown a.donate {
-            margin-top: 6px; padding-top: 12px;
-            border-top: 1px solid rgba(255,255,255,.14);
-            color: #FFA726; font-weight: 700;
-        }
-
-        .nav-links a.nav-join {
-            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
-            color: #fff; font-weight: 700; margin-left: 6px;
-        }
-
-        .nav-links a.nav-join:hover { filter: brightness(1.08); }
-
-        /* ---------- mobile: tap-to-expand accordion, no hover ---------- */
-        @media (max-width: 900px) {
-            .hamburger { display: flex; }
-
-            .nav-links {
-                position: fixed; top: 0; right: -100%;
-                width: 86%; max-width: 340px; height: 100vh; overflow-y: auto;
-                flex-direction: column; align-items: stretch; gap: 2px;
-                background: #14293a; padding: 96px 18px 40px;
-                box-shadow: -6px 0 24px rgba(0,0,0,.5);
-                transition: right .3s ease; z-index: 100;
-            }
-
-            .nav-links.active { right: 0; }
-
-            .nav-item { width: 100%; }
-            .nav-item::after { display: none; }
-
-            .nav-links a,
-            .nav-trigger { width: 100%; justify-content: space-between; padding: 14px 16px; font-size: 1.05rem; }
-
-            .dropdown {
-                position: static; opacity: 1; visibility: visible; transform: none;
-                display: none; min-width: 0; background: rgba(0,0,0,.22);
-                border: none; box-shadow: none; padding: 4px 0 8px 12px; margin: 2px 0 6px;
-            }
-
-            .nav-item.open .dropdown { display: block; }
-            .dropdown a { white-space: normal; padding: 12px 16px; }
-
-            .nav-links a.nav-join { margin: 14px 0 0; justify-content: center; padding: 16px; }
-        }
-
-        /* Hamburger Menu */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            z-index: 101;
-        }
-
-        .hamburger span {
-            width: 30px;
-            height: 3px;
-            background: var(--snow-white);
-            transition: all 0.3s ease;
-            border-radius: 3px;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(8px, -8px);
-        }
+        /* Above the Leaflet map controls */
+        header { z-index: 1200; }
 
         /* Mobile Menu Styles */
         @media (max-width: 768px) {
@@ -248,26 +44,6 @@
             padding: 80px 20px;
             text-align: center;
             color: var(--snow-white);
-        }
-
-        .page-header h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 3rem;
-            letter-spacing: 4px;
-            margin-bottom: 10px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
-        }
-
-        .page-header p {
-            font-size: 1.2rem;
-            color: var(--ice-blue);
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
         }
 
         /* Updates Grid */
@@ -354,13 +130,6 @@
         }
 
         /* Footer */
-        footer {
-            background: rgba(26, 58, 82, 0.97);
-            color: var(--snow-white);
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 60px;
-        }
 
         footer p {
             margin-bottom: 10px;
@@ -415,9 +184,6 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .page-header h2 {
-                font-size: 2rem;
-            }
 
             .updates-grid {
                 grid-template-columns: 1fr;
@@ -449,15 +215,6 @@
 
         .panel ul { padding-left: 25px; line-height: 1.9; margin-bottom: 15px; }
 
-        .lede {
-            color: var(--ice-blue);
-            font-size: 1.15rem;
-            max-width: 780px;
-            margin: 0 auto 40px;
-            text-align: center;
-            line-height: 1.8;
-        }
-
         table.schedule { width: 100%; border-collapse: collapse; }
 
         table.schedule th,
@@ -475,21 +232,6 @@
 
         table.schedule tr:last-child td { border-bottom: none; }
 
-        .empty-state {
-            padding: 26px;
-            text-align: center;
-            color: #6b7580;
-            background: #f5f7fa;
-            border: 2px dashed #c9d3de;
-            border-radius: 12px;
-        }
-
-        .people {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 20px;
-        }
-
         .person {
             background: #f5f7fa;
             border-left: 5px solid var(--accent-orange);
@@ -497,38 +239,13 @@
             padding: 18px 20px;
         }
 
-        .person .role {
-            font-family: 'Bebas Neue', sans-serif;
-            letter-spacing: 1px;
-            font-size: 1.15rem;
-            color: var(--accent-orange);
-        }
-
         .person .name { font-weight: 700; color: var(--deep-blue); font-size: 1.1rem; }
-
-        .person .vacant { color: #8a94a0; font-style: italic; }
 
         .signup {
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
             margin-top: 18px;
-        }
-
-        .signup input[type="email"],
-        .signup input[type="text"] {
-            flex: 1 1 220px;
-            min-width: 0;
-            padding: 14px 16px;
-            border: 2px solid #d5dde6;
-            border-radius: 8px;
-            font-family: inherit;
-            font-size: 1rem;
-        }
-
-        .signup input:focus {
-            outline: none;
-            border-color: var(--accent-orange);
         }
 
         .signup button {
@@ -544,43 +261,6 @@
         }
 
         .signup button:hover { transform: translateY(-2px); }
-
-        .tier-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .tier {
-            background: #f5f7fa;
-            border-radius: 12px;
-            padding: 22px;
-            border-top: 5px solid var(--accent-orange);
-        }
-
-        .tier h4 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.4rem;
-            letter-spacing: 1px;
-            color: var(--deep-blue);
-        }
-
-        .supporter-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 18px;
-        }
-
-        .supporter {
-            background: #f5f7fa;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .supporter .biz { font-weight: 700; color: var(--deep-blue); font-size: 1.05rem; }
-        .supporter .town { color: #6b7580; font-size: 0.9rem; }
 
         /* ---- trail map + status table ---- */
         /* embedded statewide SLEDNH map */
@@ -785,107 +465,6 @@
         @media (max-width: 768px) {
             #map { height: 380px; }
         }
-    
-        /* ---------- footer has one job: ask for donations ---------- */
-        .footer-donate { max-width: 620px; margin: 0 auto 22px; text-align: center; }
-
-        .footer-donate-lead { color: var(--ice-blue); font-size: 1.05rem; margin-bottom: 18px; }
-
-        .footer-donate-btn {
-            display: inline-block; padding: 16px 44px;
-            background: linear-gradient(135deg, var(--logo-gradient-start), var(--logo-gradient-end));
-            color: #fff !important; text-decoration: none; border-radius: 50px;
-            font-weight: 700; font-size: 1.15rem; letter-spacing: .5px;
-            box-shadow: 0 8px 24px rgba(255,69,0,.35);
-            transition: transform .25s ease, box-shadow .25s ease;
-        }
-
-        .footer-donate-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 32px rgba(255,69,0,.5); }
-
-        .footer-fine { text-align: center; font-size: .9rem; color: var(--ice-blue); opacity: .75; }
-        .footer-fine a { color: inherit; }
-        /* =====================================================================
-           CONTRAST FIXES (WCAG AA)
-
-           The bright logo gradient (#FF4500 -> #FFA726) gives white text as
-           little as 1.94:1 at its amber end, so it is no longer used behind
-           text. Interactive surfaces get a deeper orange; the bright gradient
-           is still used for decoration (racing stripe, rules, borders).
-
-           Measured after these rules: every text/background pair on the site
-           meets AA. To revert, delete this whole block.
-           ===================================================================== */
-        :root {
-            --action-orange: #C2410C;   /* 5.18:1 with white */
-            --action-dark:   #9A3412;   /* 7.31:1 with white */
-            --link-orange:   #C2410C;   /* 5.18:1 on white, 4.83 on #f5f7fa */
-            --muted-text:    #55606c;   /* 5.97:1 on #f5f7fa */
-        }
-
-        .nav-links a.nav-join,
-        .join-button,
-        .cta-button,
-        .back-button,
-        .expand-button,
-        .footer-donate-btn,
-        .home-cta-primary,
-        .fb-follow-btn,
-        .link-button.primary,
-        .link-button.donate-hero,
-        .signup button {
-            background: linear-gradient(135deg, var(--action-orange), var(--action-dark)) !important;
-            color: #fff !important;
-        }
-
-        .fb-follow-btn { background: #1461C9 !important; }   /* 5.86:1 */
-
-        /* orange text on light backgrounds, including inline styles */
-        a[style*="accent-orange"]:not([style*="background"]),
-        a[style*="logo-gradient-start"]:not([style*="background"]),
-        .person .role,
-        .contact-label,
-        .president-title { color: var(--link-orange) !important; }
-
-        .panel a:not(.back-button):not(.cta-button),
-        .update-content a:not(.back-button):not(.cta-button) { color: var(--link-orange); }
-
-        /* muted greys that fell just under 4.5 on tinted panels */
-        .empty-state,
-        .rig .spec,
-        .needs-name,
-        .trail-id { color: var(--muted-text) !important; }
-
-        /* the purple / pink info boxes were 2.04:1 and 3.47:1 with white text */
-        .info-box { background: linear-gradient(135deg, #4C5FD7 0%, #5B3A8E 100%) !important; }
-        .info-box[style*="f093fb"] { background: linear-gradient(135deg, #A03CB0 0%, #C62F48 100%) !important; }
-
-
-        /* light text on the mid-blue panels was 4.17-4.46:1 - nudged brighter */
-        .join-section p,
-        .benefit-item p,
-        .join-note,
-        .join-note strong,
-        .totals span,
-        .landing .footer { color: #E9F3FB !important; }
-
-        .join-note a,
-        .join-headline a { color: #FFE9CC !important; }   /* 5.6:1 on the navy panel */
-
-        .totals span { color: #4A5560 !important; }        /* on the light #eef2f6 tile */
-
-    
-        /* buttons written as inline styles, with no class to hook onto */
-        a[style*="logo-gradient-start"][style*="background"],
-        a[style*="accent-orange"][style*="background"] {
-            background: linear-gradient(135deg, var(--action-orange), var(--action-dark)) !important;
-            color: #fff !important;
-        }
-
-        /* greys hard-coded inline */
-        [style*="#6b7580"] { color: var(--muted-text) !important; }
-
-        /* opacity was quietly cutting contrast on already-light text */
-        .footer { opacity: 1 !important; }
 
     </style>
 </head>
@@ -1048,34 +627,6 @@
     </footer>
 
     <!-- JavaScript -->
-    <script>
-        // Mobile Menu Toggle
-        function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            const hamburger = document.getElementById('hamburger');
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        }
-
-        function closeMenu() {
-            const navLinks = document.getElementById('navLinks');
-            const hamburger = document.getElementById('hamburger');
-            navLinks.classList.remove('active');
-            hamburger.classList.remove('active');
-        }
-
-        // Expand/Collapse Content
-        function toggleExpand(contentId, button) {
-            const content = document.getElementById(contentId);
-            content.classList.toggle('collapsed');
-
-            if (content.classList.contains('collapsed')) {
-                button.textContent = 'Read More';
-            } else {
-                button.textContent = 'Read Less';
-            }
-        }
-    </script>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="trails-data.js"></script>
@@ -1271,36 +822,6 @@
     }
     </script>
 
-    <script>
-        // Desktop opens menus on hover (CSS). Touch screens have no hover, so
-        // below 900px the trigger toggles its own submenu instead.
-        (function () {
-            var nav = document.getElementById('navLinks');
-            if (!nav) return;
-            function touchLayout() { return window.matchMedia('(max-width: 900px)').matches; }
-            function closeAll() {
-                nav.querySelectorAll('.nav-item.open').forEach(function (o) {
-                    o.classList.remove('open');
-                    o.querySelector('.nav-trigger').setAttribute('aria-expanded', 'false');
-                });
-            }
-            nav.querySelectorAll('.nav-trigger').forEach(function (btn) {
-                btn.addEventListener('click', function (e) {
-                    if (!touchLayout()) return;
-                    e.preventDefault();
-                    var item = btn.closest('.nav-item');
-                    var wasOpen = item.classList.contains('open');
-                    closeAll();
-                    if (!wasOpen) {
-                        item.classList.add('open');
-                        btn.setAttribute('aria-expanded', 'true');
-                    }
-                });
-            });
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape') { closeAll(); closeMenu(); }
-            });
-        })();
-    </script>
+    <script src="site.js"></script>
 </body>
 </html>
