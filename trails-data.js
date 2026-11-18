@@ -1,6 +1,6 @@
 // Trail geometry and lengths derived from the official SLEDNH trail map
 // (slednh.evtrails.com), fetched 2026-08-10. Regenerate rather than hand-edit.
-// Editable trail STATUS lives in trails.html, not here.
+// Editable trail STATUS lives in trail-status.js, not here.
 window.TRAIL_BOUNDS = [[43.01507, -71.29748], [43.15831, -70.93529]];
 window.TRAIL_TOTALS = {"gb": 14.8, "nsr": 30.0, "lst": 13.5};
 window.TRAIL_POIS = [{"name": "Rockingham Ballroom Parking", "cat": "Parking", "lat": 43.0504, "lon": -70.93605}, {"name": "Parking", "cat": "Parking", "lat": 43.04979, "lon": -70.93527}, {"name": "Gas", "cat": "Gas", "lat": 43.14859, "lon": -71.00615}, {"name": "Sunoco", "cat": "Gas", "lat": 43.0289, "lon": -71.07438}, {"name": "Gas", "cat": "Gas", "lat": 43.03249, "lon": -71.07218}, {"name": "Food", "cat": "Restaurant", "lat": 43.03603, "lon": -71.18253}, {"name": "Mobil", "cat": "Gas", "lat": 43.02466, "lon": -71.07436}, {"name": "Brickyard Nutrition", "cat": "Restaurant", "lat": 43.02462, "lon": -71.07571}, {"name": "Shell", "cat": "Gas", "lat": 43.03546, "lon": -71.06927}, {"name": "Irving", "cat": "Gas", "lat": 43.04301, "lon": -70.93138}, {"name": "Gas", "cat": "Gas", "lat": 43.04673, "lon": -70.93101}, {"name": "Grab N' Go Gas Station", "cat": "Gas", "lat": 43.08408, "lon": -70.93431}];

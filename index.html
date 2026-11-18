@@ -376,8 +376,10 @@
         }
 
         /* ==========================================================
-           TRAIL STATUS BAR  --  edit this ONE spot to set trail status
-           See the markup below <body> for the four ready-made options.
+           TRAIL STATUS BAR  --  filled in from the trail Google Sheet
+           (see the markup below <body>). Colours: open green, caution
+           amber, closed slate (closed is the normal state most of the
+           year, so it isn't alarm-red).
            ========================================================== */
         .trail-status-bar {
             padding: 14px 20px;
@@ -385,13 +387,28 @@
             font-weight: 600;
             font-size: 1.05rem;
             color: #fff;
+            border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+        }
+        .trail-status-bar .status-main {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            gap: 8px 18px;
-            border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+            gap: 4px 18px;
         }
+        .trail-status-bar .status-comment { font-weight: 500; }
+        .trail-status-bar a { color: inherit; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+        .trail-status-bar .status-exceptions {
+            list-style: none;
+            margin: 8px auto 0;
+            padding: 8px 0 0;
+            max-width: 900px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .trail-status-bar .status-exceptions li { margin: 2px 0; }
+        .trail-status-bar.is-caution .status-exceptions { border-top-color: rgba(44, 62, 80, 0.3); }
 
         .trail-status-bar .status-dot {
             display: inline-block;
@@ -406,13 +423,12 @@
         .trail-status-bar .status-stamp {
             font-weight: 500;
             font-size: 0.9rem;
-            opacity: 0.9;
+            opacity: 1;   /* was 0.9: fell under 4.5:1 on the green bar */
         }
 
         .trail-status-bar.is-open     { background: #2E7D32; }
-        .trail-status-bar.is-closed   { background: #C62828; }
+        .trail-status-bar.is-closed   { background: #37474F; }
         .trail-status-bar.is-caution  { background: #F9A825; color: #2C3E50; }
-        .trail-status-bar.is-offseason{ background: #37474F; }
 
 
         /* ---------- Facebook follow band ---------- */
@@ -1241,20 +1257,77 @@
     </script>
 
     <!-- ============================================================
-         TRAIL STATUS BAR
-         Update this whenever trail status changes. Change TWO things:
-           1. the class on the <div>   2. the text inside it
-         Ready-made options (copy the whole line you want):
-
-         <div class="trail-status-bar is-open">
-         <div class="trail-status-bar is-caution">
-         <div class="trail-status-bar is-closed">
-         <div class="trail-status-bar is-offseason">
+         TRAIL STATUS BAR -- no need to edit this.
+         It fills itself in from the trail naming Google Sheet, tab
+         "Website Status" (the same one the trails page reads, via
+         trail-status.js): row 2 NETWORK gives the status, comment and
+         Updated date; any trail set differently is listed underneath.
+         The text below only shows if the sheet can't be reached.
          ============================================================ -->
-    <div class="trail-status-bar is-offseason">
-        <span><span class="status-dot"></span>Trails are closed for the season</span>
-        <span class="status-stamp">Updated August 10, 2026 &middot; See you in December</span>
+    <div class="trail-status-bar is-closed" id="trail-status-bar">
+        <div class="status-main">
+            <span class="status-head"><span class="status-dot" aria-hidden="true"></span><span id="ts-label">Trails are closed</span></span>
+            <span class="status-comment" id="ts-comment">Closed for the season. See you in December.</span>
+            <span class="status-stamp">Updated <span id="ts-updated">October 28, 2026</span> &middot; <a href="trails.html">Trail map &amp; conditions &rarr;</a></span>
+        </div>
+        <ul class="status-exceptions" id="ts-exceptions" hidden></ul>
     </div>
+
+    <script src="trails-data.js"></script>
+    <script src="trail-status.js"></script>
+    <script>
+        // Fill the trail status bar: built-in values first, then the sheet's when it loads.
+        (function () {
+            var bar = document.getElementById('trail-status-bar');
+            var LABELS = {
+                open:    'Trails are open',
+                caution: 'Trails are open: ride with caution',
+                closed:  'Trails are closed'
+            };
+            var names = {};
+            (window.TRAIL_DATA || []).forEach(function (t) { names[t.id] = t.name; });
+
+            // "GREENWAY TRL" -> "Greenway Trail"; unnamed trails show their id (e.g. GB-05).
+            function trailName(id) {
+                var n = names[id];
+                if (!n) return id;
+                if (n === n.toUpperCase()) {
+                    n = n.toLowerCase().replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); });
+                }
+                return n.replace(/\bTrl\b/gi, 'Trail');
+            }
+
+            function render() {
+                var st = NETWORK_STATUS.status;
+                bar.className = 'trail-status-bar is-' + st;
+                document.getElementById('ts-label').textContent = LABELS[st] || LABELS.closed;
+                document.getElementById('ts-comment').textContent = NETWORK_STATUS.comment || '';
+                document.getElementById('ts-updated').textContent = LAST_UPDATED;
+
+                var list = document.getElementById('ts-exceptions');
+                var ex = trailExceptions();
+                list.innerHTML = '';
+                list.hidden = !ex.length;
+                var MAX = 4;
+                ex.slice(0, MAX).forEach(function (e) {
+                    var li = document.createElement('li');
+                    var b = document.createElement('strong');
+                    b.textContent = trailName(e.id) + ': ' + e.status.charAt(0).toUpperCase() + e.status.slice(1);
+                    li.appendChild(b);
+                    if (e.comment) li.appendChild(document.createTextNode(' — ' + e.comment));
+                    list.appendChild(li);
+                });
+                if (ex.length > MAX) {
+                    var more = document.createElement('li');
+                    more.innerHTML = '<a href="trails.html">' + (ex.length - MAX) + ' more on the trail map</a>';
+                    list.appendChild(more);
+                }
+            }
+
+            render();
+            loadTrailStatus(render);
+        })();
+    </script>
 
     <section class="hero">
         <!-- ============================================================
