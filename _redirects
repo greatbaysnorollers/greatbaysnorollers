@@ -5,3 +5,7 @@
 # Trail reports were merged into Club Updates; live status moved to the map page.
 /trail-conditions.html   /club-updates.html   301
 /trail-conditions        /club-updates.html   301
+
+# The old meeting calendar file was replaced by the club's Google Calendar
+# (subscribe links on the events page). Old links land on those instead.
+/gbsr-meetings.ics       /events.html#subscribe   301
