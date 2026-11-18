@@ -47,10 +47,12 @@ window.CLUB_EVENTS = [
         title: 'December Club Meeting',
         when: 'Monday, December 7 &middot; 6:00 PM &middot; Billy&rsquo;s shop, 31 Tuckers Way, Newmarket',
         text: `Trail-naming night: we&rsquo;ll go through everyone&rsquo;s suggestions on a big screen with the
-               interactive map and settle on names. Also on the list: the Lee bridge, getting trails and groomers
+               interactive map and settle on names.
+               <a href="https://docs.google.com/spreadsheets/d/1SGmMfgPYqCgOK_gtZ_HX9HYHLcbq4DgdCuo7uyFnkHg/edit?usp=sharing" target="_blank" rel="noopener">Add your trail name ideas</a>
+               before the meeting. Also on the list: the Lee bridge, getting trails and groomers
                ready for the season, and ideas for the Newmarket 300 parade float. Everyone is welcome; bring a
                camp chair. The full agenda will be posted here closer to the date.`,
-        link: ['https://docs.google.com/spreadsheets/d/1SGmMfgPYqCgOK_gtZ_HX9HYHLcbq4DgdCuo7uyFnkHg/edit?usp=sharing', 'Add your trail name ideas']
+        link: ['https://www.facebook.com/events/957589860556155/', 'RSVP on Facebook']
     },
     {
         date: '2026-11-21',
