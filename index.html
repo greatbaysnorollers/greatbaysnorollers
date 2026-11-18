@@ -430,6 +430,51 @@
         .trail-status-bar.is-closed   { background: #37474F; }
         .trail-status-bar.is-caution  { background: #F9A825; color: #2C3E50; }
 
+        /* ---------- "THE TRAILS ARE OPEN" hero (switch in the script after the hero) ---------- */
+        .hero.season-open { padding: 80px 20px 90px; }
+        .season-eyebrow {
+            display: inline-block;
+            background: #2E7D32;            /* 5.1:1 with white */
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            padding: 6px 16px;
+            border-radius: 50px;
+            margin-bottom: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+        }
+        .hero.season-open h2 { font-size: 5rem; letter-spacing: 6px; margin-bottom: 8px; line-height: 1; }
+        .hero.season-open .season-pitch { font-size: 1.2rem; max-width: 640px; margin: 0 auto 28px; color: #fff; }
+        .season-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 14px;
+            justify-content: center;
+            align-items: center;
+        }
+        .season-ghost {
+            display: inline-block;
+            padding: 13px 26px;
+            border: 2px solid rgba(255, 255, 255, 0.85);
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.95rem;
+            background: rgba(10, 22, 32, 0.35);
+            transition: background 0.2s ease;
+        }
+        .season-ghost:hover, .season-ghost:focus-visible { background: rgba(10, 22, 32, 0.7); }
+        @media (max-width: 600px) {
+            .hero.season-open h2 { font-size: 3.2rem; letter-spacing: 3px; }
+            .hero.season-open .season-pitch { font-size: 1.05rem; }
+            .season-actions a { width: 100%; max-width: 320px; box-sizing: border-box; text-align: center; }
+        }
+
 
         /* ---------- Facebook follow band ---------- */
         .fb-follow {
@@ -1272,12 +1317,66 @@
         <ul class="status-exceptions" id="ts-exceptions" hidden></ul>
     </div>
 
+    <section class="hero">
+        <!-- ============================================================
+             HERO PHOTOS. They cross-fade every 7 seconds.
+             To change them: edit the background-image paths below.
+             To add one: copy a whole <div class="hero-slide" ...></div> line.
+             To stop the rotation: delete all but the first line.
+             Use LANDSCAPE photos — portrait ones get badly cropped.
+             ============================================================ -->
+        <div class="hero-slide is-active" style="background-image: url('3-MEDIA/1-Photos/Hero/club-lineup-marsh.jpg')"></div>
+        <div class="hero-slide" style="background-image: url('3-MEDIA/1-Photos/Hero/sled-lineup-bluebird.jpg')"></div>
+        <div class="hero-slide" style="background-image: url('3-MEDIA/1-Photos/Hero/riders-on-the-river.jpg')"></div>
+        <div class="hero-slide" style="background-image: url('3-MEDIA/1-Photos/Hero/single-file-trail.jpg')"></div>
+
+        <div class="hero-default" id="hero-default">
+            <h2>RIDE WITH US</h2>
+            <p>Your Local Snowmobile Club in Rockingham County</p>
+            <a href="#join" class="cta-button">Join the Club</a>
+        </div>
+
+        <!-- "THE TRAILS ARE OPEN" announcement. It replaces the text above
+             whenever the trail sheet's NETWORK row says Open (or Caution),
+             once SEASON_BANNER_ON is set to true in the script below. -->
+        <div class="hero-season" id="hero-season" hidden>
+            <span class="season-eyebrow" id="season-label">2026&ndash;27 season</span>
+            <h2>THE TRAILS ARE OPEN</h2>
+            <p class="season-pitch">Your membership keeps them groomed. <strong>$25 individual, $30 family</strong>,
+               and New Hampshire takes $30 off the registration of every sled you own.</p>
+            <div class="season-actions">
+                <a href="https://tinyurl.com/GreatBaySnoRollers" target="_blank" rel="noopener" class="cta-button">Join or renew</a>
+                <a href="trails.html" class="season-ghost">Trail map &amp; conditions</a>
+                <a href="https://slednh.com/nh-snowmobile-trail-map/" target="_blank" rel="noopener" class="season-ghost">Get the SledNH app</a>
+            </div>
+        </div>
+    </section>
+
     <script src="trails-data.js"></script>
     <script src="trail-status.js"></script>
     <script>
-        // Fill the trail status bar: built-in values first, then the sheet's when it loads.
+        /* ============================================================
+           "THE TRAILS ARE OPEN" BANNER SWITCH
+           false = the homepage never shows it (the status bar still works).
+           true  = it appears by itself whenever the trail sheet's NETWORK
+                   status is Open or Caution, and goes away when it's Closed.
+           To preview it on your own computer, open the homepage from a
+           local server with ?preview=open on the end of the address.
+           ============================================================ */
+        var SEASON_BANNER_ON = false;
+
+        // Fill the trail status bar and the banner: built-in values first,
+        // then the sheet's when it loads.
         (function () {
             var bar = document.getElementById('trail-status-bar');
+            var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+            var preview = local && /[?&]preview=open\b/.test(location.search);
+
+            // "2026–27 season": the winter that starts in the current or coming December.
+            var now = new Date();
+            var y = now.getMonth() >= 6 ? now.getFullYear() : now.getFullYear() - 1;
+            document.getElementById('season-label').textContent =
+                y + '–' + String(y + 1).slice(2) + ' season';
             var LABELS = {
                 open:    'Trails are open',
                 caution: 'Trails are open: ride with caution',
@@ -1321,30 +1420,29 @@
                     more.innerHTML = '<a href="trails.html">' + (ex.length - MAX) + ' more on the trail map</a>';
                     list.appendChild(more);
                 }
+
+                // the "trails are open" banner
+                var season = (SEASON_BANNER_ON || preview) && (st === 'open' || st === 'caution');
+                document.getElementById('hero-season').hidden = !season;
+                document.getElementById('hero-default').hidden = season;
+                document.querySelector('.hero').classList.toggle('season-open', season);
             }
 
-            render();
-            loadTrailStatus(render);
+            if (preview) {
+                // Local preview only: a made-up opening day, so the banner and
+                // the exceptions list can be seen without touching the real sheet.
+                applySheet(parseCSV(
+                    'Trail ID,Status,Comments,Updated\n' +
+                    'NETWORK,Open,"Groomed overnight, ride on the right",December 21 (preview)\n' +
+                    'gb-GREENWAY_TRL,Closed,Closed for a timber harvest until early to mid January,\n' +
+                    'gb-NEAL_MILL_EXTENSION,Closed,Closed for a timber harvest until early to mid January,\n'));
+                render();
+            } else {
+                render();
+                loadTrailStatus(render);
+            }
         })();
     </script>
-
-    <section class="hero">
-        <!-- ============================================================
-             HERO PHOTOS. They cross-fade every 7 seconds.
-             To change them: edit the background-image paths below.
-             To add one: copy a whole <div class="hero-slide" ...></div> line.
-             To stop the rotation: delete all but the first line.
-             Use LANDSCAPE photos — portrait ones get badly cropped.
-             ============================================================ -->
-        <div class="hero-slide is-active" style="background-image: url('3-MEDIA/1-Photos/Hero/club-lineup-marsh.jpg')"></div>
-        <div class="hero-slide" style="background-image: url('3-MEDIA/1-Photos/Hero/sled-lineup-bluebird.jpg')"></div>
-        <div class="hero-slide" style="background-image: url('3-MEDIA/1-Photos/Hero/riders-on-the-river.jpg')"></div>
-        <div class="hero-slide" style="background-image: url('3-MEDIA/1-Photos/Hero/single-file-trail.jpg')"></div>
-
-        <h2>RIDE WITH US</h2>
-        <p>Your Local Snowmobile Club in Rockingham County</p>
-        <a href="#join" class="cta-button">Join the Club</a>
-    </section>
 
     <script>
         // Cross-fade the hero photos. Respects "reduce motion" system settings.
