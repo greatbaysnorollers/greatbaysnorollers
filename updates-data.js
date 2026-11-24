@@ -59,7 +59,7 @@ window.CLUB_EVENTS = [
         club: 'Both',
         title: 'Final Lee Bridge Work Day',
         when: 'Saturday, November 28 &middot; 8:00 AM &middot; 51 Tuttle Road, Lee',
-        text: `Ramps on each end and some welded cross bracing, and the new bridge over the Little River is done.
+        text: `Ramps on each end and some welded cross bracing, and the new Lee bridge near Tuttle Road is done.
                Same parking as last time: 51 Tuttle Road, just north of the bridge.`,
         post: 'workdayNov28',
         link: ['https://www.google.com/calendar/event?eid=dnAzNThjajg4MnNoczllOWZ1YXFrbnFvNHMgZ3JlYXRiYXlzbm9yb2xsZXJzQG0', 'Add it to your calendar']
@@ -83,7 +83,7 @@ window.CLUB_POSTS = [
         club: 'Both',
         title: 'Final Lee Bridge Work Day &mdash; Saturday, November 28',
         text: `
-            <p>One more Saturday and the new bridge over the Little River near Tuttle Road is done. On
+            <p>One more Saturday and the new Lee bridge near Tuttle Road is done. On
                <strong>Saturday, November 28</strong> we&rsquo;re adding the ramps at each end and welding
                some cross bracing. Members of both clubs and anyone who wants to help are welcome.</p>
             <p><strong>We meet at 8:00 AM.</strong> Same parking as last time: 51 Tuttle Road, Lee, just
