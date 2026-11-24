@@ -68,11 +68,48 @@ window.CLUB_EVENTS = [
 
 window.CLUB_POSTS = [
     {
+        id: 'bridgeDeckedNov21',
+        date: '2026-11-21',
+        club: 'Both',
+        title: 'The Lee Bridge Is Decked',
+        text: `
+            <p>The new bridge over the Lamprey River near Tuttle Road has its deck. On Saturday,
+               November 21, about ten members of the Great Bay Sno-Rollers and the Lee Sno-Travelers
+               laid and fastened the wood decking across the new steel beams, and the whole deck was
+               down by the end of the day.</p>
+            <p><strong>What&rsquo;s left:</strong> ramps at each end, so sleds can get on and off the
+               deck. Once the ramps are on, the bridge is ready for sleds.</p>
+            <p>A quick look back: the old bridge came out on October 17, and the new steel beams went in
+               this month. Thank you to everyone who gave up a Saturday.</p>
+            <p>The project is funded by the NH Summer Grant-in-Aid program.
+               <a href="club-updates.html#bridgeOct17">See how it started</a>.</p>
+            <p>Want to hear about the next work day? <a href="get-involved.html">Sign up for club emails</a>
+               or <a href="events.html#subscribe">subscribe to the club calendar</a>.</p>
+            <p><strong>Ride safe,</strong><br>Great Bay Sno-Rollers &amp; Lee Sno-Travelers</p>`,
+        homeText: `
+            <p>About ten members of both clubs decked the new bridge over the Lamprey River near Tuttle
+               Road on Saturday, November 21. Only the ramps at each end are left.
+               <a href="club-updates.html#bridgeDeckedNov21">Full update and photos &rarr;</a></p>`,
+        photoFolder: '2026_Nov21-Lee-Bridge-Decking',
+        photos: [
+            ['finished-deck.jpg', 'The finished wood deck on the new Lee bridge'],
+            ['crew-decking-from-the-river.jpg', 'Looking up from the river between the steel beams as the crew decks the bridge'],
+            ['first-boards-on-the-beams.jpg', 'Members fastening the first boards across the new steel beams'],
+            ['crew-working-across-the-deck.jpg', 'The crew working across the partly finished deck'],
+            ['fastening-the-first-section.jpg', 'Members fastening the first section of decking'],
+            ['deck-nearly-done.jpg', 'The deck nearly finished, seen from the trail'],
+            ['lumber-ready-to-go.jpg', 'Stacks of decking lumber ready to go at the start of the day']
+        ],
+        homePhotos: ['finished-deck.jpg', 'crew-decking-from-the-river.jpg', 'first-boards-on-the-beams.jpg']
+    },
+    {
         id: 'workdayNov21',
         date: '2026-11-21',
         club: 'Both',
         title: 'Lee Bridge Decking Work Day &mdash; Saturday, November 21',
         text: `
+            <p><strong>Update:</strong> the deck is on.
+               <a href="club-updates.html#bridgeDeckedNov21">See the photos</a>.</p>
             <p>The new bridge over the Lamprey River near Tuttle Road is ready for decking. Glenn got the
                steel beams set, and on <strong>Saturday, November 21</strong> we&rsquo;re putting the wood
                decking on. Members of both clubs and anyone who wants to help are welcome; more hands make it go faster.</p>
