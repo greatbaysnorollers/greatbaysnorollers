@@ -62,7 +62,7 @@ window.CLUB_EVENTS = [
         text: `Ramps on each end and some welded cross bracing, and the new Lee bridge near Tuttle Road is done.
                Same parking as last time: 51 Tuttle Road, just north of the bridge.`,
         post: 'workdayNov28',
-        link: ['https://www.google.com/calendar/event?eid=dnAzNThjajg4MnNoczllOWZ1YXFrbnFvNHMgZ3JlYXRiYXlzbm9yb2xsZXJzQG0', 'Add it to your calendar']
+        link: ['https://www.facebook.com/events/2546162305889802/', 'RSVP on Facebook']
     },
     {
         date: '2026-11-21',
@@ -90,7 +90,8 @@ window.CLUB_POSTS = [
                north of the bridge.</p>
             <p><strong>Bring</strong> a battery-powered impact driver or skill saw if you have one,
                and any PPE you need (gloves, safety glasses and so on).</p>
-            <p><a href="https://www.google.com/calendar/event?eid=dnAzNThjajg4MnNoczllOWZ1YXFrbnFvNHMgZ3JlYXRiYXlzbm9yb2xsZXJzQG0" target="_blank" rel="noopener">Add it to your calendar</a>.
+            <p><a href="https://www.facebook.com/events/2546162305889802/" target="_blank" rel="noopener"><strong>RSVP on Facebook &rarr;</strong></a>
+               Facebook will send you a reminder. Or <a href="https://www.google.com/calendar/event?eid=dnAzNThjajg4MnNoczllOWZ1YXFrbnFvNHMgZ3JlYXRiYXlzbm9yb2xsZXJzQG0" target="_blank" rel="noopener">add it to your calendar</a>.
                <a href="club-updates.html#bridgeDeckedNov21">See how decking day went</a>.</p>
             <p><strong>Ride safe,</strong><br>Great Bay Sno-Rollers &amp; Lee Sno-Travelers</p>`
     },
