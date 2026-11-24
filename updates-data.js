@@ -93,14 +93,17 @@ window.CLUB_POSTS = [
         photoFolder: '2026_Nov21-Lee-Bridge-Decking',
         photos: [
             ['finished-deck.jpg', 'The finished wood deck on the new Lee bridge'],
-            ['crew-decking-from-the-river.jpg', 'Looking up from the river between the steel beams as the crew decks the bridge'],
+            ['bare-steel-beams-before.jpg', 'The new steel beams across the river before any decking went on'],
+            ['lumber-ready-to-go.jpg', 'Stacks of decking lumber ready to go at the start of the day'],
             ['first-boards-on-the-beams.jpg', 'Members fastening the first boards across the new steel beams'],
-            ['crew-working-across-the-deck.jpg', 'The crew working across the partly finished deck'],
+            ['crew-decking-from-the-river.jpg', 'Looking up from the river between the steel beams as the crew decks the bridge'],
+            ['lumber-stacked-on-the-beams.jpg', 'A member in a Great Bay Sno-Rollers sweatshirt beside lumber stacked on the first section of deck'],
             ['fastening-the-first-section.jpg', 'Members fastening the first section of decking'],
-            ['deck-nearly-done.jpg', 'The deck nearly finished, seen from the trail'],
-            ['lumber-ready-to-go.jpg', 'Stacks of decking lumber ready to go at the start of the day']
+            ['crew-fastening-deck-boards.jpg', 'Members kneeling to fasten deck boards while others look on'],
+            ['crew-working-across-the-deck.jpg', 'The crew working across the partly finished deck'],
+            ['deck-nearly-done.jpg', 'The deck nearly finished, seen from the trail']
         ],
-        homePhotos: ['finished-deck.jpg', 'crew-decking-from-the-river.jpg', 'first-boards-on-the-beams.jpg']
+        homePhotos: ['finished-deck.jpg', 'bare-steel-beams-before.jpg', 'crew-fastening-deck-boards.jpg']
     },
     {
         id: 'workdayNov21',
