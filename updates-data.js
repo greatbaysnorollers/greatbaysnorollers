@@ -59,7 +59,7 @@ window.CLUB_EVENTS = [
         club: 'Both',
         title: 'Lee Bridge Decking Work Day',
         when: 'Saturday, November 21 &middot; 8:00 AM &middot; 51 Tuttle Road, Lee',
-        text: `The new bridge over the Lamprey River near Tuttle Road is ready for its wood decking.
+        text: `The new bridge over the Little River near Tuttle Road is ready for its wood decking.
                Park at 51 Tuttle Road, just north of the bridge, and bring an impact driver or skill saw if you have one.`,
         post: 'workdayNov21',
         link: ['https://www.facebook.com/events/1889427749135666/', 'RSVP on Facebook']
@@ -73,7 +73,7 @@ window.CLUB_POSTS = [
         club: 'Both',
         title: 'The Lee Bridge Is Decked',
         text: `
-            <p>The new bridge over the Lamprey River near Tuttle Road has its deck. On Saturday,
+            <p>The new bridge over the Little River near Tuttle Road has its deck. On Saturday,
                November 21, about ten members of the Great Bay Sno-Rollers and the Lee Sno-Travelers
                laid and fastened the wood decking across the new steel beams, and the whole deck was
                down by the end of the day.</p>
@@ -87,7 +87,7 @@ window.CLUB_POSTS = [
                or <a href="events.html#subscribe">subscribe to the club calendar</a>.</p>
             <p><strong>Ride safe,</strong><br>Great Bay Sno-Rollers &amp; Lee Sno-Travelers</p>`,
         homeText: `
-            <p>About ten members of both clubs decked the new bridge over the Lamprey River near Tuttle
+            <p>About ten members of both clubs decked the new bridge over the Little River near Tuttle
                Road on Saturday, November 21. Only the ramps at each end are left.
                <a href="club-updates.html#bridgeDeckedNov21">Full update and photos &rarr;</a></p>`,
         photoFolder: '2026_Nov21-Lee-Bridge-Decking',
@@ -113,7 +113,7 @@ window.CLUB_POSTS = [
         text: `
             <p><strong>Update:</strong> the deck is on.
                <a href="club-updates.html#bridgeDeckedNov21">See the photos</a>.</p>
-            <p>The new bridge over the Lamprey River near Tuttle Road is ready for decking. Glenn got the
+            <p>The new bridge over the Little River near Tuttle Road is ready for decking. Glenn got the
                steel beams set, and on <strong>Saturday, November 21</strong> we&rsquo;re putting the wood
                decking on. Members of both clubs and anyone who wants to help are welcome; more hands make it go faster.</p>
             <p><strong>We meet at 8:00 AM.</strong> Park at 51 Tuttle Road, Lee, just north of the bridge.</p>
@@ -154,7 +154,7 @@ window.CLUB_POSTS = [
         text: `
             <p><strong>This bridge replacement is funded by the State of New Hampshire's Summer
                Grant-in-Aid program.</strong> The bridge carries the Lee Sno-Travelers trail across the
-               Lamprey River near Tuttle Road.</p>
+               Little River near Tuttle Road.</p>
             <p>On Saturday, October 17, members of both clubs turned out and
                tore out the old bridge: the decking came up, the old steel was cut out, and the debris
                was hauled away. The steel beams for the new bridge have also been purchased.</p>
@@ -162,13 +162,13 @@ window.CLUB_POSTS = [
                for the <a href="events.html">November 2 meeting</a>. Come weigh in.</p>
             <p>A big thank-you to everyone who came out and helped!</p>`,
         homeText: `
-            <p>Our bridge over the Lamprey River near Tuttle Road, funded by the state's Summer
+            <p>Our bridge over the Little River near Tuttle Road, funded by the state's Summer
                Grant-in-Aid program, took a big step forward: members of both clubs tore out the old
                bridge, and the steel beams for the new one have been purchased.
                <a href="club-updates.html#bridgeOct17">Full update and photos &rarr;</a></p>`,
         photoFolder: '2026_Oct17-Bridge_Demo',
         photos: [
-            ['old-bridge-before.jpg', 'The old wooden bridge over the Lamprey River before demolition'],
+            ['old-bridge-before.jpg', 'The old wooden bridge over the Little River before demolition'],
             ['old-bridge-deck-before.jpg', 'The worn deck of the old bridge, looking across'],
             ['crew-pulling-decking.jpg', 'Club members pulling up the old decking'],
             ['stripped-to-the-stringers.jpg', 'The bridge stripped down to its stringers over the river'],
