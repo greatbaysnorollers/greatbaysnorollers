@@ -55,6 +55,16 @@ window.CLUB_EVENTS = [
         link: ['https://www.facebook.com/events/957589860556155/', 'RSVP on Facebook']
     },
     {
+        date: '2026-11-28',
+        club: 'Both',
+        title: 'Final Lee Bridge Work Day',
+        when: 'Saturday, November 28 &middot; 8:00 AM &middot; 51 Tuttle Road, Lee',
+        text: `Ramps on each end and some welded cross bracing, and the new bridge over the Little River is done.
+               Same parking as last time: 51 Tuttle Road, just north of the bridge.`,
+        post: 'workdayNov28',
+        link: ['https://www.google.com/calendar/event?eid=dnAzNThjajg4MnNoczllOWZ1YXFrbnFvNHMgZ3JlYXRiYXlzbm9yb2xsZXJzQG0', 'Add it to your calendar']
+    },
+    {
         date: '2026-11-21',
         club: 'Both',
         title: 'Lee Bridge Decking Work Day',
@@ -67,6 +77,23 @@ window.CLUB_EVENTS = [
 ];
 
 window.CLUB_POSTS = [
+    {
+        id: 'workdayNov28',
+        date: '2026-11-24',
+        club: 'Both',
+        title: 'Final Lee Bridge Work Day &mdash; Saturday, November 28',
+        text: `
+            <p>One more Saturday and the new bridge over the Little River near Tuttle Road is done. On
+               <strong>Saturday, November 28</strong> we&rsquo;re adding the ramps at each end and welding
+               some cross bracing. Members of both clubs and anyone who wants to help are welcome.</p>
+            <p><strong>We meet at 8:00 AM.</strong> Same parking as last time: 51 Tuttle Road, Lee, just
+               north of the bridge.</p>
+            <p><strong>Bring</strong> a battery-powered impact driver or skill saw if you have one,
+               and any PPE you need (gloves, safety glasses and so on).</p>
+            <p><a href="https://www.google.com/calendar/event?eid=dnAzNThjajg4MnNoczllOWZ1YXFrbnFvNHMgZ3JlYXRiYXlzbm9yb2xsZXJzQG0" target="_blank" rel="noopener">Add it to your calendar</a>.
+               <a href="club-updates.html#bridgeDeckedNov21">See how decking day went</a>.</p>
+            <p><strong>Ride safe,</strong><br>Great Bay Sno-Rollers &amp; Lee Sno-Travelers</p>`
+    },
     {
         id: 'bridgeDeckedNov21',
         date: '2026-11-21',
